@@ -1,0 +1,1310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[油脂青年]]></title>
+  <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
+  <link href="https://penghuicai.github.io/"/>
+  <updated>2020-05-14T17:52:58+08:00</updated>
+  <id>https://penghuicai.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[error reading property field]]></title>
+    <link href="https://penghuicai.github.io/15894485026978.html"/>
+    <updated>2020-05-14T17:28:22+08:00</updated>
+    <id>https://penghuicai.github.io/15894485026978.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text">error reading property field &#39;attributeCode&#39;/&#39;p_attributeCode&#39; of item &#39;8951708354515&#39;/&#39;8951708354515&#39; (info was [attributeCode,p_attributeCode,class de.hybris.platform.util.Itemxxxxxxxx
+xxxxxxxx
+xxxxxxxx
+xxxxxxxx
+Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column &#39;p_attributeCode&#39; not found.
+</code></pre>
+
+<h3 id="toc_0">快速解决</h3>
+
+<pre class="line-numbers"><code class="language-text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
+SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+
+REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
+;8951708354515
+</code></pre>
+
+<h3 id="toc_1">问题步骤</h3>
+
+<h4 id="toc_2">1. 获取 itemType 类型的 pk</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT {itemtype} FROM {Item} WHERE {pk} = &#39;8951708354515&#39;
+</code></pre>
+
+<h4 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT {code} FROM {ComposedType} WHERE {pk} = &#39;8796107276370&#39;
+</code></pre>
+
+<h4 id="toc_4">3. 根据 Code 获取报错的那条数据</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+</code></pre>
+
+<h4 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h4>
+
+<pre class="line-numbers"><code class="language-text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
+;8951708354515
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GIT 服务器搭建（GOGS）]]></title>
+    <link href="https://penghuicai.github.io/15891852674965.html"/>
+    <updated>2020-05-11T16:21:07+08:00</updated>
+    <id>https://penghuicai.github.io/15891852674965.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">GOGS 安装</h2>
+
+<h6 id="toc_1">shell脚本在底部</h6>
+
+<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A350FAC73AEA4F5FB266FD88BAB8EF33/8637" alt="shell脚本在底部"/></p>
+
+<h2 id="toc_2">GOGS 配置</h2>
+
+<h4 id="toc_3">1、数据库设置</h4>
+
+<blockquote>
+<p>修改数据库类型为: <mark>SQLite3</mark><br/>
+数据库文件路径: <mark>/home/git/gogs-data/gogs.db</mark></p>
+</blockquote>
+
+<h4 id="toc_4">2、应用基本设置</h4>
+
+<blockquote>
+<p>应用名称为: <mark>XXXGIT</mark><br/>
+仓库根目录: <mark>/home/git/gogs-repositories</mark><br/>
+运行系统用户: <mark>git</mark><br/>
+域名: <mark>host_ip</mark> （<em>服务器 ip 地址/域名 如：10.1.255.156</em>）<br/>
+SSH 端口号: <mark>22</mark><br/>
+HTTP 端口号: <mark>3000</mark>（<em>3000</em>）<br/>
+应用 URL: <mark>http://host_ip:3000</mark>（<em>服务器 ip:80 地址/域名 如：<a href="http://10.1.255.156:3000">http://10.1.255.156:3000</a></em>）<br/>
+日志路径: <mark>/home/git/gogs-log</mark></p>
+</blockquote>
+
+<h4 id="toc_5">3、选择设置</h4>
+
+<h6 id="toc_6">管理员帐号设置</h6>
+
+<blockquote>
+<p>管理员用户名: <mark>gogsadmin</mark><br/>
+管理员密码: <mark>123456</mark><br/>
+确认密码: <mark>同上</mark><br/>
+管理员邮箱: <mark><a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a></mark></p>
+</blockquote>
+
+<h4 id="toc_7">4、立即安装</h4>
+
+<blockquote>
+<p>点击【立即安装】按钮即可</p>
+</blockquote>
+
+<h2 id="toc_8">GOGS 启动、停止、重启脚本</h2>
+
+<h6 id="toc_9">shell脚本在底部</h6>
+
+<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
+
+<h2 id="toc_10">GOGS安装脚本</h2>
+
+<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+set -e
+# Root执行 CentOS7
+sleep 1s
+if ! type wget &gt;/dev/null 2&gt;&amp;1; then
+    echo &quot;################ wget 开始安装&quot;
+    yum install -y wget
+    echo &quot;################ wget 安装完成&quot;
+fi
+sleep 1s
+if ! type git &gt;/dev/null 2&gt;&amp;1; then
+    echo &quot;################ git 开始安装&quot;
+    yum install -y git
+    echo &quot;################ git 安装完成&quot;
+fi
+sleep 1s
+# 创建用户
+user=git
+group=git
+if ! egrep &quot;^$group&quot; /etc/group &gt;/dev/null 2&gt;&amp;1;
+then
+    echo &quot; 创建 git 用户组&quot;
+    groupadd $group
+fi
+
+#create user if not exists
+if ! egrep &quot;^$user&quot; /etc/passwd  &gt;/dev/null 2&gt;&amp;1;then
+    echo &quot;################ 创建 git 用户&quot;
+    useradd -g $group $user
+    echo &quot;################ 创建用户完成&quot;
+fi
+
+echo &quot;################ 创建应用文件夹 /opt&quot;
+mkdir -p /opt
+mkdir -p /home/git
+
+sleep 1s
+TIME=$(date &quot;+%Y%m%d%H%M&quot;)
+echo &quot;################ 下载 gogs 二进制文件&quot;
+if [ ! -f &quot;/opt/gogs.tar.gz&quot; ];then
+    echo &quot;################ gogs.tar.gz 文件不存在&quot;
+    sleep 1s
+    echo &quot;################ 开始下载&quot;
+    wget -O /opt/gogs.tar.gz https://github.com/gogs/gogs/releases/download/v0.11.53/linux_amd64.tar.gz
+    echo &quot;################ 下载完成&quot;
+else
+    echo &quot;################ gogs.tar.gz 文件已存在&quot;
+    echo &quot;################ 重命名 gogs.tar.gz 为 gogs.$TIME.tar.gz&quot;
+    mv /opt/gogs.tar.gz /opt/gogs.$TIME.tar.gz
+    sleep 1s
+    echo &quot;################ 开始下载&quot;
+    wget -O /opt/gogs.tar.gz https://github.com/gogs/gogs/releases/download/v0.11.53/linux_amd64.tar.gz
+    echo &quot;################ 下载完成&quot;
+fi
+
+sleep 1s
+echo &quot;################ 解压 gogs.tar.gz&quot;
+rm -rf /opt/gogs/
+tar -xzf /opt/gogs.tar.gz  -C /opt
+mkdir -p /opt/gogs/custom/conf/
+
+sudo chown -R git:git /opt
+sudo chown -R git:git /home/git
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+# 清空nat表PREROUTING链
+# iptables -t nat -F PREROUTING
+
+sleep 1s
+PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+
+if [[ ! $PID ]]; then
+    echo &quot;################ 检测 gogs 服务未启动&quot;
+else
+    echo &quot;################ 检测 gogs 服务启动中 PID=${PID}&quot;
+    sudo kill -9 ${PID}
+    echo &quot;################ 已停止 gogs 服务&quot;
+fi
+
+sleep 1s
+echo &quot;################ 开始启动 gogs 服务&quot;
+sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+
+sleep 3s
+PID2=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+HOST_IP=`ip a |grep eth0 | grep inet | grep -v inet6 | grep -v 127 | sed &#39;s/^[ \t]*//g&#39; | cut -d &#39; &#39; -f2 | cut -d / -f 1`
+echo &quot;PID = $PID2&quot;
+if [[ ! $PID2 ]]; then
+    echo -e &quot;\033[31m gogs 服务启动失败！请尝试重新启动\033[0m&quot;
+else
+    echo &quot;#######################################################################&quot;
+    echo &quot;                                启动成功                                &quot;
+    #echo &quot;            gogs 内置端口 3000 iptable 配置 80 转发 3000          &quot;
+    echo &quot;           请在浏览器中打开 http://${HOST_IP}:80 进行设置             &quot;
+    echo &quot;#######################################################################&quot;
+fi
+</code></pre>
+
+<h2 id="toc_11">GOGS启动脚本</h2>
+
+<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+set -e
+
+PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+MODE=$1
+case &quot;${MODE}&quot; in
+    stop)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+    ;;
+    restart)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动，启动gogs服务&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+        sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        echo &quot;gogs服务启动成功PID=${PID}&quot;
+    ;;
+    start)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动，启动gogs服务&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+        sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        echo &quot;gogs服务启动成功PID=${PID}&quot;
+    ;;
+    *)
+        echo $&quot;please input right command (start,stop,restart) !&quot;
+    ;;
+esac
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[订单下同时存在发货和取消的配货单]]></title>
+    <link href="https://penghuicai.github.io/15891841805966.html"/>
+    <updated>2020-05-11T16:03:00+08:00</updated>
+    <id>https://penghuicai.github.io/15891841805966.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text">SELECT DISTINCT({o.ecsOrderId}) FROM {
+Consignment AS c
+JOIN ConsignmentStatus AS cs ON {cs.pk} = {c.status}
+JOIN Order! AS o ON {o.pk} = {c.order}
+} 
+WHERE EXISTS({{
+    select {c.order} from {
+    Consignment 
+    join ConsignmentStatus on {ConsignmentStatus.pk} = {Consignment.status} 
+    join BaseStore on {BaseStore.pk} = {Consignment.baseStore} 
+    join ChannelType on {ChannelType.pk} = {BaseStore.channelType}
+    }
+    where {ConsignmentStatus.code} = &#39;SHIPPED&#39; and {ChannelType.code} != &#39;EC&#39; and {c.order} = {Consignment.order}
+}})
+AND {cs.code} = &#39;TRADE_CLOSE&#39;
+AND {c.orderCreationDate} &gt;= &#39;2020-04-12 00:00:00&#39;
+AND {c.orderCreationDate} &lt; &#39;2020-05-12 00:00:00&#39;
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ImpEx 示例]]></title>
+    <link href="https://penghuicai.github.io/15553797325376.html"/>
+    <updated>2019-04-16T09:55:32+08:00</updated>
+    <id>https://penghuicai.github.io/15553797325376.html</id>
+    <content type="html"><![CDATA[
+<blockquote>
+<p>ImpEx 文件本质上是以‘,’分隔的文件（CSV），允许从SAP Commerce 进行紧凑，人工可读，导入和导出(creating, updating, removing, and exporting)数据。它们可以通过 <a href="https://localhost:9002/hac/console/impex/import">SAP Commerce Administration Console</a>(hac) 手动执行，也可以在特定位置保存 ImpEx 文件，在每次初始化系统时自动执行。</p>
+</blockquote>
+
+<p><img src="media/15553797325376/15553800955800.jpg" alt="HAC导入导出入口" class="mw_img_center" style="width:800px;display: block; clear:both; margin: 0 auto;"/></p>
+
+<h2 id="toc_0">ImpEx 导入示例</h2>
+
+<pre class="line-numbers"><code class="language-text"># 目录信息 目录代码;目录名称;关联网店
+INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+;TMProductCatalog12617;XX旗舰店;12617
+    
+# 目录版本信息 目录代码;版本;是否是活动目录版本;语言
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active[default=true];languages(isoCode)
+;TMProductCatalog12617;Online;;zh
+
+#时间格式
+INSERTxxxxx;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+</code></pre>
+
+<h2 id="toc_1">ImpEx 导出示例</h2>
+
+<pre class="line-numbers"><code class="language-text">&quot;#% impex.setTargetFile(&quot;&quot;Catalog.csv&quot;&quot;);&quot;
+INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {Catalog} where id=&#39;TMProductCatalog10001&#39;&quot;&quot;);&quot;
+
+# 查看List类型的自定义字段 functionalLimit（数据库存储的是二进制的集合）,我们可以查对应的
+&quot;#% impex.setTargetFile(&quot;&quot;UserGroup.csv&quot;&quot;);&quot;
+INSERT_UPDATE UserGroup;uid[unique=true];functionalLimit
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {UserGroup} where {uid}=&#39;TMCustomerService&#39;&quot;&quot;);&quot;
+
+# 导出RDC/NDC配货单行
+&quot;$query=SELECT {ce.pk} FROM { ConsignmentEntry AS ce LEFT JOIN Consignment AS c ON {ce.consignment}={c.pk} LEFT JOIN Order AS o ON {c.order}={o.pk} LEFT JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} LEFT JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk}} WHERE {postype.code} IN (&#39;NDC&#39;,&#39;RDC&#39;) AND {o.payConfirmDate} BETWEEN &#39;2019-11-11 00:00:00&#39; AND &#39;2019-11-12 00:00:00&#39;&quot;
+&quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
+INSERT_UPDATE ConsignmentEntry;;consignment(order(code));consignment(order(status(code)));consignment(code);consignment(status(code));consignment(pointOfService(bizCode));entryNum;product(code);quantity;allocQuantity;
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
+
+# 多表关联字段、包括字段在子类
+&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN (&#39;SALES&#39;, &#39;SWAP&#39;, &#39;REPLENISHMENT&#39; )  AND {ConsignmentStatus.code} NOT IN (&#39;CANCELLED&#39;,&#39;TRADE_CLOSE&#39;,&#39;SPLIT_CLOSE&#39;) AND {OrderType.code} != &#39;BUYOFF&#39; AND {ChannelType.CODE} = &#39;EC&#39;  AND {postype.CODE} != &#39;EC&#39; AND {o.payConfirmDate} &gt;= &#39;2019-06-01 00:00:00&#39; AND {o.payConfirmDate} &lt; &#39;2019-11-25 00:00:00&#39;&quot;
+&quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
+INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryNum;consignment(order(Order.platformType(code)));consignment(order(store(channelType(code))));consignment(order(Order.orderStore(name)));consignment(status(name[lang=zh]));consignment(pointOfService(bizCode));warehouse(bizCode);consignment(pointOfService(posType(code)));consignment(order(Order.payConfirmDate));product(code);allocQuantity;orderEntry(OrderEntry.actualPaidUnitPrice);orderEntry(OrderEntry.tagPrice);
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
+
+&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN (&#39;SALES&#39;, &#39;SWAP&#39;, &#39;REPLENISHMENT&#39; )  AND {ConsignmentStatus.code} NOT IN (&#39;CANCELLED&#39;,&#39;TRADE_CLOSE&#39;,&#39;SPLIT_CLOSE&#39;) AND {OrderType.code} != &#39;BUYOFF&#39; AND {ChannelType.CODE} = &#39;OFFLINE&#39; AND {o.payConfirmDate} &gt;= &#39;2019-01-01 00:00:00&#39; AND {o.payConfirmDate} &lt; &#39;2019-11-25 00:00:00&#39;&quot;
+&quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
+INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryNum;consignment(order(Order.platformType(code)));consignment(order(store(channelType(code))));consignment(order(Order.orderStore(name)));consignment(status(name[lang=zh]));consignment(pointOfService(bizCode));warehouse(bizCode);consignment(pointOfService(posType(code)));consignment(order(Order.payConfirmDate));product(code);allocQuantity;orderEntry(OrderEntry.actualPaidUnitPrice);orderEntry(OrderEntry.tagPrice);
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
+</code></pre>
+
+<p>ImpEx 删除示例</p>
+
+<pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
+REMOVE UserGroup[batchmode=true];uid[unique=true];
+;TMCustomerService;
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FlexibleSearch 语法]]></title>
+    <link href="https://penghuicai.github.io/15541115479606.html"/>
+    <updated>2019-04-01T17:39:07+08:00</updated>
+    <id>https://penghuicai.github.io/15541115479606.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">简介</h2>
+
+<p>FlexibleSearch 框架自动解析类型和数据库表依赖关系，不需要指定显式的数据库表名，类型系统和数据库表示之间的整个转换过程是自动进行的，并在必要时使用 UNION 和 JOIN 生成数据库可执行的 SQL 语句。</p>
+
+<pre class="line-numbers"><code class="language-sql">SELECT
+    {p:pk},{p.code},{p.name[zh]} 
+FROM {Product as p}
+</code></pre>
+
+<pre class="line-numbers"><code class="language-sql">SELECT 
+    item_t0.PK, item_t0.p_code, lp_t0.p_name
+FROM products item_t0 
+    JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK 
+</code></pre>
+
+<hr/>
+
+<h2 id="toc_1">FlexibleSearch 查询的基本语法</h2>
+
+<pre class="line-numbers"><code class="language-sql">SELECT &lt;selects&gt; FROM &lt;types&gt; ( WHERE &lt;conditions&gt; )? ( ORDER BY &lt;order&gt; )?
+</code></pre>
+
+<h3 id="toc_2">&lt;selects&gt; 返回字段（数据库列）</h3>
+
+<ul>
+<li>获取所有字段
+<ul>
+<li><code>{*}</code> 按 SQL 约定返回所有数据库列，例如：<code>SELECT {*} FROM {Product}</code>。</li>
+</ul></li>
+<li>获取指定字段
+<ul>
+<li><code>{attribute}</code> 指定属性标识符用必须使用<code>{}</code>包裹，例如：<code>SELECT {code} FROM {Product}</code>。</li>
+</ul></li>
+<li>获取国际化字段
+<ul>
+<li><code>{attribute[zh]}</code> 使用语言标识符作为属性名称中的后缀，并用<code>[]</code>包裹，例如<code>SELECT {name[zh]}, {name[en]} FROM {Product}</code>。</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_3">&lt;types&gt; 对象模型 类型 code</h3>
+
+<ul>
+<li><code>FROM</code>子句中的<code>&lt;types&gt;</code>字段的值需要是<code>itemtype</code>的<code>code</code>属性，<code>FROM</code>子句必须用<code>{}</code>包裹</li>
+<li>可以使用<code>AS</code>给类型指定别名，例如<code>SELECT {p.code} FROM {Product AS p} ORDER BY {p.code}</code></li>
+<li>可以使用<code>JOIN</code>和<code>LEFT JOIN</code>联合查询，例如<code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></li>
+<li>子类型：默认查询搜索该类型和它的子类型所有数据，需要在<code>{}</code>中的类型后缀添加<code>!</code>，指定不查询子类型
+<ul>
+<li>查询子类型例子：<code>SELECT {code},{pk} FROM {Product}</code></li>
+<li>不查询子类型例子：<code>SELECT {code},{pk} FROM {Product!}</code></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_4">条件</h3>
+
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>SQL命令/关键字</th>
+<th>说明</th>
+<th>代码示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>ORDER BY {alias:attribute}</td>
+<td>按指定属性值排序（默认ASC）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime}</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ASC</code></td>
+<td>按升序对结果进行排序（a ... z，0 ... 9）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} ASC</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>DESC</code></td>
+<td>按降序对结果进行排序（z ... a，9 ... 0）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} DESC</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DISTINCT</code></td>
+<td>消除查询结果中的重复项</td>
+<td><code>SELECT DISTINCT({p.creationtime}),{p:pk},{p.modifiedtime} FROM {Product as p}</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>OR</code></td>
+<td>或者</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; OR {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>AND</code></td>
+<td>并且</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; AND {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>IS [NOT] NULL</code></td>
+<td>返回是null/非null结果</td>
+<td><code>... WHERE ... IS [NOT] NULL</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>[NOT] IN</code></td>
+<td>属于/不属于</td>
+<td><code>... WHERE ... [NOT] IN (... , ...)</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>[NOT] EXISTS</code></td>
+<td>存在/不存在</td>
+<td><code>SELECT {o.code}, FROM {order as o} WHERE 1=1 AND NOT EXISTS({{ SELECT {c.PK} FROM {Consignment as c} WHERE {c.order}={o.pk} }})</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>LIKE</code></td>
+<td>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的</td>
+<td><code>... WHERE ... LIKE &#39;...&#39;</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>%</code></td>
+<td>匹配任意数量字符的通配符</td>
+<td><code>... WHERE ... LIKE &#39;%...&#39; , &#39;...%...&#39; , &#39;...%&#39; , &#39;%...%&#39;</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>_</code></td>
+<td>匹配单个字符的通配符</td>
+<td><code>... WHERE ... LIKE &#39;_...&#39; , &#39;..._...&#39; , &#39;..._&#39;</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>LEFT JOIN ON</code></td>
+<td>左链接，左表返回符合条件的所有行，右表没有的数据显示null</td>
+<td><code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>= 、 !=, &lt;&gt; 、 &lt; 、 &lt;= 、 &gt; 、 &gt;=</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>CONCAT</code></td>
+<td>连接两个结果 - 右侧的示例将返回字符串结果</td>
+<td><code>SELECT concat({c.code},&#39;-&#39;,{cs.code}) as &#39;配货单号-配货单状态&#39; FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk} } WHERE {cs.code} = &#39;APPROVED&#39;</code></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK WHERE lp_t0.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 JOIN productslp lp_t0_l1 ON lp_t0.ITEMPK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK LEFT JOIN productslp lp_t0_l1 ON item_t0.PK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>{locAttr[ANY]}</code></td>
+<td>所有国际化定义</td>
+<td><code>SELECT count(DISTINCT {p:PK}) FROM {Product AS p} WHERE {p:name[ANY]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>Product!</code></td>
+<td>ModelType加<code>!</code>FlexibleSearch查询仅搜索指定的类型并省略所有子类型</td>
+<td><code>SELECT {code},{pk} FROM {Product!}</code></td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 查看日志文件常用命令集合]]></title>
+    <link href="https://penghuicai.github.io/15888326579314.html"/>
+    <updated>2020-05-07T14:24:17+08:00</updated>
+    <id>https://penghuicai.github.io/15888326579314.html</id>
+    <content type="html"><![CDATA[
+<p>查看日志文件常用命令</p>
+
+<pre class="line-numbers"><code class="language-shell">1. tail
+2. less
+3. cat + grep 组合
+</code></pre>
+
+<blockquote>
+<h2 id="toc_0">tail</h2>
+
+<p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
+</blockquote>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
+</code></pre></li>
+<li><p>无参：显示尾部 10 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail console.log
+</code></pre></li>
+<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
+<pre class="line-numbers"><code class="language-shell">tail -f console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 20 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 10 个字节内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
+</code></pre></li>
+</ul>
+
+<h5 id="toc_1">注意</h5>
+
+<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
+2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
+3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
+</code></pre>
+
+<h2 id="toc_2">less</h2>
+
+<p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
+</code></pre></li>
+<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less console.log
+</code></pre></li>
+<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less -N console.log
+</code></pre></li>
+<li><p>查看文件，搜索指令时忽略大小写</p>
+<pre class="line-numbers"><code class="language-shell">less -i console.log
+</code></pre></li>
+<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">/字符串
+</code></pre></li>
+<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">?字符串
+</code></pre></li>
+<li><p>搜索指令，仅显示匹配“字符串”的行</p>
+<pre class="line-numbers"><code class="language-shell">&amp;字符串
+</code></pre></li>
+<li><p>滚动指令，向上一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
+</code></pre></li>
+<li><p>滚动指令，向下一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
+</code></pre></li>
+<li><p>滚动指令，向下滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">键盘空格键
+</code></pre></li>
+<li><p>滚动命令，向上滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">b
+</code></pre></li>
+<li><p>滚动命令，滚动到头部</p>
+<pre class="line-numbers"><code class="language-shell">g
+</code></pre></li>
+<li><p>滚动命令，滚动到尾部</p>
+<pre class="line-numbers"><code class="language-shell">G
+</code></pre></li>
+<li><p>退出less模式</p>
+<pre class="line-numbers"><code class="language-shell">q
+</code></pre></li>
+</ul>
+
+<h2 id="toc_3">cat + grep 组合</h2>
+
+<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>示例</p>
+<pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
+cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
+</code></pre></li>
+<li><p>显示包括字符串的行及下面的 1 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 5 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LoadRunner 常用语法]]></title>
+    <link href="https://penghuicai.github.io/15675650161144.html"/>
+    <updated>2019-09-04T10:43:36+08:00</updated>
+    <id>https://penghuicai.github.io/15675650161144.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-java">// 定义数组时一定要指明大小
+// 变量定义一定要放在所以操作之前，放在脚本最前面 
+int num ; // 定义数值变量
+int numArray[5]; // 定义整型数组
+char *str1,*str2,*str3; // 定义字符串变量
+char strArray[10],fileName[5],data[10]; // 定义字符串数组
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">// 数值赋值
+num = 10;
+// 输出非字符串
+lr_output_message(&quot;%d&quot;, num)
+// 字符串变量赋值
+str1 = &quot;string1&quot;;
+str2 = &quot;string2&quot;;
+lr_output_message(str1);
+// 拼接字符串
+sprintf(strArray, &quot;%s+%s&quot;, str1, str2);
+lr_output_message(strArray);
+// 变量赋值给字符串数组
+strcpy(strArray,&quot;字符串赋值给数组变量stry:String&quot;);
+lr_output_message(strArray);
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">// 参数
+
+// 参数赋值（左边给右边赋值）
+// 左边值赋值给右边的参数
+lr_save_string(&quot;parameterString&quot;, &quot;parameter1&quot;);
+lr_output_message(lr_eval_string(&quot;{parameter1}&quot;));
+// 左边变量的值赋值给参数
+lr_save_string(strArray,&quot;parameter2&quot;);
+lr_output_message(lr_eval_string(&quot;{parameter2}&quot;));
+// 左边数值赋值给参数
+lr_save_int(999,&quot;parameterNumber1&quot;);
+lr_output_message(lr_eval_string(&quot;{parameterNumber1}&quot;));
+lr_output_message(&quot;%d&quot;,num);
+lr_save_int(num*2,&quot;parameterNumber2&quot;);
+lr_output_message(&quot;%d&quot;,num);
+lr_output_message(lr_eval_string(&quot;{parameterNumber2}&quot;));
+
+// 参数取值
+lr_eval_string(&quot;{parameter1}&quot;);
+lr_eval_string(&quot;{parameterNumber1}&quot;);
+
+// 参数转换为数组变量
+strcpy(strArray,lr_eval_string(&quot;{parameter1}&quot;));
+lr_output_message(&quot;%s&quot;,strArray);
+// 参数转换为数值
+num = atoi(lr_eval_string(&quot;{parameterNumber1}&quot;));
+lr_output_message(&quot;%d&quot;,num);
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">// 时间 http://www.51testing.com/html/48/15163948-3713192.html
+// 当前时间戳
+web_save_timestamp_param(&quot;timestamp&quot;, LAST);
+lr_output_message(&quot;时间戳:%s&quot;,lr_eval_string(&quot;{timestamp}&quot;));
+// 格式化当前时间赋值给参数
+lr_save_datetime(&quot;%Y%m%d%H%M%S&quot;, DATE_NOW, &quot;now&quot;);
+lr_output_message(lr_eval_string(&quot;{now}&quot;))
+// 时间的偏移量
+DATE_NOW(现在的日期)
+TIME_NOW(现在的时间)
+ONE_DAY(一天的时间)
+ONE_HOUR(一小时的时间)
+ONE_MIN(一分钟的时间)
+</code></pre>
+
+<h1 id="toc_0">LoadRunner 参数类型</h1>
+
+<h2 id="toc_1">Random Number（随机数）</h2>
+
+<p>随机数，在属性设置中可以设置产生随机数的范围和更新值得时间。</p>
+
+<h3 id="toc_2">Update value on（更新值得时间）</h3>
+
+<h4 id="toc_3">Each occurrence（每次出现）</h4>
+
+<p>每次出现该参数被调用就更新（取新的值），脚本中出现多次每次都更新值。</p>
+
+<h4 id="toc_4">Each interaction（每次迭代）</h4>
+
+<p>每次迭代时更新（取新的值），每次迭代不管多少个虚拟用户，都是迭代一次所有用户取相同的一个值。<br/>
+例如：有10个虚拟用户，每个虚拟用户都取第1次生成的数，执行完成，称为一次迭代完成。然后10个虚拟用户都取第2次生成的数，完成第二次迭代，后面以此类推。</p>
+
+<h4 id="toc_5">Once（只取一次）</h4>
+
+<p>在场景初始化时更新一次，在一个场景中的所有用户每次迭代值都相同。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ImpEx 语法]]></title>
+    <link href="https://penghuicai.github.io/15651658018173.html"/>
+    <updated>2019-08-07T16:16:41+08:00</updated>
+    <id>https://penghuicai.github.io/15651658018173.html</id>
+    <content type="html"><![CDATA[
+<p>SAP Commerce 附带了一个名为 ImpEx 的基于文本的导入和导出功能。 </p>
+
+<h3 id="toc_0">ImpEx 的主要功能包括：</h3>
+
+<ul>
+<li>ImpEx 导入</li>
+<li>ImpEx 导出</li>
+</ul>
+
+<h3 id="toc_1">使用 ImpEx 做什么：</h3>
+
+<ul>
+<li>在运行时创建更新删除数据。</li>
+<li>为项目创建初始数据。</li>
+<li>修改用户和用户组的访问权限。</li>
+</ul>
+
+<h4 id="toc_2">修改用户和用户组的访问权限</h4>
+
+<h6 id="toc_3">语法</h6>
+
+<pre class="line-numbers"><code class="language-text"># 用户权限管理开头语
+$START_USERRIGHTS
+    # 头信息，它定义要设置的属性。这个头是特定于用户权限管理
+    Type;UID;MemberOfGroups;Password;Target;read;change;create;delete;change_perm
+    # 名为 testGroup 的用户组（这个用户组是 employeegroup 的组成员(子组)） 
+    UserGroup;testGroup;employeegroup;
+    # 更新 Product 类型的访问权限 
+    ;;;;Product;+;+;+;+;-
+    # 创建一个名为 impex-demo 的 Employee 类型的用户。此用户是 testGroup 的成员，他的帐户密码是1234
+    Employee;impex-demo;testGroup;1234;
+    # 用户权限管理结束语
+$END_USERRIGHTS
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text">$START_USERRIGHTS
+    # 头信息，必须存在的列Type、UID、MemberOfGroups、Password和Target
+    Type;UID;MemberOfGroups;Password;Target;read;change;create;delete;change_perm
+    UserGroup;testGroup;employeegroup;
+    ;;;;Product.code;-;-;;;;
+    ;;;;Product.ean;-;-;;;;
+$END_USERRIGHTS
+</code></pre>
+
+<h1 id="toc_4">ImpEx 导入语法</h1>
+
+<pre class="line-numbers"><code class="language-text"># mode：方式标识
+# type：要处理的 item 类型
+# attribute：Item 的属性
+# modifier：属性的附加条件
+# attribute(subtype.subtype_attribute) 字段在子类~~~~ 
+mode type[modifier=value];attribute[modifier=value];attribute[modifier=value];attribute(subtype.subtype_attribute)
+</code></pre>
+
+<h2 id="toc_5">1. 操作方式标识</h2>
+
+<pre class="line-numbers"><code class="language-shell"># 插入  INSERT 
+INSERT Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+;TMProductCatalog12617;中国XX旗舰店;12617
+
+# 更新 UPDATE
+UPDATE Catalog;id[unique=true];name[lang=zh]
+;TMProductCatalog12617;XX旗舰店
+
+# 插入或更新 INSERT_UPDATE
+INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+;TMProductCatalog12617;XX中国旗舰店;12617
+
+# 删除 REMOVE
+# 根据 uid 删除 UserGroup 中对应的数据
+REMOVE UserGroup[batchmode=false];uid[unique=true];
+;TestGroup;
+</code></pre>
+
+<h2 id="toc_6">2. 常用关键符号</h2>
+
+<p><code>;</code> 列分隔符</p>
+
+<pre class="line-numbers"><code class="language-text">Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+</code></pre>
+
+<p><code>,</code> 多数据分隔符</p>
+
+<pre class="line-numbers"><code class="language-text">xx,yy,zz
+</code></pre>
+
+<p><code>[]</code> 声明功能和特性</p>
+
+<pre class="line-numbers"><code class="language-text">[default=Online]
+[unique=true]
+</code></pre>
+
+<p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item</p>
+
+<pre class="line-numbers"><code class="language-text">status(code)
+baseStores(uid)
+</code></pre>
+
+<p><code>$</code> 定义和使用别名</p>
+
+<pre class="line-numbers"><code class="language-text">$version=Staged
+$version=version[default=$version]
+</code></pre>
+
+<h2 id="toc_7">3. 常用关键字</h2>
+
+<pre class="line-numbers"><code class="language-shell"># 唯一性：unique
+code[unique=true]  
+# 默认值：default
+version[default=Online]
+# 语言：lang
+name[lang=zh]
+# 批处理模式：batchmode（紧跟 item code）
+UserGroup[batchmode=true]
+</code></pre>
+
+<h2 id="toc_8">4. 别名</h2>
+
+<p>缩短 ImpEx 头定义，重复使用。</p>
+
+<pre class="line-numbers"><code class="language-shell"># Staged/Online
+$version=version[default=Online]
+$catalog=catalog(id[default=masterProductCatalog])
+$catalogVersion=catalogversion($catalog,$version)[unique=true]
+</code></pre>
+
+<h1 id="toc_9">如何使用impex</h1>
+
+<p><a href="https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac">https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FlexibleSearch 示例]]></title>
+    <link href="https://penghuicai.github.io/15597973060454.html"/>
+    <updated>2019-06-06T13:01:46+08:00</updated>
+    <id>https://penghuicai.github.io/15597973060454.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">一、 基本<code>SELECT</code>语句</h2>
+
+<h3 id="toc_1">1.1. 带有否定操作符<code>NOT</code>的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_2">1.1.1. 获取 <code>code</code> 不为空的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p.pk} FROM {Product AS p} WHERE {p.code} IS NOT NULL
+</code></pre>
+
+<h5 id="toc_3">1.1.2. 获取 <code>code</code> 不包含特定字符串的所有类别</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {c:pk} FROM {Category AS c} WHERE {c:code} IS NOT LIKE &#39;%test%&#39;
+</code></pre>
+
+<h3 id="toc_4">1.2. 返回多列的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_5">1.2.1. 获取所有类别的所有数据库列</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT * FROM {Category}
+</code></pre>
+
+<h5 id="toc_6">1.2.2. 获取类别上次修改的时间、<code>code</code>和<code>PK</code>列</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {cat:modifiedtime}, {cat:code}, {cat:pk} FROM {Category AS cat}
+</code></pre>
+
+<h3 id="toc_7">1.3. 多个条件属性的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_8">1.3.1. 获取<code>code</code>或<code>name</code>包含特定字符串的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+    FROM {Product AS p}
+    WHERE
+        {p:code} LIKE &#39;%myProduct&#39;
+        OR
+        {p:name} LIKE &#39;%myProduct&#39;
+    ORDER BY {p:code} ASC
+</code></pre>
+
+<h5 id="toc_9">1.3.2. <code>％</code>用作通配符</h5>
+
+<ul>
+<li><code>a％</code>  查找以a开头的所有字符串，</li>
+<li><code>％a</code>  查找以a结尾的所有字符串，</li>
+<li><code>％a％</code>  查找包含a的所有字符串。</li>
+</ul>
+
+<h5 id="toc_10">1.3.3. 补充：通过<code>?</code>占位符引入参数到查询中，可以搜索任何搜索字符串：</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:code} LIKE ?name
+      OR {p:name} LIKE ?name
+   ORDER BY {p:code} ASC
+</code></pre>
+
+<pre class="line-numbers"><code class="language-sql">WHERE ... LIKE CONCAT(&#39;%&#39;, CONCAT(?name, &#39;%&#39;))
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">... LIKE ?name;
+query.addQueryParameter(&quot;name&quot;, &quot;%h%&quot;) 
+</code></pre>
+
+<h3 id="toc_11">1.4. 多语言的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_12">1.4.1. 获取<code>name</code>列为<code>null</code>的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 查询未明确指定语言，默认使用当前会话语言
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:name} IS NULL
+</code></pre>
+
+<h5 id="toc_13">1.4.2. 获取所有<code>name</code>列英语<code>null</code>或<code>description</code>列中文为<code>null</code>的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:name[en]} IS NULL 
+      OR {p:description[zh]} IS NULL
+</code></pre>
+
+<h5 id="toc_14">1.4.3. 同时搜索多种语言</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]:o} LIKE &#39;%text%&#39; 
+   OR {p:description[en]:o} LIKE &#39;%text%&#39;
+
+# 添加`OR`子句以搜索其他属性或语言
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]:o} LIKE &#39;%text%&#39;
+   OR {p:description[en]:o} LIKE &#39;%text%&#39;
+   OR {p:name[de]:o} LIKE &#39;%text%&#39;
+   OR {p:description[fr]:o} LIKE &#39;%text%&#39;
+</code></pre>
+
+<h3 id="toc_15">1.5. 带参数的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_16">1.5.1. 在<code>FlexibleSearch</code>语句中使用一个参数</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[en]:o} LIKE ?param
+   OR {p:description[de]:o} LIKE ?param
+   OR {p:description[fr]:o} LIKE ?param
+</code></pre>
+
+<h5 id="toc_17">1.5.2. 在<code>FlexibleSearch</code>语句中使用2个参数</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 获取至少属于以下两个类别之一的所有产品： 
+SELECT {cpr:target}
+   FROM {CategoryProductRelation AS cpr}
+   WHERE {cpr:source} LIKE ?param1
+      OR {cpr:source} LIKE ?param2
+# 获取在两个日期之间更改的所有产品
+SELECT {pk}
+   FROM {Product}
+   WHERE  {modifiedtime} &gt;= ?startDate
+      AND {modifiedtime} &lt;= ?endDate
+</code></pre>
+
+<h3 id="toc_18">1.6. 带连接的<code>SELECT</code>语句</h3>
+
+<p>合并多个字符串</p>
+
+<h5 id="toc_19">1.6.1. 用<code>%</code>括住搜索字符串</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 关于`CONCAT`操作符的示例
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]} 
+      LIKE CONCAT(&#39;%&#39;, CONCAT(&#39;myProduct&#39;,&#39;%&#39;))
+   ORDER BY {p:code} ASC
+# 结合`?`占位符的示例
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]} LIKE CONCAT(&#39;%&#39;,CONCAT(?param,&#39;%&#39;))
+   ORDER BY {p:code}
+</code></pre>
+
+<h3 id="toc_20">1.7. 使用<code>DISTINCT</code>操作符的<code>SELECT</code>语句</h3>
+
+<p>清楚查询结果中的重复项</p>
+
+<h5 id="toc_21">1.7.1. 清楚查询结果中的重复项</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT DISTINCT {cpr:target}
+   FROM {CategoryProductRelation AS cpr}
+   WHERE {cpr:source} LIKE ?param1
+      OR {cpr:source} LIKE ?param2
+</code></pre>
+
+<h3 id="toc_22">1.8. 使用<code>GROUP BY</code>操作符<code>SELECT</code>语句</h3>
+
+<h5 id="toc_23">1.8.1. 获取每个产品订单行，并按产品分组</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {oe:product}
+    FROM {OrderEntry AS oe}
+    GROUP BY {oe:product}
+</code></pre>
+
+<h2 id="toc_24">二、 子查询</h2>
+
+<h3 id="toc_25">2.1. 子查询语法</h3>
+
+<pre class="line-numbers"><code class="language-sql">SELECT *
+   FROM ${type}
+   WHERE
+   {{
+      SELECT *
+         FROM ${other_type}
+         WHERE ${subselect_search_condition}
+   }}
+</code></pre>
+
+<h3 id="toc_26">2.2. 对多种类型进行子选择</h3>
+
+<h5 id="toc_27">2.2.1 获得每一个直接或间接指定价格的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT DISTINCT {p:PK}, {p:name}, {p:code}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        {{
+            -- subselect 1
+            SELECT {dr:product} FROM {DiscountRow AS dr}
+        }}
+    )
+    OR {p:PK} IN
+    (
+        {{
+            -- subselect 2
+            SELECT {prod:PK} 
+            FROM {
+                Product AS prod
+                LEFT JOIN DiscountRow AS dr ON {prod:Europe1PriceFactory_PDG} = {dr:pg}
+            }
+            WHERE {prod:Europe1PriceFactory_PDG} IS NOT NULL
+        }}
+    )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_28">2.2.2 获得至少属于3个类别的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        -- subselect 1
+        SELECT prod
+        FROM
+        (
+            {{
+                -- subselect 2
+                SELECT {cpr:target} AS prod, count({cpr:target}) AS howmany
+                FROM {CategoryProductRelation AS cpr}
+                GROUP BY {cpr:target}
+            }}
+        ) temptable
+        WHERE howmany &gt; 3
+   )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_29">2.2.3 结合<code>?</code>占位符的示例</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        -- subselect 1
+        SELECT prod
+        FROM
+        (
+            {{
+                -- subselect 2
+                SELECT {cpr:target} AS prod, count({cpr:target}) AS howmany
+                FROM {CategoryProductRelation AS cpr}
+                GROUP BY {cpr:target}
+            }}
+        ) temptable
+        WHERE howmany &gt; ?number
+   )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h3 id="toc_30">2.3. 使用参数进行子选择</h3>
+
+<h5 id="toc_31">2.3.1 在指定日期和指定时间之后被订购所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} IN
+   ( 
+      {{
+         -- subselect 1
+         SELECT DISTINCT {oe:product}
+            FROM {OrderEntry AS oe}
+            WHERE {oe:order} IN
+            ( 
+               {{
+                  -- subselect 2
+                  SELECT {o:PK}
+                     FROM {Order AS o}
+                     WHERE {o:date} &gt;= ?date 
+               }}
+            )
+      }}
+   )
+</code></pre>
+
+<h5 id="toc_32">2.3.2 获取指定货币中没有标价的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} NOT IN
+   (
+      {{
+         -- subselect
+         SELECT {pr:product}
+            FROM {PriceRow AS pr}
+            WHERE {pr:currency} = ?currency
+      }}
+   )
+   ORDER BY {p:name} ASC, {p:code} ASC
+   
+# 也可以用 不存在`NOT EXISTS`
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} NOT EXISTS
+   (
+      {{
+         -- subselect
+         SELECT {pr:product}
+            FROM {PriceRow AS pr}
+            WHERE {pr:currency} = ?currency
+      }}
+   )
+   ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_33">使用<code>FROM</code>子句和<code>SQL</code>聚合函数并带有子查询的报表查询</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT AVG(torderentries.totprice), AVG(torderentries.totquantity)
+    FROM 
+    (
+       {{ 
+          SELECT SUM({totalPrice}) AS totprice, SUM({quantity}) AS totquantity
+          FROM {OrderEntry} 
+          WHERE {creationtime} &gt;= ?startDate 
+              AND {creationtime} &lt; ?endDate 
+          GROUP BY {order}
+       }}
+    ) AS torderentries
+</code></pre>
+
+<h3 id="toc_34">2.4. 将<code>SELECT</code>语句与<code>UNION</code>操作符组合在一起</h3>
+
+<p><code>UNION</code>操作符用于合并两个或多个<code>SELECT</code>语句的结果集。</p>
+
+<h5 id="toc_35">2.4.1. 语法</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT x.PK
+FROM
+(
+    {{
+        SELECT {PK} AS PK FROM {Chapter}
+        WHERE {Chapter.PUBLICATION} LIKE 6587084167216798848
+    }}
+UNION ALL
+    {{
+        SELECT {PK} AS PK FROM {Page}
+        WHERE {Page.PUBLICATION} LIKE 6587084167216798848
+    }}
+) x
+</code></pre>
+
+<h5 id="toc_36">2.4.1 获取订单的所有支付金额</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT result.orderid, result.name, result.amount
+FROM
+(
+    {{
+        SELECT {o.orderid} AS orderid, {op.payname} AS name, {op.payAmount} AS amount
+        FROM 
+            { 
+                OrderPayType AS op JOIN Order AS o ON {op.order ={o.pk}
+            }
+        WHERE {o.orderid} = &#39;10001&#39;
+    }}
+UNION
+    {{
+        SELECT {o.orderid} AS orderid, {opi.name} AS name, {opi.promotionAmount} AS amount
+        FROM 
+            {
+                OrderPromotionInfo AS opi
+                JOIN order AS o ON {o.pk}={opi.order}
+            }
+        WHERE {o.orderid} = &#39;10001&#39;
+    }}
+) result
+</code></pre>
+
+]]></content>
+  </entry>
+  
+</feed>

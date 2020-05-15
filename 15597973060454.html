@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			FlexibleSearch 示例 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            FlexibleSearch 示例   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2019/06/06</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='FlexibleSearch.html'>FlexibleSearch</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_FlexibleSearch.html'>#FlexibleSearch</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_Hybris.html'>#Hybris</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <h2 id="toc_0">一、 基本<code>SELECT</code>语句</h2>
+
+<h3 id="toc_1">1.1. 带有否定操作符<code>NOT</code>的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_2">1.1.1. 获取 <code>code</code> 不为空的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p.pk} FROM {Product AS p} WHERE {p.code} IS NOT NULL
+</code></pre>
+
+<h5 id="toc_3">1.1.2. 获取 <code>code</code> 不包含特定字符串的所有类别</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {c:pk} FROM {Category AS c} WHERE {c:code} IS NOT LIKE &#39;%test%&#39;
+</code></pre>
+
+<h3 id="toc_4">1.2. 返回多列的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_5">1.2.1. 获取所有类别的所有数据库列</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT * FROM {Category}
+</code></pre>
+
+<h5 id="toc_6">1.2.2. 获取类别上次修改的时间、<code>code</code>和<code>PK</code>列</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {cat:modifiedtime}, {cat:code}, {cat:pk} FROM {Category AS cat}
+</code></pre>
+
+<h3 id="toc_7">1.3. 多个条件属性的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_8">1.3.1. 获取<code>code</code>或<code>name</code>包含特定字符串的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+    FROM {Product AS p}
+    WHERE
+        {p:code} LIKE &#39;%myProduct&#39;
+        OR
+        {p:name} LIKE &#39;%myProduct&#39;
+    ORDER BY {p:code} ASC
+</code></pre>
+
+<h5 id="toc_9">1.3.2. <code>％</code>用作通配符</h5>
+
+<ul>
+<li><code>a％</code>  查找以a开头的所有字符串，</li>
+<li><code>％a</code>  查找以a结尾的所有字符串，</li>
+<li><code>％a％</code>  查找包含a的所有字符串。</li>
+</ul>
+
+<h5 id="toc_10">1.3.3. 补充：通过<code>?</code>占位符引入参数到查询中，可以搜索任何搜索字符串：</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:code} LIKE ?name
+      OR {p:name} LIKE ?name
+   ORDER BY {p:code} ASC
+</code></pre>
+
+<pre class="line-numbers"><code class="language-sql">WHERE ... LIKE CONCAT(&#39;%&#39;, CONCAT(?name, &#39;%&#39;))
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">... LIKE ?name;
+query.addQueryParameter(&quot;name&quot;, &quot;%h%&quot;) 
+</code></pre>
+
+<h3 id="toc_11">1.4. 多语言的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_12">1.4.1. 获取<code>name</code>列为<code>null</code>的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 查询未明确指定语言，默认使用当前会话语言
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:name} IS NULL
+</code></pre>
+
+<h5 id="toc_13">1.4.2. 获取所有<code>name</code>列英语<code>null</code>或<code>description</code>列中文为<code>null</code>的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:name[en]} IS NULL 
+      OR {p:description[zh]} IS NULL
+</code></pre>
+
+<h5 id="toc_14">1.4.3. 同时搜索多种语言</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]:o} LIKE &#39;%text%&#39; 
+   OR {p:description[en]:o} LIKE &#39;%text%&#39;
+
+# 添加`OR`子句以搜索其他属性或语言
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]:o} LIKE &#39;%text%&#39;
+   OR {p:description[en]:o} LIKE &#39;%text%&#39;
+   OR {p:name[de]:o} LIKE &#39;%text%&#39;
+   OR {p:description[fr]:o} LIKE &#39;%text%&#39;
+</code></pre>
+
+<h3 id="toc_15">1.5. 带参数的<code>SELECT</code>语句</h3>
+
+<h5 id="toc_16">1.5.1. 在<code>FlexibleSearch</code>语句中使用一个参数</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[en]:o} LIKE ?param
+   OR {p:description[de]:o} LIKE ?param
+   OR {p:description[fr]:o} LIKE ?param
+</code></pre>
+
+<h5 id="toc_17">1.5.2. 在<code>FlexibleSearch</code>语句中使用2个参数</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 获取至少属于以下两个类别之一的所有产品： 
+SELECT {cpr:target}
+   FROM {CategoryProductRelation AS cpr}
+   WHERE {cpr:source} LIKE ?param1
+      OR {cpr:source} LIKE ?param2
+# 获取在两个日期之间更改的所有产品
+SELECT {pk}
+   FROM {Product}
+   WHERE  {modifiedtime} &gt;= ?startDate
+      AND {modifiedtime} &lt;= ?endDate
+</code></pre>
+
+<h3 id="toc_18">1.6. 带连接的<code>SELECT</code>语句</h3>
+
+<p>合并多个字符串</p>
+
+<h5 id="toc_19">1.6.1. 用<code>%</code>括住搜索字符串</h5>
+
+<pre class="line-numbers"><code class="language-sql"># 关于`CONCAT`操作符的示例
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]} 
+      LIKE CONCAT(&#39;%&#39;, CONCAT(&#39;myProduct&#39;,&#39;%&#39;))
+   ORDER BY {p:code} ASC
+# 结合`?`占位符的示例
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:description[zh]} LIKE CONCAT(&#39;%&#39;,CONCAT(?param,&#39;%&#39;))
+   ORDER BY {p:code}
+</code></pre>
+
+<h3 id="toc_20">1.7. 使用<code>DISTINCT</code>操作符的<code>SELECT</code>语句</h3>
+
+<p>清楚查询结果中的重复项</p>
+
+<h5 id="toc_21">1.7.1. 清楚查询结果中的重复项</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT DISTINCT {cpr:target}
+   FROM {CategoryProductRelation AS cpr}
+   WHERE {cpr:source} LIKE ?param1
+      OR {cpr:source} LIKE ?param2
+</code></pre>
+
+<h3 id="toc_22">1.8. 使用<code>GROUP BY</code>操作符<code>SELECT</code>语句</h3>
+
+<h5 id="toc_23">1.8.1. 获取每个产品订单行，并按产品分组</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {oe:product}
+    FROM {OrderEntry AS oe}
+    GROUP BY {oe:product}
+</code></pre>
+
+<h2 id="toc_24">二、 子查询</h2>
+
+<h3 id="toc_25">2.1. 子查询语法</h3>
+
+<pre class="line-numbers"><code class="language-sql">SELECT *
+   FROM ${type}
+   WHERE
+   {{
+      SELECT *
+         FROM ${other_type}
+         WHERE ${subselect_search_condition}
+   }}
+</code></pre>
+
+<h3 id="toc_26">2.2. 对多种类型进行子选择</h3>
+
+<h5 id="toc_27">2.2.1 获得每一个直接或间接指定价格的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT DISTINCT {p:PK}, {p:name}, {p:code}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        {{
+            -- subselect 1
+            SELECT {dr:product} FROM {DiscountRow AS dr}
+        }}
+    )
+    OR {p:PK} IN
+    (
+        {{
+            -- subselect 2
+            SELECT {prod:PK} 
+            FROM {
+                Product AS prod
+                LEFT JOIN DiscountRow AS dr ON {prod:Europe1PriceFactory_PDG} = {dr:pg}
+            }
+            WHERE {prod:Europe1PriceFactory_PDG} IS NOT NULL
+        }}
+    )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_28">2.2.2 获得至少属于3个类别的所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        -- subselect 1
+        SELECT prod
+        FROM
+        (
+            {{
+                -- subselect 2
+                SELECT {cpr:target} AS prod, count({cpr:target}) AS howmany
+                FROM {CategoryProductRelation AS cpr}
+                GROUP BY {cpr:target}
+            }}
+        ) temptable
+        WHERE howmany &gt; 3
+   )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_29">2.2.3 结合<code>?</code>占位符的示例</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+FROM {Product AS p}
+WHERE {p:PK} IN
+    (
+        -- subselect 1
+        SELECT prod
+        FROM
+        (
+            {{
+                -- subselect 2
+                SELECT {cpr:target} AS prod, count({cpr:target}) AS howmany
+                FROM {CategoryProductRelation AS cpr}
+                GROUP BY {cpr:target}
+            }}
+        ) temptable
+        WHERE howmany &gt; ?number
+   )
+ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h3 id="toc_30">2.3. 使用参数进行子选择</h3>
+
+<h5 id="toc_31">2.3.1 在指定日期和指定时间之后被订购所有产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} IN
+   ( 
+      {{
+         -- subselect 1
+         SELECT DISTINCT {oe:product}
+            FROM {OrderEntry AS oe}
+            WHERE {oe:order} IN
+            ( 
+               {{
+                  -- subselect 2
+                  SELECT {o:PK}
+                     FROM {Order AS o}
+                     WHERE {o:date} &gt;= ?date 
+               }}
+            )
+      }}
+   )
+</code></pre>
+
+<h5 id="toc_32">2.3.2 获取指定货币中没有标价的产品</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} NOT IN
+   (
+      {{
+         -- subselect
+         SELECT {pr:product}
+            FROM {PriceRow AS pr}
+            WHERE {pr:currency} = ?currency
+      }}
+   )
+   ORDER BY {p:name} ASC, {p:code} ASC
+   
+# 也可以用 不存在`NOT EXISTS`
+SELECT {p:PK}
+   FROM {Product AS p}
+   WHERE {p:PK} NOT EXISTS
+   (
+      {{
+         -- subselect
+         SELECT {pr:product}
+            FROM {PriceRow AS pr}
+            WHERE {pr:currency} = ?currency
+      }}
+   )
+   ORDER BY {p:name} ASC, {p:code} ASC
+</code></pre>
+
+<h5 id="toc_33">使用<code>FROM</code>子句和<code>SQL</code>聚合函数并带有子查询的报表查询</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT AVG(torderentries.totprice), AVG(torderentries.totquantity)
+    FROM 
+    (
+       {{ 
+          SELECT SUM({totalPrice}) AS totprice, SUM({quantity}) AS totquantity
+          FROM {OrderEntry} 
+          WHERE {creationtime} &gt;= ?startDate 
+              AND {creationtime} &lt; ?endDate 
+          GROUP BY {order}
+       }}
+    ) AS torderentries
+</code></pre>
+
+<h3 id="toc_34">2.4. 将<code>SELECT</code>语句与<code>UNION</code>操作符组合在一起</h3>
+
+<p><code>UNION</code>操作符用于合并两个或多个<code>SELECT</code>语句的结果集。</p>
+
+<h5 id="toc_35">2.4.1. 语法</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT x.PK
+FROM
+(
+    {{
+        SELECT {PK} AS PK FROM {Chapter}
+        WHERE {Chapter.PUBLICATION} LIKE 6587084167216798848
+    }}
+UNION ALL
+    {{
+        SELECT {PK} AS PK FROM {Page}
+        WHERE {Page.PUBLICATION} LIKE 6587084167216798848
+    }}
+) x
+</code></pre>
+
+<h5 id="toc_36">2.4.1 获取订单的所有支付金额</h5>
+
+<pre class="line-numbers"><code class="language-sql">SELECT result.orderid, result.name, result.amount
+FROM
+(
+    {{
+        SELECT {o.orderid} AS orderid, {op.payname} AS name, {op.payAmount} AS amount
+        FROM 
+            { 
+                OrderPayType AS op JOIN Order AS o ON {op.order ={o.pk}
+            }
+        WHERE {o.orderid} = &#39;10001&#39;
+    }}
+UNION
+    {{
+        SELECT {o.orderid} AS orderid, {opi.name} AS name, {opi.promotionAmount} AS amount
+        FROM 
+            {
+                OrderPromotionInfo AS opi
+                JOIN order AS o ON {o.pk}={opi.order}
+            }
+        WHERE {o.orderid} = &#39;10001&#39;
+    }}
+) result
+</code></pre>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			GIT 服务器搭建（GOGS） - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            GIT 服务器搭建（GOGS）   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2020/05/11</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='other.html'>Other</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <h2 id="toc_0">GOGS 安装</h2>
+
+<h6 id="toc_1">shell脚本在底部</h6>
+
+<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A350FAC73AEA4F5FB266FD88BAB8EF33/8637" alt="shell脚本在底部"/></p>
+
+<h2 id="toc_2">GOGS 配置</h2>
+
+<h4 id="toc_3">1、数据库设置</h4>
+
+<blockquote>
+<p>修改数据库类型为: <mark>SQLite3</mark><br/>
+数据库文件路径: <mark>/home/git/gogs-data/gogs.db</mark></p>
+</blockquote>
+
+<h4 id="toc_4">2、应用基本设置</h4>
+
+<blockquote>
+<p>应用名称为: <mark>XXXGIT</mark><br/>
+仓库根目录: <mark>/home/git/gogs-repositories</mark><br/>
+运行系统用户: <mark>git</mark><br/>
+域名: <mark>host_ip</mark> （<em>服务器 ip 地址/域名 如：10.1.255.156</em>）<br/>
+SSH 端口号: <mark>22</mark><br/>
+HTTP 端口号: <mark>3000</mark>（<em>3000</em>）<br/>
+应用 URL: <mark>http://host_ip:3000</mark>（<em>服务器 ip:80 地址/域名 如：<a href="http://10.1.255.156:3000">http://10.1.255.156:3000</a></em>）<br/>
+日志路径: <mark>/home/git/gogs-log</mark></p>
+</blockquote>
+
+<h4 id="toc_5">3、选择设置</h4>
+
+<h6 id="toc_6">管理员帐号设置</h6>
+
+<blockquote>
+<p>管理员用户名: <mark>gogsadmin</mark><br/>
+管理员密码: <mark>123456</mark><br/>
+确认密码: <mark>同上</mark><br/>
+管理员邮箱: <mark><a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a></mark></p>
+</blockquote>
+
+<h4 id="toc_7">4、立即安装</h4>
+
+<blockquote>
+<p>点击【立即安装】按钮即可</p>
+</blockquote>
+
+<h2 id="toc_8">GOGS 启动、停止、重启脚本</h2>
+
+<h6 id="toc_9">shell脚本在底部</h6>
+
+<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
+
+<h2 id="toc_10">GOGS安装脚本</h2>
+
+<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+set -e
+# Root执行 CentOS7
+sleep 1s
+if ! type wget &gt;/dev/null 2&gt;&amp;1; then
+    echo &quot;################ wget 开始安装&quot;
+    yum install -y wget
+    echo &quot;################ wget 安装完成&quot;
+fi
+sleep 1s
+if ! type git &gt;/dev/null 2&gt;&amp;1; then
+    echo &quot;################ git 开始安装&quot;
+    yum install -y git
+    echo &quot;################ git 安装完成&quot;
+fi
+sleep 1s
+# 创建用户
+user=git
+group=git
+if ! egrep &quot;^$group&quot; /etc/group &gt;/dev/null 2&gt;&amp;1;
+then
+    echo &quot; 创建 git 用户组&quot;
+    groupadd $group
+fi
+
+#create user if not exists
+if ! egrep &quot;^$user&quot; /etc/passwd  &gt;/dev/null 2&gt;&amp;1;then
+    echo &quot;################ 创建 git 用户&quot;
+    useradd -g $group $user
+    echo &quot;################ 创建用户完成&quot;
+fi
+
+echo &quot;################ 创建应用文件夹 /opt&quot;
+mkdir -p /opt
+mkdir -p /home/git
+
+sleep 1s
+TIME=$(date &quot;+%Y%m%d%H%M&quot;)
+echo &quot;################ 下载 gogs 二进制文件&quot;
+if [ ! -f &quot;/opt/gogs.tar.gz&quot; ];then
+    echo &quot;################ gogs.tar.gz 文件不存在&quot;
+    sleep 1s
+    echo &quot;################ 开始下载&quot;
+    wget -O /opt/gogs.tar.gz https://github.com/gogs/gogs/releases/download/v0.11.53/linux_amd64.tar.gz
+    echo &quot;################ 下载完成&quot;
+else
+    echo &quot;################ gogs.tar.gz 文件已存在&quot;
+    echo &quot;################ 重命名 gogs.tar.gz 为 gogs.$TIME.tar.gz&quot;
+    mv /opt/gogs.tar.gz /opt/gogs.$TIME.tar.gz
+    sleep 1s
+    echo &quot;################ 开始下载&quot;
+    wget -O /opt/gogs.tar.gz https://github.com/gogs/gogs/releases/download/v0.11.53/linux_amd64.tar.gz
+    echo &quot;################ 下载完成&quot;
+fi
+
+sleep 1s
+echo &quot;################ 解压 gogs.tar.gz&quot;
+rm -rf /opt/gogs/
+tar -xzf /opt/gogs.tar.gz  -C /opt
+mkdir -p /opt/gogs/custom/conf/
+
+sudo chown -R git:git /opt
+sudo chown -R git:git /home/git
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+# 清空nat表PREROUTING链
+# iptables -t nat -F PREROUTING
+
+sleep 1s
+PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+
+if [[ ! $PID ]]; then
+    echo &quot;################ 检测 gogs 服务未启动&quot;
+else
+    echo &quot;################ 检测 gogs 服务启动中 PID=${PID}&quot;
+    sudo kill -9 ${PID}
+    echo &quot;################ 已停止 gogs 服务&quot;
+fi
+
+sleep 1s
+echo &quot;################ 开始启动 gogs 服务&quot;
+sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+
+sleep 3s
+PID2=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+HOST_IP=`ip a |grep eth0 | grep inet | grep -v inet6 | grep -v 127 | sed &#39;s/^[ \t]*//g&#39; | cut -d &#39; &#39; -f2 | cut -d / -f 1`
+echo &quot;PID = $PID2&quot;
+if [[ ! $PID2 ]]; then
+    echo -e &quot;\033[31m gogs 服务启动失败！请尝试重新启动\033[0m&quot;
+else
+    echo &quot;#######################################################################&quot;
+    echo &quot;                                启动成功                                &quot;
+    #echo &quot;            gogs 内置端口 3000 iptable 配置 80 转发 3000          &quot;
+    echo &quot;           请在浏览器中打开 http://${HOST_IP}:80 进行设置             &quot;
+    echo &quot;#######################################################################&quot;
+fi
+</code></pre>
+
+<h2 id="toc_11">GOGS启动脚本</h2>
+
+<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+set -e
+
+PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+MODE=$1
+case &quot;${MODE}&quot; in
+    stop)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+    ;;
+    restart)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动，启动gogs服务&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+        sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        echo &quot;gogs服务启动成功PID=${PID}&quot;
+    ;;
+    start)
+        if [[ ! $PID ]]; then
+          echo &quot;检测gogs服务未启动，启动gogs服务&quot;
+        else
+          sudo kill -9 ${PID}
+          echo &quot;已停止gogs服务&quot;
+        fi
+        sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
+        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        echo &quot;gogs服务启动成功PID=${PID}&quot;
+    ;;
+    *)
+        echo $&quot;please input right command (start,stop,restart) !&quot;
+    ;;
+esac
+</code></pre>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>

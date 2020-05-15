@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			FlexibleSearch 语法 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            FlexibleSearch 语法   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2019/04/01</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='FlexibleSearch.html'>FlexibleSearch</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_FlexibleSearch.html'>#FlexibleSearch</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_Hybris.html'>#Hybris</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <h2 id="toc_0">简介</h2>
+
+<p>FlexibleSearch 框架自动解析类型和数据库表依赖关系，不需要指定显式的数据库表名，类型系统和数据库表示之间的整个转换过程是自动进行的，并在必要时使用 UNION 和 JOIN 生成数据库可执行的 SQL 语句。</p>
+
+<pre class="line-numbers"><code class="language-sql">SELECT
+    {p:pk},{p.code},{p.name[zh]} 
+FROM {Product as p}
+</code></pre>
+
+<pre class="line-numbers"><code class="language-sql">SELECT 
+    item_t0.PK, item_t0.p_code, lp_t0.p_name
+FROM products item_t0 
+    JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK 
+</code></pre>
+
+<hr/>
+
+<h2 id="toc_1">FlexibleSearch 查询的基本语法</h2>
+
+<pre class="line-numbers"><code class="language-sql">SELECT &lt;selects&gt; FROM &lt;types&gt; ( WHERE &lt;conditions&gt; )? ( ORDER BY &lt;order&gt; )?
+</code></pre>
+
+<h3 id="toc_2">&lt;selects&gt; 返回字段（数据库列）</h3>
+
+<ul>
+<li>获取所有字段
+<ul>
+<li><code>{*}</code> 按 SQL 约定返回所有数据库列，例如：<code>SELECT {*} FROM {Product}</code>。</li>
+</ul></li>
+<li>获取指定字段
+<ul>
+<li><code>{attribute}</code> 指定属性标识符用必须使用<code>{}</code>包裹，例如：<code>SELECT {code} FROM {Product}</code>。</li>
+</ul></li>
+<li>获取国际化字段
+<ul>
+<li><code>{attribute[zh]}</code> 使用语言标识符作为属性名称中的后缀，并用<code>[]</code>包裹，例如<code>SELECT {name[zh]}, {name[en]} FROM {Product}</code>。</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_3">&lt;types&gt; 对象模型 类型 code</h3>
+
+<ul>
+<li><code>FROM</code>子句中的<code>&lt;types&gt;</code>字段的值需要是<code>itemtype</code>的<code>code</code>属性，<code>FROM</code>子句必须用<code>{}</code>包裹</li>
+<li>可以使用<code>AS</code>给类型指定别名，例如<code>SELECT {p.code} FROM {Product AS p} ORDER BY {p.code}</code></li>
+<li>可以使用<code>JOIN</code>和<code>LEFT JOIN</code>联合查询，例如<code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></li>
+<li>子类型：默认查询搜索该类型和它的子类型所有数据，需要在<code>{}</code>中的类型后缀添加<code>!</code>，指定不查询子类型
+<ul>
+<li>查询子类型例子：<code>SELECT {code},{pk} FROM {Product}</code></li>
+<li>不查询子类型例子：<code>SELECT {code},{pk} FROM {Product!}</code></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_4">条件</h3>
+
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>SQL命令/关键字</th>
+<th>说明</th>
+<th>代码示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>ORDER BY {alias:attribute}</td>
+<td>按指定属性值排序（默认ASC）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime}</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ASC</code></td>
+<td>按升序对结果进行排序（a ... z，0 ... 9）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} ASC</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>DESC</code></td>
+<td>按降序对结果进行排序（z ... a，9 ... 0）</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} DESC</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DISTINCT</code></td>
+<td>消除查询结果中的重复项</td>
+<td><code>SELECT DISTINCT({p.creationtime}),{p:pk},{p.modifiedtime} FROM {Product as p}</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>OR</code></td>
+<td>或者</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; OR {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>AND</code></td>
+<td>并且</td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; AND {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>IS [NOT] NULL</code></td>
+<td>返回是null/非null结果</td>
+<td><code>... WHERE ... IS [NOT] NULL</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>[NOT] IN</code></td>
+<td>属于/不属于</td>
+<td><code>... WHERE ... [NOT] IN (... , ...)</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>[NOT] EXISTS</code></td>
+<td>存在/不存在</td>
+<td><code>SELECT {o.code}, FROM {order as o} WHERE 1=1 AND NOT EXISTS({{ SELECT {c.PK} FROM {Consignment as c} WHERE {c.order}={o.pk} }})</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>LIKE</code></td>
+<td>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的</td>
+<td><code>... WHERE ... LIKE &#39;...&#39;</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>%</code></td>
+<td>匹配任意数量字符的通配符</td>
+<td><code>... WHERE ... LIKE &#39;%...&#39; , &#39;...%...&#39; , &#39;...%&#39; , &#39;%...%&#39;</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>_</code></td>
+<td>匹配单个字符的通配符</td>
+<td><code>... WHERE ... LIKE &#39;_...&#39; , &#39;..._...&#39; , &#39;..._&#39;</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>LEFT JOIN ON</code></td>
+<td>左链接，左表返回符合条件的所有行，右表没有的数据显示null</td>
+<td><code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>= 、 !=, &lt;&gt; 、 &lt; 、 &lt;= 、 &gt; 、 &gt;=</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>CONCAT</code></td>
+<td>连接两个结果 - 右侧的示例将返回字符串结果</td>
+<td><code>SELECT concat({c.code},&#39;-&#39;,{cs.code}) as &#39;配货单号-配货单状态&#39; FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk} } WHERE {cs.code} = &#39;APPROVED&#39;</code></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK WHERE lp_t0.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 JOIN productslp lp_t0_l1 ON lp_t0.ITEMPK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>:o</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK LEFT JOIN productslp lp_t0_l1 ON item_t0.PK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>{locAttr[ANY]}</code></td>
+<td>所有国际化定义</td>
+<td><code>SELECT count(DISTINCT {p:PK}) FROM {Product AS p} WHERE {p:name[ANY]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>Product!</code></td>
+<td>ModelType加<code>!</code>FlexibleSearch查询仅搜索指定的类型并省略所有子类型</td>
+<td><code>SELECT {code},{pk} FROM {Product!}</code></td>
+</tr>
+</tbody>
+</table>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>

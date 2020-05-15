@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			Linux 查看日志文件常用命令集合 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            Linux 查看日志文件常用命令集合   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2020/05/07</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='linux.html'>Linux</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_tail%20less%20cat.html'>#tail less cat</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <p>查看日志文件常用命令</p>
+
+<pre class="line-numbers"><code class="language-shell">1. tail
+2. less
+3. cat + grep 组合
+</code></pre>
+
+<blockquote>
+<h2 id="toc_0">tail</h2>
+
+<p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
+</blockquote>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
+</code></pre></li>
+<li><p>无参：显示尾部 10 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail console.log
+</code></pre></li>
+<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
+<pre class="line-numbers"><code class="language-shell">tail -f console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 20 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 10 个字节内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
+</code></pre></li>
+</ul>
+
+<h5 id="toc_1">注意</h5>
+
+<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
+2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
+3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
+</code></pre>
+
+<h2 id="toc_2">less</h2>
+
+<p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
+</code></pre></li>
+<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less console.log
+</code></pre></li>
+<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less -N console.log
+</code></pre></li>
+<li><p>查看文件，搜索指令时忽略大小写</p>
+<pre class="line-numbers"><code class="language-shell">less -i console.log
+</code></pre></li>
+<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">/字符串
+</code></pre></li>
+<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">?字符串
+</code></pre></li>
+<li><p>搜索指令，仅显示匹配“字符串”的行</p>
+<pre class="line-numbers"><code class="language-shell">&amp;字符串
+</code></pre></li>
+<li><p>滚动指令，向上一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
+</code></pre></li>
+<li><p>滚动指令，向下一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
+</code></pre></li>
+<li><p>滚动指令，向下滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">键盘空格键
+</code></pre></li>
+<li><p>滚动命令，向上滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">b
+</code></pre></li>
+<li><p>滚动命令，滚动到头部</p>
+<pre class="line-numbers"><code class="language-shell">g
+</code></pre></li>
+<li><p>滚动命令，滚动到尾部</p>
+<pre class="line-numbers"><code class="language-shell">G
+</code></pre></li>
+<li><p>退出less模式</p>
+<pre class="line-numbers"><code class="language-shell">q
+</code></pre></li>
+</ul>
+
+<h2 id="toc_3">cat + grep 组合</h2>
+
+<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>示例</p>
+<pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
+cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
+</code></pre></li>
+<li><p>显示包括字符串的行及下面的 1 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 5 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+</ul>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>
