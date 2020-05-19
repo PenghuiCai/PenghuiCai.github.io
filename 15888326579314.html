@@ -121,18 +121,22 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>查看日志文件常用命令</p>
+                    <ul>
+<li>
+<a href="#toc_0">tail</a>
+</li>
+<li>
+<a href="#toc_1">less</a>
+</li>
+<li>
+<a href="#toc_2">cat + grep 组合</a>
+</li>
+</ul>
 
-<pre class="line-numbers"><code class="language-shell">1. tail
-2. less
-3. cat + grep 组合
-</code></pre>
 
-<blockquote>
 <h2 id="toc_0">tail</h2>
 
 <p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
-</blockquote>
 
 <ul>
 <li><p>命令格式</p>
@@ -152,14 +156,14 @@
 </code></pre></li>
 </ul>
 
-<h5 id="toc_1">注意</h5>
+<p>注意</p>
 
 <pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
 2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
 3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
 </code></pre>
 
-<h2 id="toc_2">less</h2>
+<h2 id="toc_1">less</h2>
 
 <p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
 
@@ -208,7 +212,7 @@
 </code></pre></li>
 </ul>
 
-<h2 id="toc_3">cat + grep 组合</h2>
+<h2 id="toc_2">cat + grep 组合</h2>
 
 <p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
 

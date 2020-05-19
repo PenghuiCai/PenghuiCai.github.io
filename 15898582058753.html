@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			GIT 分支管理推荐 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            GIT 分支管理推荐   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2020/05/19</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='other.html'>Other</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_Git.html'>#Git</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <ul>
+<li>
+<a href="#toc_0">创建 新功能 分支</a>
+<ul>
+<li>
+<a href="#toc_1">创建条件</a>
+</li>
+<li>
+<a href="#toc_2">命名规则</a>
+</li>
+<li>
+<a href="#toc_3">生命周期：</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">创建 bug修复 分支</a>
+<ul>
+<li>
+<a href="#toc_5">创建条件</a>
+</li>
+<li>
+<a href="#toc_6">命名规则</a>
+</li>
+<li>
+<a href="#toc_7">生命周期：</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">创建 新功能 分支</h2>
+
+<h3 id="toc_1">创建条件</h3>
+
+<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支开发某个 新功能点 时创建
+</code></pre>
+
+<h3 id="toc_2">命名规则</h3>
+
+<pre class="line-numbers"><code class="language-text">feature/authorName-createTime-functionalDescription
+例1（无项目管理系统）：feature/xm-20190313-createOrder
+例2（有项目管理系统）：feature/xm-20190313-taskid
+</code></pre>
+
+<h3 id="toc_3">生命周期：</h3>
+
+<ul>
+<li><p>开发前：</p>
+<pre class="line-numbers"><code class="language-text">从 master(prod) 分支创建 feature/xxx 分支完成开发任务
+</code></pre></li>
+<li><p>开发后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支到 develop(develop/global) 分支进行功能测试
+</code></pre></li>
+<li><p>功能测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre></li>
+<li><p>验收测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 master(prod)，等待部署上线
+</code></pre></li>
+<li><p>上线完成：</p>
+<pre class="line-numbers"><code class="language-text">观察一段时间，删除 feature/xxx 分支
+</code></pre></li>
+</ul>
+
+<h2 id="toc_4">创建 bug修复 分支</h2>
+
+<h3 id="toc_5">创建条件</h3>
+
+<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支修复某个 Bug 时创建
+</code></pre>
+
+<h3 id="toc_6">命名规则</h3>
+
+<pre class="line-numbers"><code class="language-text">bugfix/authorName-createTime-functionalDescription
+例1（无项目管理系统）：bugfix/xm-20190313-saveOrderException
+例2（有项目管理系统）：bugfix/xm-20190313-taskid
+</code></pre>
+
+<h3 id="toc_7">生命周期：</h3>
+
+<ul>
+<li><p>修复前：</p>
+<pre class="line-numbers"><code class="language-text">创建 bugfix/xxx 分支完成 bug 修补任务
+</code></pre></li>
+<li><p>修复后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支到 develop 分支进行功能测试
+</code></pre></li>
+<li><p>功能测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre></li>
+<li><p>验收测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 master(prod)，等待部署上线
+</code></pre></li>
+<li><p>上线完成：</p>
+<pre class="line-numbers"><code class="language-text">观察一段时间，删除  bugfix/xxx 分支
+</code></pre></li>
+</ul>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>

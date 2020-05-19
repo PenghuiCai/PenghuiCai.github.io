@@ -4,7 +4,7 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-05-14T17:52:58+08:00</updated>
+  <updated>2020-05-19T11:35:58+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,49 +13,140 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[error reading property field]]></title>
-    <link href="https://penghuicai.github.io/15894485026978.html"/>
-    <updated>2020-05-14T17:28:22+08:00</updated>
-    <id>https://penghuicai.github.io/15894485026978.html</id>
+    <title type="html"><![CDATA[Linux 查看日志文件常用命令集合]]></title>
+    <link href="https://penghuicai.github.io/15888326579314.html"/>
+    <updated>2020-05-07T14:24:17+08:00</updated>
+    <id>https://penghuicai.github.io/15888326579314.html</id>
     <content type="html"><![CDATA[
-<pre class="line-numbers"><code class="language-text">error reading property field &#39;attributeCode&#39;/&#39;p_attributeCode&#39; of item &#39;8951708354515&#39;/&#39;8951708354515&#39; (info was [attributeCode,p_attributeCode,class de.hybris.platform.util.Itemxxxxxxxx
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
-Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column &#39;p_attributeCode&#39; not found.
+<ul>
+<li>
+<a href="#toc_0">tail</a>
+</li>
+<li>
+<a href="#toc_1">less</a>
+</li>
+<li>
+<a href="#toc_2">cat + grep 组合</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">tail</h2>
+
+<p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
+
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
+</code></pre></li>
+<li><p>无参：显示尾部 10 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail console.log
+</code></pre></li>
+<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
+<pre class="line-numbers"><code class="language-shell">tail -f console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 20 行内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
+</code></pre></li>
+<li><p>读取日志文件尾部 10 个字节内容</p>
+<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
+</code></pre></li>
+</ul>
+
+<p>注意</p>
+
+<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
+2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
+3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
 </code></pre>
 
-<h3 id="toc_0">快速解决</h3>
+<h2 id="toc_1">less</h2>
 
-<pre class="line-numbers"><code class="language-text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
-SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+<p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
 
-REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
-;8951708354515
-</code></pre>
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
+</code></pre></li>
+<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less console.log
+</code></pre></li>
+<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
+<pre class="line-numbers"><code class="language-shell">less -N console.log
+</code></pre></li>
+<li><p>查看文件，搜索指令时忽略大小写</p>
+<pre class="line-numbers"><code class="language-shell">less -i console.log
+</code></pre></li>
+<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">/字符串
+</code></pre></li>
+<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
+<pre class="line-numbers"><code class="language-shell">?字符串
+</code></pre></li>
+<li><p>搜索指令，仅显示匹配“字符串”的行</p>
+<pre class="line-numbers"><code class="language-shell">&amp;字符串
+</code></pre></li>
+<li><p>滚动指令，向上一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
+</code></pre></li>
+<li><p>滚动指令，向下一行</p>
+<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
+</code></pre></li>
+<li><p>滚动指令，向下滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">键盘空格键
+</code></pre></li>
+<li><p>滚动命令，向上滚动一屏幕</p>
+<pre class="line-numbers"><code class="language-shell">b
+</code></pre></li>
+<li><p>滚动命令，滚动到头部</p>
+<pre class="line-numbers"><code class="language-shell">g
+</code></pre></li>
+<li><p>滚动命令，滚动到尾部</p>
+<pre class="line-numbers"><code class="language-shell">G
+</code></pre></li>
+<li><p>退出less模式</p>
+<pre class="line-numbers"><code class="language-shell">q
+</code></pre></li>
+</ul>
 
-<h3 id="toc_1">问题步骤</h3>
+<h2 id="toc_2">cat + grep 组合</h2>
 
-<h4 id="toc_2">1. 获取 itemType 类型的 pk</h4>
+<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
 
-<pre class="line-numbers"><code class="language-text">SELECT {itemtype} FROM {Item} WHERE {pk} = &#39;8951708354515&#39;
-</code></pre>
-
-<h4 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h4>
-
-<pre class="line-numbers"><code class="language-text">SELECT {code} FROM {ComposedType} WHERE {pk} = &#39;8796107276370&#39;
-</code></pre>
-
-<h4 id="toc_4">3. 根据 Code 获取报错的那条数据</h4>
-
-<pre class="line-numbers"><code class="language-text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
-</code></pre>
-
-<h4 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h4>
-
-<pre class="line-numbers"><code class="language-text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
-;8951708354515
-</code></pre>
+<ul>
+<li><p>命令格式</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>示例</p>
+<pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
+cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
+</code></pre></li>
+<li><p>显示包括字符串的行及下面的 1 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 5 行记录</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
+# ======================================<br/>
+# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+</ul>
 
 ]]></content>
   </entry>
@@ -66,22 +157,58 @@ REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
     <updated>2020-05-11T16:21:07+08:00</updated>
     <id>https://penghuicai.github.io/15891852674965.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">GOGS 安装</h2>
+<ul>
+<li>
+<a href="#toc_0">脚本在底部</a>
+</li>
+<li>
+<a href="#toc_1">GOGS 安装</a>
+</li>
+<li>
+<a href="#toc_2">GOGS 配置</a>
+<ul>
+<li>
+<a href="#toc_3">1、数据库设置</a>
+</li>
+<li>
+<a href="#toc_4">2、应用基本设置</a>
+</li>
+<li>
+<a href="#toc_5">3、选择设置</a>
+</li>
+<li>
+<a href="#toc_6">4、立即安装</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">GOGS 启动、停止、重启脚本</a>
+</li>
+<li>
+<a href="#toc_8">GOGS安装脚本</a>
+</li>
+<li>
+<a href="#toc_9">GOGS启动脚本</a>
+</li>
+</ul>
 
-<h6 id="toc_1">shell脚本在底部</h6>
+
+<h2 id="toc_0">脚本在底部</h2>
+
+<h2 id="toc_1">GOGS 安装</h2>
 
 <p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A350FAC73AEA4F5FB266FD88BAB8EF33/8637" alt="shell脚本在底部"/></p>
 
 <h2 id="toc_2">GOGS 配置</h2>
 
-<h4 id="toc_3">1、数据库设置</h4>
+<h3 id="toc_3">1、数据库设置</h3>
 
 <blockquote>
 <p>修改数据库类型为: <mark>SQLite3</mark><br/>
 数据库文件路径: <mark>/home/git/gogs-data/gogs.db</mark></p>
 </blockquote>
 
-<h4 id="toc_4">2、应用基本设置</h4>
+<h3 id="toc_4">2、应用基本设置</h3>
 
 <blockquote>
 <p>应用名称为: <mark>XXXGIT</mark><br/>
@@ -94,30 +221,28 @@ HTTP 端口号: <mark>3000</mark>（<em>3000</em>）<br/>
 日志路径: <mark>/home/git/gogs-log</mark></p>
 </blockquote>
 
-<h4 id="toc_5">3、选择设置</h4>
-
-<h6 id="toc_6">管理员帐号设置</h6>
+<h3 id="toc_5">3、选择设置</h3>
 
 <blockquote>
-<p>管理员用户名: <mark>gogsadmin</mark><br/>
+<p>管理员帐号设置<br/>
+管理员用户名: <mark>gogsadmin</mark><br/>
 管理员密码: <mark>123456</mark><br/>
 确认密码: <mark>同上</mark><br/>
 管理员邮箱: <mark><a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a></mark></p>
 </blockquote>
 
-<h4 id="toc_7">4、立即安装</h4>
+<h3 id="toc_6">4、立即安装</h3>
 
 <blockquote>
 <p>点击【立即安装】按钮即可</p>
 </blockquote>
 
-<h2 id="toc_8">GOGS 启动、停止、重启脚本</h2>
+<h2 id="toc_7">GOGS 启动、停止、重启脚本</h2>
 
-<h6 id="toc_9">shell脚本在底部</h6>
+<p><code>shell脚本在底部</code><br/>
+<img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
 
-<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
-
-<h2 id="toc_10">GOGS安装脚本</h2>
+<h2 id="toc_8">GOGS安装脚本</h2>
 
 <pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
 set -e
@@ -218,7 +343,7 @@ else
 fi
 </code></pre>
 
-<h2 id="toc_11">GOGS启动脚本</h2>
+<h2 id="toc_9">GOGS启动脚本</h2>
 
 <pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
 set -e
@@ -260,6 +385,163 @@ case &quot;${MODE}&quot; in
         echo $&quot;please input right command (start,stop,restart) !&quot;
     ;;
 esac
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GIT 分支管理推荐]]></title>
+    <link href="https://penghuicai.github.io/15898582058753.html"/>
+    <updated>2020-05-19T11:16:45+08:00</updated>
+    <id>https://penghuicai.github.io/15898582058753.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">创建 新功能 分支</a>
+<ul>
+<li>
+<a href="#toc_1">创建条件</a>
+</li>
+<li>
+<a href="#toc_2">命名规则</a>
+</li>
+<li>
+<a href="#toc_3">生命周期：</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">创建 bug修复 分支</a>
+<ul>
+<li>
+<a href="#toc_5">创建条件</a>
+</li>
+<li>
+<a href="#toc_6">命名规则</a>
+</li>
+<li>
+<a href="#toc_7">生命周期：</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">创建 新功能 分支</h2>
+
+<h3 id="toc_1">创建条件</h3>
+
+<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支开发某个 新功能点 时创建
+</code></pre>
+
+<h3 id="toc_2">命名规则</h3>
+
+<pre class="line-numbers"><code class="language-text">feature/authorName-createTime-functionalDescription
+例1（无项目管理系统）：feature/xm-20190313-createOrder
+例2（有项目管理系统）：feature/xm-20190313-taskid
+</code></pre>
+
+<h3 id="toc_3">生命周期：</h3>
+
+<ul>
+<li><p>开发前：</p>
+<pre class="line-numbers"><code class="language-text">从 master(prod) 分支创建 feature/xxx 分支完成开发任务
+</code></pre></li>
+<li><p>开发后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支到 develop(develop/global) 分支进行功能测试
+</code></pre></li>
+<li><p>功能测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre></li>
+<li><p>验收测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 master(prod)，等待部署上线
+</code></pre></li>
+<li><p>上线完成：</p>
+<pre class="line-numbers"><code class="language-text">观察一段时间，删除 feature/xxx 分支
+</code></pre></li>
+</ul>
+
+<h2 id="toc_4">创建 bug修复 分支</h2>
+
+<h3 id="toc_5">创建条件</h3>
+
+<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支修复某个 Bug 时创建
+</code></pre>
+
+<h3 id="toc_6">命名规则</h3>
+
+<pre class="line-numbers"><code class="language-text">bugfix/authorName-createTime-functionalDescription
+例1（无项目管理系统）：bugfix/xm-20190313-saveOrderException
+例2（有项目管理系统）：bugfix/xm-20190313-taskid
+</code></pre>
+
+<h3 id="toc_7">生命周期：</h3>
+
+<ul>
+<li><p>修复前：</p>
+<pre class="line-numbers"><code class="language-text">创建 bugfix/xxx 分支完成 bug 修补任务
+</code></pre></li>
+<li><p>修复后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支到 develop 分支进行功能测试
+</code></pre></li>
+<li><p>功能测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre></li>
+<li><p>验收测试后：</p>
+<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 master(prod)，等待部署上线
+</code></pre></li>
+<li><p>上线完成：</p>
+<pre class="line-numbers"><code class="language-text">观察一段时间，删除  bugfix/xxx 分支
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[error reading property field]]></title>
+    <link href="https://penghuicai.github.io/15894485026978.html"/>
+    <updated>2020-05-14T17:28:22+08:00</updated>
+    <id>https://penghuicai.github.io/15894485026978.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text">error reading property field &#39;attributeCode&#39;/&#39;p_attributeCode&#39; of item &#39;8951708354515&#39;/&#39;8951708354515&#39; (info was [attributeCode,p_attributeCode,class de.hybris.platform.util.Itemxxxxxxxx
+xxxxxxxx
+xxxxxxxx
+xxxxxxxx
+Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column &#39;p_attributeCode&#39; not found.
+</code></pre>
+
+<h3 id="toc_0">快速解决</h3>
+
+<pre class="line-numbers"><code class="language-text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
+SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+
+REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
+;8951708354515
+</code></pre>
+
+<h3 id="toc_1">问题步骤</h3>
+
+<h4 id="toc_2">1. 获取 itemType 类型的 pk</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT {itemtype} FROM {Item} WHERE {pk} = &#39;8951708354515&#39;
+</code></pre>
+
+<h4 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT {code} FROM {ComposedType} WHERE {pk} = &#39;8796107276370&#39;
+</code></pre>
+
+<h4 id="toc_4">3. 根据 Code 获取报错的那条数据</h4>
+
+<pre class="line-numbers"><code class="language-text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+</code></pre>
+
+<h4 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h4>
+
+<pre class="line-numbers"><code class="language-text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
+;8951708354515
 </code></pre>
 
 ]]></content>
@@ -557,141 +839,6 @@ FROM products item_t0
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux 查看日志文件常用命令集合]]></title>
-    <link href="https://penghuicai.github.io/15888326579314.html"/>
-    <updated>2020-05-07T14:24:17+08:00</updated>
-    <id>https://penghuicai.github.io/15888326579314.html</id>
-    <content type="html"><![CDATA[
-<p>查看日志文件常用命令</p>
-
-<pre class="line-numbers"><code class="language-shell">1. tail
-2. less
-3. cat + grep 组合
-</code></pre>
-
-<blockquote>
-<h2 id="toc_0">tail</h2>
-
-<p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
-</blockquote>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
-</code></pre></li>
-<li><p>无参：显示尾部 10 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail console.log
-</code></pre></li>
-<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
-<pre class="line-numbers"><code class="language-shell">tail -f console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 20 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 10 个字节内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
-</code></pre></li>
-</ul>
-
-<h5 id="toc_1">注意</h5>
-
-<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
-2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
-3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
-</code></pre>
-
-<h2 id="toc_2">less</h2>
-
-<p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
-</code></pre></li>
-<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less console.log
-</code></pre></li>
-<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less -N console.log
-</code></pre></li>
-<li><p>查看文件，搜索指令时忽略大小写</p>
-<pre class="line-numbers"><code class="language-shell">less -i console.log
-</code></pre></li>
-<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">/字符串
-</code></pre></li>
-<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">?字符串
-</code></pre></li>
-<li><p>搜索指令，仅显示匹配“字符串”的行</p>
-<pre class="line-numbers"><code class="language-shell">&amp;字符串
-</code></pre></li>
-<li><p>滚动指令，向上一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
-</code></pre></li>
-<li><p>滚动指令，向下一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
-</code></pre></li>
-<li><p>滚动指令，向下滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">键盘空格键
-</code></pre></li>
-<li><p>滚动命令，向上滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">b
-</code></pre></li>
-<li><p>滚动命令，滚动到头部</p>
-<pre class="line-numbers"><code class="language-shell">g
-</code></pre></li>
-<li><p>滚动命令，滚动到尾部</p>
-<pre class="line-numbers"><code class="language-shell">G
-</code></pre></li>
-<li><p>退出less模式</p>
-<pre class="line-numbers"><code class="language-shell">q
-</code></pre></li>
-</ul>
-
-<h2 id="toc_3">cat + grep 组合</h2>
-
-<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>示例</p>
-<pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
-cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
-</code></pre></li>
-<li><p>显示包括字符串的行及下面的 1 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 5 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-</ul>
 
 ]]></content>
   </entry>

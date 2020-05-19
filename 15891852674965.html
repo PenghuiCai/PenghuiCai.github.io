@@ -110,6 +110,10 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_Git.html'>#Git</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_gogs.html'>#gogs</a>
                                      
 
                                 </p>
@@ -119,22 +123,58 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">GOGS 安装</h2>
+                    <ul>
+<li>
+<a href="#toc_0">脚本在底部</a>
+</li>
+<li>
+<a href="#toc_1">GOGS 安装</a>
+</li>
+<li>
+<a href="#toc_2">GOGS 配置</a>
+<ul>
+<li>
+<a href="#toc_3">1、数据库设置</a>
+</li>
+<li>
+<a href="#toc_4">2、应用基本设置</a>
+</li>
+<li>
+<a href="#toc_5">3、选择设置</a>
+</li>
+<li>
+<a href="#toc_6">4、立即安装</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">GOGS 启动、停止、重启脚本</a>
+</li>
+<li>
+<a href="#toc_8">GOGS安装脚本</a>
+</li>
+<li>
+<a href="#toc_9">GOGS启动脚本</a>
+</li>
+</ul>
 
-<h6 id="toc_1">shell脚本在底部</h6>
+
+<h2 id="toc_0">脚本在底部</h2>
+
+<h2 id="toc_1">GOGS 安装</h2>
 
 <p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A350FAC73AEA4F5FB266FD88BAB8EF33/8637" alt="shell脚本在底部"/></p>
 
 <h2 id="toc_2">GOGS 配置</h2>
 
-<h4 id="toc_3">1、数据库设置</h4>
+<h3 id="toc_3">1、数据库设置</h3>
 
 <blockquote>
 <p>修改数据库类型为: <mark>SQLite3</mark><br/>
 数据库文件路径: <mark>/home/git/gogs-data/gogs.db</mark></p>
 </blockquote>
 
-<h4 id="toc_4">2、应用基本设置</h4>
+<h3 id="toc_4">2、应用基本设置</h3>
 
 <blockquote>
 <p>应用名称为: <mark>XXXGIT</mark><br/>
@@ -147,30 +187,28 @@ HTTP 端口号: <mark>3000</mark>（<em>3000</em>）<br/>
 日志路径: <mark>/home/git/gogs-log</mark></p>
 </blockquote>
 
-<h4 id="toc_5">3、选择设置</h4>
-
-<h6 id="toc_6">管理员帐号设置</h6>
+<h3 id="toc_5">3、选择设置</h3>
 
 <blockquote>
-<p>管理员用户名: <mark>gogsadmin</mark><br/>
+<p>管理员帐号设置<br/>
+管理员用户名: <mark>gogsadmin</mark><br/>
 管理员密码: <mark>123456</mark><br/>
 确认密码: <mark>同上</mark><br/>
 管理员邮箱: <mark><a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a></mark></p>
 </blockquote>
 
-<h4 id="toc_7">4、立即安装</h4>
+<h3 id="toc_6">4、立即安装</h3>
 
 <blockquote>
 <p>点击【立即安装】按钮即可</p>
 </blockquote>
 
-<h2 id="toc_8">GOGS 启动、停止、重启脚本</h2>
+<h2 id="toc_7">GOGS 启动、停止、重启脚本</h2>
 
-<h6 id="toc_9">shell脚本在底部</h6>
+<p><code>shell脚本在底部</code><br/>
+<img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
 
-<p><img src="https://note.youdao.com/yws/public/resource/cf893e1fbf161b5e933a1688c1e0dedc/xmlnote/A91F16C87055458BA3AC994F9F33186A/8645" alt="shell脚本在底部"/></p>
-
-<h2 id="toc_10">GOGS安装脚本</h2>
+<h2 id="toc_8">GOGS安装脚本</h2>
 
 <pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
 set -e
@@ -271,7 +309,7 @@ else
 fi
 </code></pre>
 
-<h2 id="toc_11">GOGS启动脚本</h2>
+<h2 id="toc_9">GOGS启动脚本</h2>
 
 <pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
 set -e
