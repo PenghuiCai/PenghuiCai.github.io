@@ -196,8 +196,8 @@ INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 REMOVE UserGroup[batchmode=false];uid[unique=true];
 ;TestGroup;
 # 删除 REMOVE 删除 ItemType 表内所有数据
-REMOVE MonitorItem[batchmode=true];itemtype(code)[unique=true]
-;MonitorItem
+REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
+;ItemTypeCode
 </code></pre>
 
 <h2 id="toc_6">2. 常用关键符号</h2>
