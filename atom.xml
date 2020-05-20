@@ -4,7 +4,7 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-05-19T13:29:56+08:00</updated>
+  <updated>2020-05-19T13:31:54+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -751,6 +751,9 @@ INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 # 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=false];uid[unique=true];
 ;TestGroup;
+# 删除 REMOVE 删除 ItemType 表内所有数据
+REMOVE MonitorItem[batchmode=true];itemtype(code)[unique=true]
+;MonitorItem
 </code></pre>
 
 <h2 id="toc_6">2. 常用关键符号</h2>
