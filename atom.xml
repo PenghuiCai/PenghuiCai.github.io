@@ -4,13 +4,46 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-05-20T09:55:39+08:00</updated>
+  <updated>2020-05-20T10:02:52+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[GIT 仓库迁移并保留分支和历史提交]]></title>
+    <link href="https://penghuicai.github.io/15905697716646.html"/>
+    <updated>2020-05-27T16:56:11+08:00</updated>
+    <id>https://penghuicai.github.io/15905697716646.html</id>
+    <content type="html"><![CDATA[
+<p>通过修改仓库地址实现，保留分支和历史提交的记录</p>
+
+<h2 id="toc_0">clone 旧库的镜像</h2>
+
+<pre class="line-numbers"><code class="language-text">git clone --mirror https://xxx.com/old/core.git
+</code></pre>
+
+<h2 id="toc_1">进入本地 clone 的旧库目录</h2>
+
+<pre class="line-numbers"><code class="language-text">cd core
+</code></pre>
+
+<h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
+
+<pre class="line-numbers"><code class="language-text">git remote set-url --push origin https://xxx.com/new/core.git
+</code></pre>
+
+<h2 id="toc_3">将新地址镜像 core 直接推到远程新库</h2>
+
+<pre class="line-numbers"><code class="language-text">git push --mirror
+</code></pre>
+
+<h2 id="toc_4">已搞定</h2>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GIT 分支管理推荐]]></title>
