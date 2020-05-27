@@ -130,7 +130,7 @@
 
 <h2 id="toc_1">进入本地 clone 的旧库目录</h2>
 
-<pre class="line-numbers"><code class="language-text">cd core
+<pre class="line-numbers"><code class="language-text">cd core.git
 </code></pre>
 
 <h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
@@ -143,7 +143,25 @@
 <pre class="line-numbers"><code class="language-text">git push --mirror
 </code></pre>
 
-<h2 id="toc_4">已搞定</h2>
+<h2 id="toc_4">删除本地库 core，然后再重新拉取</h2>
+
+<pre class="line-numbers"><code class="language-text">rm -rf core.git
+
+git clone -b prod https://xxx.com/new/core.git
+</code></pre>
+
+<h2 id="toc_5">已搞定</h2>
+
+<pre class="line-numbers"><code class="language-text">git clone --mirror old.git
+
+cd old.git
+
+git remote set-url --push origin new.git
+
+这一步的时候，可以删除不需要的分支和版本
+
+git push --mirror new.git
+</code></pre>
 
                   </article>
                   <div class="comments-wrap">
