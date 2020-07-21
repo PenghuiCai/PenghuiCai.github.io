@@ -143,7 +143,13 @@ INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];activ
 INSERTxxxxx;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
 </code></pre>
 
-<h2 id="toc_1">ImpEx 导出示例</h2>
+<h2 id="toc_1">ImpEx 导入JOB定义</h2>
+
+<pre class="line-numbers"><code class="language-text">INSERT_UPDATE ServicelayerJob;code[unique=true];springId
+;jobCode;jobSpringId
+</code></pre>
+
+<h2 id="toc_2">ImpEx 导出示例</h2>
 
 <pre class="line-numbers"><code class="language-text">&quot;#% impex.setTargetFile(&quot;&quot;Catalog.csv&quot;&quot;);&quot;
 INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)

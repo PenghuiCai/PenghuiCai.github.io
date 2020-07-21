@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-			GIT 仓库迁移并保留分支和历史提交 - 油脂青年
+			打包报错 打包时候UglifyJs压缩的问题 - 油脂青年
 			
 		</title>
 		
@@ -82,7 +82,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            GIT 仓库迁移并保留分支和历史提交   
+                            打包报错 打包时候UglifyJs压缩的问题   
                       </h1>
                      
                     
@@ -99,7 +99,7 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2020/05/27</span>
+                                 <span class="date">2020/07/01</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
                                       <span class="posted-in"><a href='other.html'>Other</a></span>
@@ -111,7 +111,7 @@
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
                                   
-                                    <a class="tag is-link is-light" href='tag_Git.html'>#Git</a>
+                                    <a class="tag is-link is-light" href='tag_%E5%89%8D%E7%AB%AF.html'>#前端</a>
                                      
 
                                 </p>
@@ -121,46 +121,40 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>通过修改仓库地址实现，保留分支和历史提交的记录</p>
+                    <h2 id="toc_0">报错内容</h2>
 
-<h2 id="toc_0">clone 旧库的镜像</h2>
+<pre class="line-numbers"><code class="language-text">Failed to compile. 133.a17a298b.async.js from UglifyJs 
+# 问题1
+Unexpected token: operator (&gt;) [133.a17a298b.async.js:51671,24] 
 
-<pre class="line-numbers"><code class="language-text">git clone --mirror https://xxx.com/old/core.git
+# 问题2
+from UglifyJs Unexpected token: keyword (const)
+
+# 问题3
+from UglifyJs Unexpected token: punc ())
 </code></pre>
 
-<h2 id="toc_1">进入本地 clone 的旧库目录</h2>
+<h2 id="toc_1">报错原因</h2>
 
-<pre class="line-numbers"><code class="language-text">cd core.git
-</code></pre>
+<p>压缩工具 uglify 只支持 es5 的语法。<br/>
+当遇到 const、let、()=&gt; 类似的语法将跑出上面异常</p>
 
-<h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
+<h3 id="toc_2">我遇到的问题1</h3>
 
-<pre class="line-numbers"><code class="language-text">git remote set-url --push origin https://xxx.com/new/core.git
-</code></pre>
+<p>@ant-design/charts 依赖的 d3-regression 使用了 es6 语法。<br/>
+但是现在使用的 roadhog，压缩工具 uglify-js 不支持 es6 语法， 所以 build 打包报错了</p>
 
-<h2 id="toc_3">将新地址镜像 core 直接推到远程新库</h2>
+<h2 id="toc_3">解决办法</h2>
 
-<pre class="line-numbers"><code class="language-text">git push --mirror
-</code></pre>
+<h3 id="toc_4">roadhog</h3>
 
-<h2 id="toc_4">删除本地库 core，然后再重新拉取</h2>
-
-<pre class="line-numbers"><code class="language-text">rm -rf core.git
-
-git clone -b prod https://xxx.com/new/core.git
-</code></pre>
-
-<h2 id="toc_5">已搞定</h2>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror old.git
-
-cd old.git
-
-git remote set-url --push origin new.git
-
-这一步的时候，可以删除不需要的分支和版本
-
-git push --mirror
+<pre class="line-numbers"><code class="language-text">#.roadhogrc.js 文件 加入下面内容
+export default {
+    &quot;extraBabelIncludes:&quot; [
+        &quot;node_modules/d3-regression&quot;,
+        &quot;node_modules/xxxx&quot;
+    ]
+}
 </code></pre>
 
                   </article>
