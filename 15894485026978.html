@@ -128,7 +128,31 @@ xxxxxxxx
 Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column &#39;p_attributeCode&#39; not found.
 </code></pre>
 
-<h3 id="toc_0">快速解决</h3>
+<ul>
+<li>
+<a href="#toc_0">快速解决</a>
+</li>
+<li>
+<a href="#toc_1">问题步骤</a>
+<ul>
+<li>
+<a href="#toc_2">1. 获取 itemType 类型的 pk</a>
+</li>
+<li>
+<a href="#toc_3">2. 根据类型 PK 获取 ItemType Code</a>
+</li>
+<li>
+<a href="#toc_4">3. 根据 Code 获取报错的那条数据</a>
+</li>
+<li>
+<a href="#toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">快速解决</h2>
 
 <pre class="line-numbers"><code class="language-text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
 SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
@@ -137,24 +161,24 @@ REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
 ;8951708354515
 </code></pre>
 
-<h3 id="toc_1">问题步骤</h3>
+<h2 id="toc_1">问题步骤</h2>
 
-<h4 id="toc_2">1. 获取 itemType 类型的 pk</h4>
+<h3 id="toc_2">1. 获取 itemType 类型的 pk</h3>
 
 <pre class="line-numbers"><code class="language-text">SELECT {itemtype} FROM {Item} WHERE {pk} = &#39;8951708354515&#39;
 </code></pre>
 
-<h4 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h4>
+<h3 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h3>
 
 <pre class="line-numbers"><code class="language-text">SELECT {code} FROM {ComposedType} WHERE {pk} = &#39;8796107276370&#39;
 </code></pre>
 
-<h4 id="toc_4">3. 根据 Code 获取报错的那条数据</h4>
+<h3 id="toc_4">3. 根据 Code 获取报错的那条数据</h3>
 
 <pre class="line-numbers"><code class="language-text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
 </code></pre>
 
-<h4 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h4>
+<h3 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h3>
 
 <pre class="line-numbers"><code class="language-text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
 ;8951708354515

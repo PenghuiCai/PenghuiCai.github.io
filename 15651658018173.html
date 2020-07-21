@@ -123,16 +123,58 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>SAP Commerce 附带了一个名为 ImpEx 的基于文本的导入和导出功能。 </p>
+                    <blockquote>
+<p>SAP Commerce 附带了一个名为 ImpEx 的基于文本的导入和导出功能。 </p>
+</blockquote>
 
-<h3 id="toc_0">ImpEx 的主要功能包括：</h3>
+<ul>
+<li>
+<a href="#toc_0">ImpEx 的主要功能包括：</a>
+</li>
+<li>
+<a href="#toc_1">使用 ImpEx 做什么：</a>
+<ul>
+<li>
+<a href="#toc_2">修改用户和用户组的访问权限</a>
+<ul>
+<li>
+<a href="#toc_3">示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">ImpEx 导入语法</a>
+<ul>
+<li>
+<a href="#toc_5">1. 操作方式标识</a>
+</li>
+<li>
+<a href="#toc_6">2. 常用关键符号</a>
+</li>
+<li>
+<a href="#toc_7">3. 常用关键字</a>
+</li>
+<li>
+<a href="#toc_8">4. 别名</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">如何使用impex</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">ImpEx 的主要功能包括：</h2>
 
 <ul>
 <li>ImpEx 导入</li>
 <li>ImpEx 导出</li>
 </ul>
 
-<h3 id="toc_1">使用 ImpEx 做什么：</h3>
+<h2 id="toc_1">使用 ImpEx 做什么：</h2>
 
 <ul>
 <li>在运行时创建更新删除数据。</li>
@@ -140,9 +182,9 @@
 <li>修改用户和用户组的访问权限。</li>
 </ul>
 
-<h4 id="toc_2">修改用户和用户组的访问权限</h4>
+<h3 id="toc_2">修改用户和用户组的访问权限</h3>
 
-<h6 id="toc_3">语法</h6>
+<h4 id="toc_3">示例</h4>
 
 <pre class="line-numbers"><code class="language-text"># 用户权限管理开头语
 $START_USERRIGHTS
@@ -167,7 +209,7 @@ $END_USERRIGHTS
 $END_USERRIGHTS
 </code></pre>
 
-<h1 id="toc_4">ImpEx 导入语法</h1>
+<h3 id="toc_4">ImpEx 导入语法</h3>
 
 <pre class="line-numbers"><code class="language-text"># mode：方式标识
 # type：要处理的 item 类型
@@ -177,7 +219,7 @@ $END_USERRIGHTS
 mode type[modifier=value];attribute[modifier=value];attribute[modifier=value];attribute(subtype.subtype_attribute)
 </code></pre>
 
-<h2 id="toc_5">1. 操作方式标识</h2>
+<h4 id="toc_5">1. 操作方式标识</h4>
 
 <pre class="line-numbers"><code class="language-shell"># 插入  INSERT 
 INSERT Catalog;id[unique=true];name[lang=zh];baseStores(uid)
@@ -200,7 +242,7 @@ REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
 ;ItemTypeCode
 </code></pre>
 
-<h2 id="toc_6">2. 常用关键符号</h2>
+<h4 id="toc_6">2. 常用关键符号</h4>
 
 <p><code>;</code> 列分隔符</p>
 
@@ -230,7 +272,7 @@ baseStores(uid)
 $version=version[default=$version]
 </code></pre>
 
-<h2 id="toc_7">3. 常用关键字</h2>
+<h4 id="toc_7">3. 常用关键字</h4>
 
 <pre class="line-numbers"><code class="language-shell"># 唯一性：unique
 code[unique=true]  
@@ -242,7 +284,7 @@ name[lang=zh]
 UserGroup[batchmode=true]
 </code></pre>
 
-<h2 id="toc_8">4. 别名</h2>
+<h4 id="toc_8">4. 别名</h4>
 
 <p>缩短 ImpEx 头定义，重复使用。</p>
 
@@ -252,7 +294,7 @@ $catalog=catalog(id[default=masterProductCatalog])
 $catalogVersion=catalogversion($catalog,$version)[unique=true]
 </code></pre>
 
-<h1 id="toc_9">如何使用impex</h1>
+<h2 id="toc_9">如何使用impex</h2>
 
 <p><a href="https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac">https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac</a></p>
 

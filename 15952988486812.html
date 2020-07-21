@@ -119,7 +119,51 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">一、错误解释</h2>
+                    <ul>
+<li>
+<a href="#toc_0">一、错误解释</a>
+</li>
+<li>
+<a href="#toc_1">二、创建交换区原则</a>
+<ul>
+<li>
+<a href="#toc_2">1. 创建的 swap 交换区</a>
+</li>
+<li>
+<a href="#toc_3">2. 如果内存IO请求频繁</a>
+</li>
+<li>
+<a href="#toc_4">3. 创建原则</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">三、创建步骤</a>
+<ul>
+<li>
+<a href="#toc_6">1. 创建 swap 交换区硬盘存储空白文件</a>
+</li>
+<li>
+<a href="#toc_7">2. 格式化文件为 swap 文件系统</a>
+</li>
+<li>
+<a href="#toc_8">3. 启用 swap 文件交换区</a>
+</li>
+<li>
+<a href="#toc_9">4. 设置开机启用</a>
+</li>
+<li>
+<a href="#toc_10">5. 查看 swap 交换区</a>
+</li>
+<li>
+<a href="#toc_11">6. 调整 swap 文件交换区大小或删除</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一、错误解释</h2>
 
 <blockquote>
 <p>运行 npm run build 的时候需要使用很多内存（我们编译需要 8G 左右，系统物理内存只有 4G ），内存不足编译进程就会被系统 kill 。</p>
