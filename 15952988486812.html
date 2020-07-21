@@ -119,7 +119,7 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h1 id="toc_0">一、错误解释</h1>
+                    <h2 id="toc_0">一、错误解释</h2>
 
 <blockquote>
 <p>运行 npm run build 的时候需要使用很多内存（我们编译需要 8G 左右，系统物理内存只有 4G ），内存不足编译进程就会被系统 kill 。</p>
@@ -127,29 +127,29 @@
 <p>当服务器的总是内存不足，时常会因为内存不足而引发服务被强制 kill 掉进程的话，在不增加物理内存的情况下，启用 swap 交换区作为虚拟内存是一个不错的选择。</p>
 </blockquote>
 
-<h1 id="toc_1">二、创建交换区原则</h1>
+<h2 id="toc_1">二、创建交换区原则</h2>
 
-<h2 id="toc_2">1. 创建的 swap 交换区</h2>
+<h3 id="toc_2">1. 创建的 swap 交换区</h3>
 
 <blockquote>
 <p>交换区大小应该大于实际物理内存的容量大小，但是不要过大，以免造成硬盘空间浪费。通常创建物理内存 <code>2~2.5</code> 倍大小的文件作为交换区。</p>
 </blockquote>
 
-<h2 id="toc_3">2. 如果内存IO请求频繁</h2>
+<h3 id="toc_3">2. 如果内存IO请求频繁</h3>
 
 <blockquote>
 <p>单一 swap 交换区 IO 队列等待时间过长的话，可以多创建几个 swap 交换区。</p>
 </blockquote>
 
-<h2 id="toc_4">3. 创建原则</h2>
+<h3 id="toc_4">3. 创建原则</h3>
 
 <blockquote>
 <p>优先在 IO 速度最快的设备上创建。</p>
 </blockquote>
 
-<h1 id="toc_5">三、创建步骤</h1>
+<h2 id="toc_5">三、创建步骤</h2>
 
-<h2 id="toc_6">1. 创建 swap 交换区硬盘存储空白文件</h2>
+<h3 id="toc_6">1. 创建 swap 交换区硬盘存储空白文件</h3>
 
 <pre class="line-numbers"><code class="language-text"># $ free -h 
 # root 账号 
@@ -158,20 +158,20 @@ $ dd if=/dev/zero of=/swap bs=1M count=8192
 # 运行之后 需要等一会儿 才会成功
 </code></pre>
 
-<h2 id="toc_7">2. 格式化文件为 swap 文件系统</h2>
+<h3 id="toc_7">2. 格式化文件为 swap 文件系统</h3>
 
 <pre class="line-numbers"><code class="language-text"># root 账号
 # -f 使用文件作为 swap 交换区
 $ mkswap -f /swap
 </code></pre>
 
-<h2 id="toc_8">3. 启用 swap 文件交换区</h2>
+<h3 id="toc_8">3. 启用 swap 文件交换区</h3>
 
 <pre class="line-numbers"><code class="language-text">$ swapon /swap
 # $ free -h
 </code></pre>
 
-<h2 id="toc_9">4. 设置开机启用</h2>
+<h3 id="toc_9">4. 设置开机启用</h3>
 
 <pre class="line-numbers"><code class="language-text"># 修改/etc/fstab，增加一行
 $ vi /etc/fstab
@@ -182,12 +182,12 @@ $ vi /etc/fstab
  # :wq 保存文件并退出vi
 </code></pre>
 
-<h2 id="toc_10">5. 查看 swap 交换区</h2>
+<h3 id="toc_10">5. 查看 swap 交换区</h3>
 
 <pre class="line-numbers"><code class="language-text">$ swapon --show
 </code></pre>
 
-<h2 id="toc_11">6. 调整 swap 文件交换区大小或删除</h2>
+<h3 id="toc_11">6. 调整 swap 文件交换区大小或删除</h3>
 
 <pre class="line-numbers"><code class="language-text"># 关闭 swap 
 $ swapoff /swap
