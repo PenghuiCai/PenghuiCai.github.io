@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-			GIT 仓库迁移并保留分支和历史提交 - 油脂青年
+			ZOC Terminal 7.24.5 序列号版 最好用的终端仿真器 - 油脂青年
 			
 		</title>
 		
@@ -84,7 +84,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            GIT 仓库迁移并保留分支和历史提交   
+                            ZOC Terminal 7.24.5 序列号版 最好用的终端仿真器   
                       </h1>
                      
                     
@@ -101,10 +101,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2020/05/27</span>
+                                 <span class="date">2020/07/29</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='other.html'>Other</a></span>
+                                      <span class="posted-in"><a href='tools.html'>Tools</a></span>
                                          
                                   
 
@@ -112,8 +112,6 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_Git.html'>#Git</a>
                                      
 
                                 </p>
@@ -123,66 +121,18 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <blockquote>
-</li>
-<li>
-<a href="#toc_1">进入本地 clone 的旧库目录</a>
-</li>
-<li>
-<a href="#toc_2">移除旧库的地址替换成新库地址</a>
-</li>
-<li>
-<a href="#toc_3">将新地址镜像 core 直接推到远程新库</a>
-</li>
-<li>
-<a href="#toc_4">删除本地库 core，然后再重新拉取</a>
-</li>
-<li>
-<a href="#toc_5">已搞定</a>
-</li>
-</ul>
+                    <pre class="line-numbers"><code class="language-text"># the first sn-part:
+51698/01027/34713
 
+# and the second sn part being:
+00937
+</code></pre>
 
-<h2 id="toc_0">clone 旧库的镜像</h2>
+<p>下载链接 <a href="https://n459.com/file/11804594-455489783">ZOC_Terminal_7.24.5.dmg</a></p>
+
+<blockquote>
+<p>资源来源 <a href="https://www.waitsun.com/serial/zoc">麦氪派</a></p>
 </blockquote>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror https://xxx.com/old/core.git
-</code></pre>
-
-<h2 id="toc_1">进入本地 clone 的旧库目录</h2>
-
-<pre class="line-numbers"><code class="language-text">cd core.git
-</code></pre>
-
-<h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
-
-<pre class="line-numbers"><code class="language-text">git remote set-url --push origin https://xxx.com/new/core.git
-</code></pre>
-
-<h2 id="toc_3">将新地址镜像 core 直接推到远程新库</h2>
-
-<pre class="line-numbers"><code class="language-text">git push --mirror
-</code></pre>
-
-<h2 id="toc_4">删除本地库 core，然后再重新拉取</h2>
-
-<pre class="line-numbers"><code class="language-text">rm -rf core.git
-
-git clone -b prod https://xxx.com/new/core.git
-</code></pre>
-
-<h2 id="toc_5">已搞定</h2>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror old.git
-
-cd old.git
-
-git remote set-url --push origin new.git
-
-这一步的时候，可以删除不需要的分支和版本
-
-git push --mirror
-</code></pre>
 
                   </article>
                   <div class="comments-wrap">

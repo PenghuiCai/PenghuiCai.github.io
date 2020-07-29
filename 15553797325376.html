@@ -34,6 +34,8 @@
 							
 							<a target="_self" class="navbar-item " href="other.html">Other</a>
 							
+							<a target="_self" class="navbar-item " href="tools.html">Tools</a>
+							
 
 							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
 							 data-target="navbarSNSRssButtons">
@@ -196,6 +198,10 @@ INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryN
 <pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=true];uid[unique=true];
 ;TMCustomerService;
+
+# 删除整个表的数据
+REMOVE Record[batchmode=true];itemtype(code)[unique=true]
+;Record
 </code></pre>
 
                   </article>

@@ -4,13 +4,35 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-07-21T11:28:12+08:00</updated>
+  <updated>2020-07-29T15:21:22+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[ZOC Terminal 7.24.5 序列号版 最好用的终端仿真器]]></title>
+    <link href="https://penghuicai.github.io/15960037317603.html"/>
+    <updated>2020-07-29T14:22:11+08:00</updated>
+    <id>https://penghuicai.github.io/15960037317603.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text"># the first sn-part:
+51698/01027/34713
+
+# and the second sn part being:
+00937
+</code></pre>
+
+<p>下载链接 <a href="https://n459.com/file/11804594-455489783">ZOC_Terminal_7.24.5.dmg</a></p>
+
+<blockquote>
+<p>资源来源 <a href="https://www.waitsun.com/serial/zoc">麦氪派</a></p>
+</blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[正在运行中的脚本进程 npm run build Killed]]></title>
@@ -1788,6 +1810,10 @@ INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryN
 <pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=true];uid[unique=true];
 ;TMCustomerService;
+
+# 删除整个表的数据
+REMOVE Record[batchmode=true];itemtype(code)[unique=true]
+;Record
 </code></pre>
 
 ]]></content>
