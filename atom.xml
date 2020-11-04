@@ -4,7 +4,7 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-08-26T14:08:49+08:00</updated>
+  <updated>2020-10-13T13:12:12+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -993,6 +993,9 @@ cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error
 <pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
 cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
 # ======================================<br/>
+# 2. 将检索多个“或”检索条件结果在屏幕上显示<br/>
+cat [源文件名] | grep -E &quot;条件1|条件2&quot;<br/>
+# ======================================<br/>
 # 2. 将检索结果打印到目标文件中<br/>
 cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
 </code></pre></li>
@@ -1131,27 +1134,27 @@ ONE_MIN(一分钟的时间)
 <a href="#toc_1">使用 ImpEx 做什么：</a>
 <ul>
 <li>
-<a href="#toc_2">修改用户和用户组的访问权限</a>
+<a href="#toc_2">ImpEx 导入语法</a>
 <ul>
 <li>
-<a href="#toc_3">示例</a>
+<a href="#toc_3">1. 操作方式标识</a>
+</li>
+<li>
+<a href="#toc_4">2. 常用关键符号</a>
+</li>
+<li>
+<a href="#toc_5">3. 常用关键字</a>
+</li>
+<li>
+<a href="#toc_6">4. 别名</a>
 </li>
 </ul>
 </li>
 <li>
-<a href="#toc_4">ImpEx 导入语法</a>
+<a href="#toc_7">修改用户和用户组的访问权限</a>
 <ul>
 <li>
-<a href="#toc_5">1. 操作方式标识</a>
-</li>
-<li>
-<a href="#toc_6">2. 常用关键符号</a>
-</li>
-<li>
-<a href="#toc_7">3. 常用关键字</a>
-</li>
-<li>
-<a href="#toc_8">4. 别名</a>
+<a href="#toc_8">示例</a>
 </li>
 </ul>
 </li>
@@ -1178,9 +1181,110 @@ ONE_MIN(一分钟的时间)
 <li>修改用户和用户组的访问权限。</li>
 </ul>
 
-<h3 id="toc_2">修改用户和用户组的访问权限</h3>
+<h3 id="toc_2">ImpEx 导入语法</h3>
 
-<h4 id="toc_3">示例</h4>
+<pre class="line-numbers"><code class="language-text"># mode：方式标识
+# type：要处理的 item 类型
+# attribute：Item 的属性
+# modifier：属性的附加条件
+# attribute(subtype.subtype_attribute) 字段在子类~~~~ 
+mode type[modifier=value];attribute[modifier=value];attribute[modifier=value];attribute(subtype.subtype_attribute)
+</code></pre>
+
+<h4 id="toc_3">1. 操作方式标识</h4>
+
+<pre class="line-numbers"><code class="language-shell"># 插入  INSERT 
+INSERT Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+;TMProductCatalog12617;中国XX旗舰店;12617
+
+# 更新 UPDATE
+UPDATE Catalog;id[unique=true];name[lang=zh]
+;TMProductCatalog12617;XX旗舰店
+
+# 插入或更新 INSERT_UPDATE
+INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+;TMProductCatalog12617;XX中国旗舰店;12617
+
+# 删除 REMOVE
+# 根据 uid 删除 UserGroup 中对应的数据
+REMOVE UserGroup[batchmode=false];uid[unique=true];
+;TestGroup;
+
+# 删除 REMOVE 删除 ItemType 表内所有数据
+REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
+;ItemTypeCode
+</code></pre>
+
+<h4 id="toc_4">2. 常用关键符号</h4>
+
+<p><code>;</code> 列分隔符</p>
+
+<pre class="line-numbers"><code class="language-text">Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+</code></pre>
+
+<p><code>,</code> 多数据分隔符</p>
+
+<pre class="line-numbers"><code class="language-text">xx,yy,zz
+</code></pre>
+
+<p><code>[]</code> 声明功能和特性</p>
+
+<pre class="line-numbers"><code class="language-text">[default=Online]
+[unique=true]
+</code></pre>
+
+<p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item 的数据的唯一值</p>
+
+<pre class="line-numbers"><code class="language-text">status(code)
+baseStores(uid)
+</code></pre>
+
+<p><code>$</code> 定义和使用别名</p>
+
+<pre class="line-numbers"><code class="language-text">$version=Staged
+$version=version[default=$version]
+</code></pre>
+
+<p><code>&amp;</code> 引用符号，当主数据与行数据有关联关系时候</p>
+
+<pre class="line-numbers"><code class="language-text"># 主数据 ImpEx头信息增加定义
+;name;&amp;masterProduct
+;短袖1;m1
+;短袖2;m2
+
+# 行数据 ImpExt头信息关联字段
+;product;baseProduct(&amp;masterProduct)
+;短袖1-L;m1
+;短袖2-L;m2
+</code></pre>
+
+<h4 id="toc_5">3. 常用关键字</h4>
+
+<pre class="line-numbers"><code class="language-shell"># 唯一性：unique
+code[unique=true]  
+# 默认值：default
+version[default=Online]
+# 语言：lang
+name[lang=zh]
+# 时间格式
+startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;]
+# 批处理模式：batchmode（紧跟 item code）
+UserGroup[batchmode=true]
+</code></pre>
+
+<h4 id="toc_6">4. 别名</h4>
+
+<p>缩短 ImpEx 头定义，重复使用。</p>
+
+<pre class="line-numbers"><code class="language-shell"># Staged/Online
+$version=version[default=Online]
+$catalog=catalog(id[default=masterProductCatalog])
+$catalogVersion=catalogversion($catalog,$version)[unique=true]
+</code></pre>
+
+<h3 id="toc_7">修改用户和用户组的访问权限</h3>
+
+<h4 id="toc_8">示例</h4>
 
 <pre class="line-numbers"><code class="language-text"># 用户权限管理开头语
 $START_USERRIGHTS
@@ -1203,91 +1307,6 @@ $END_USERRIGHTS
     ;;;;Product.code;-;-;;;;
     ;;;;Product.ean;-;-;;;;
 $END_USERRIGHTS
-</code></pre>
-
-<h3 id="toc_4">ImpEx 导入语法</h3>
-
-<pre class="line-numbers"><code class="language-text"># mode：方式标识
-# type：要处理的 item 类型
-# attribute：Item 的属性
-# modifier：属性的附加条件
-# attribute(subtype.subtype_attribute) 字段在子类~~~~ 
-mode type[modifier=value];attribute[modifier=value];attribute[modifier=value];attribute(subtype.subtype_attribute)
-</code></pre>
-
-<h4 id="toc_5">1. 操作方式标识</h4>
-
-<pre class="line-numbers"><code class="language-shell"># 插入  INSERT 
-INSERT Catalog;id[unique=true];name[lang=zh];baseStores(uid)
-;TMProductCatalog12617;中国XX旗舰店;12617
-
-# 更新 UPDATE
-UPDATE Catalog;id[unique=true];name[lang=zh]
-;TMProductCatalog12617;XX旗舰店
-
-# 插入或更新 INSERT_UPDATE
-INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
-;TMProductCatalog12617;XX中国旗舰店;12617
-
-# 删除 REMOVE
-# 根据 uid 删除 UserGroup 中对应的数据
-REMOVE UserGroup[batchmode=false];uid[unique=true];
-;TestGroup;
-# 删除 REMOVE 删除 ItemType 表内所有数据
-REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
-;ItemTypeCode
-</code></pre>
-
-<h4 id="toc_6">2. 常用关键符号</h4>
-
-<p><code>;</code> 列分隔符</p>
-
-<pre class="line-numbers"><code class="language-text">Catalog;id[unique=true];name[lang=zh];baseStores(uid)
-</code></pre>
-
-<p><code>,</code> 多数据分隔符</p>
-
-<pre class="line-numbers"><code class="language-text">xx,yy,zz
-</code></pre>
-
-<p><code>[]</code> 声明功能和特性</p>
-
-<pre class="line-numbers"><code class="language-text">[default=Online]
-[unique=true]
-</code></pre>
-
-<p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item</p>
-
-<pre class="line-numbers"><code class="language-text">status(code)
-baseStores(uid)
-</code></pre>
-
-<p><code>$</code> 定义和使用别名</p>
-
-<pre class="line-numbers"><code class="language-text">$version=Staged
-$version=version[default=$version]
-</code></pre>
-
-<h4 id="toc_7">3. 常用关键字</h4>
-
-<pre class="line-numbers"><code class="language-shell"># 唯一性：unique
-code[unique=true]  
-# 默认值：default
-version[default=Online]
-# 语言：lang
-name[lang=zh]
-# 批处理模式：batchmode（紧跟 item code）
-UserGroup[batchmode=true]
-</code></pre>
-
-<h4 id="toc_8">4. 别名</h4>
-
-<p>缩短 ImpEx 头定义，重复使用。</p>
-
-<pre class="line-numbers"><code class="language-shell"># Staged/Online
-$version=version[default=Online]
-$catalog=catalog(id[default=masterProductCatalog])
-$catalogVersion=catalogversion($catalog,$version)[unique=true]
 </code></pre>
 
 <h2 id="toc_9">如何使用impex</h2>
@@ -1878,6 +1897,9 @@ UNION
 <li>
 <a href="#toc_2">ImpEx 导出示例</a>
 </li>
+<li>
+<a href="#toc_3">ImpEx 删除示例</a>
+</li>
 </ul>
 
 
@@ -1891,8 +1913,19 @@ INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active[default=true];languages(isoCode)
 ;TMProductCatalog12617;Online;;zh
 
-#时间格式
-INSERTxxxxx;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+# 时间格式
+INSERT modelType;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+
+# 引用导入示例
+INSERT_UPDATE ECJDProduct;site;shopId[unique=true];wareId[unique=true];itemNum[unique=true];modified;documentStatus(code);&amp;lkl
+;京东企业购;20011;100007091117;AGLQ026;2020-07-15 10:10:10;PENDING;lkl2
+;京东企业购;20011;100007091118;AGLQ027;2020-07-15 10:10:10;PENDING;lkl3
+
+INSERT_UPDATE ECJDSKU;skuId[unique=true];outerId;modified;ecJdProduct(&amp;lkl)
+;1000070911171;AGLQ026-1-5;2020-07-15 10:10:10;lkl2
+;1000070911172;AGLQ026-1-8;2020-07-15 10:10:10;lkl2
+;1000070911181;AGLQ027-1-5;2020-07-15 10:10:10;lkl3
+;1000070911182;AGLQ027-1-8;2020-07-15 10:10:10;lkl3
 </code></pre>
 
 <h2 id="toc_1">ImpEx 导入JOB定义</h2>
@@ -1930,7 +1963,7 @@ INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryN
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
 </code></pre>
 
-<p>ImpEx 删除示例</p>
+<h2 id="toc_3">ImpEx 删除示例</h2>
 
 <pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=true];uid[unique=true];

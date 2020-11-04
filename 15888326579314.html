@@ -236,6 +236,9 @@ cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error
 <pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
 cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
 # ======================================<br/>
+# 2. 将检索多个“或”检索条件结果在屏幕上显示<br/>
+cat [源文件名] | grep -E &quot;条件1|条件2&quot;<br/>
+# ======================================<br/>
 # 2. 将检索结果打印到目标文件中<br/>
 cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
 </code></pre></li>

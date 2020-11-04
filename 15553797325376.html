@@ -143,6 +143,9 @@
 <li>
 <a href="#toc_2">ImpEx 导出示例</a>
 </li>
+<li>
+<a href="#toc_3">ImpEx 删除示例</a>
+</li>
 </ul>
 
 
@@ -156,8 +159,19 @@ INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active[default=true];languages(isoCode)
 ;TMProductCatalog12617;Online;;zh
 
-#时间格式
-INSERTxxxxx;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+# 时间格式
+INSERT modelType;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+
+# 引用导入示例
+INSERT_UPDATE ECJDProduct;site;shopId[unique=true];wareId[unique=true];itemNum[unique=true];modified;documentStatus(code);&amp;lkl
+;京东企业购;20011;100007091117;AGLQ026;2020-07-15 10:10:10;PENDING;lkl2
+;京东企业购;20011;100007091118;AGLQ027;2020-07-15 10:10:10;PENDING;lkl3
+
+INSERT_UPDATE ECJDSKU;skuId[unique=true];outerId;modified;ecJdProduct(&amp;lkl)
+;1000070911171;AGLQ026-1-5;2020-07-15 10:10:10;lkl2
+;1000070911172;AGLQ026-1-8;2020-07-15 10:10:10;lkl2
+;1000070911181;AGLQ027-1-5;2020-07-15 10:10:10;lkl3
+;1000070911182;AGLQ027-1-8;2020-07-15 10:10:10;lkl3
 </code></pre>
 
 <h2 id="toc_1">ImpEx 导入JOB定义</h2>
@@ -195,7 +209,7 @@ INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryN
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
 </code></pre>
 
-<p>ImpEx 删除示例</p>
+<h2 id="toc_3">ImpEx 删除示例</h2>
 
 <pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=true];uid[unique=true];
