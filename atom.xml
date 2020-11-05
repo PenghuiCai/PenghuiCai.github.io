@@ -4,13 +4,63 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2020-11-04T17:52:05+08:00</updated>
+  <updated>2020-11-04T17:54:48+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP POST 请求被浏览器强制转换为 GET 请求]]></title>
+    <link href="https://penghuicai.github.io/16045635590464.html"/>
+    <updated>2020-11-05T16:05:59+08:00</updated>
+    <id>https://penghuicai.github.io/16045635590464.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">遇到这种情况，检查一下访问的 URL 是 HTTP 还是 HTTPS</h2>
+
+<h2 id="toc_1">原因 Nginx 做 HTTP 重定向到 HTTPS ，POST 才变成 GET 请求</h2>
+
+<ol>
+<li>浏览器客户端发送 POST 请求，Nginx 返回 302 暂时性转移到 HTTPS</li>
+<li>浏览器客户端收到 302 后，通过 HTTPS 向服务器发起新的请求</li>
+<li>新的请求就变成了 GET 请求</li>
+</ol>
+
+<h2 id="toc_2">说明</h2>
+
+<p>因为做了Nginx HTTP 重定向到 HTTPS，他们这种访问 API 的方式才出错的。<br/>
+大多数 HTTP 浏览器客户端会将引起 302 的 POST 请求转化为 GET 请求发出去。<br/>
+其实这是将 302 当做 303 来处理，至于为什么会将 302 当做 303 来处理，据说这是很多老服务器的期望行为，所以一切都是为了兼容性。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ImpEx 多表单行导出]]></title>
+    <link href="https://penghuicai.github.io/16045412531522.html"/>
+    <updated>2020-11-05T09:54:13+08:00</updated>
+    <id>https://penghuicai.github.io/16045412531522.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
+&quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
+INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
+</code></pre>
+
+<h1 id="toc_0">ImpEx 多表单行导入</h1>
+
+<pre class="line-numbers"><code class="language-text">INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);consignmentExtend(isNoticeNewPosStatus(code));
+;XS20062200002001;1;2;PENDING
+
+
+INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);
+;XS20062200002001;1;2;
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HYBRIS HMC 查询慢问题解决]]></title>
@@ -1973,230 +2023,6 @@ REMOVE UserGroup[batchmode=true];uid[unique=true];
 REMOVE Record[batchmode=true];itemtype(code)[unique=true]
 ;Record
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SAP Hybris FlexibleSearch 语法]]></title>
-    <link href="https://penghuicai.github.io/15541115479606.html"/>
-    <updated>2019-04-01T17:39:07+08:00</updated>
-    <id>https://penghuicai.github.io/15541115479606.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0">简介</a>
-</li>
-<li>
-<a href="#toc_1">FlexibleSearch 查询的基本语法</a>
-<ul>
-<li>
-<a href="#toc_2">&lt;selects&gt; 返回字段（数据库列）</a>
-</li>
-<li>
-<a href="#toc_3">&lt;types&gt; 对象模型 类型 code</a>
-</li>
-<li>
-<a href="#toc_4">条件</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<h2 id="toc_0">简介</h2>
-
-<p>FlexibleSearch 框架自动解析类型和数据库表依赖关系，不需要指定显式的数据库表名，类型系统和数据库表示之间的整个转换过程是自动进行的，并在必要时使用 UNION 和 JOIN 生成数据库可执行的 SQL 语句。</p>
-
-<pre class="line-numbers"><code class="language-sql">SELECT
-    {p:pk},{p.code},{p.name[zh]} 
-FROM {Product as p}
-</code></pre>
-
-<pre class="line-numbers"><code class="language-sql">SELECT 
-    item_t0.PK, item_t0.p_code, lp_t0.p_name
-FROM products item_t0 
-    JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK 
-</code></pre>
-
-<hr/>
-
-<h2 id="toc_1">FlexibleSearch 查询的基本语法</h2>
-
-<pre class="line-numbers"><code class="language-sql">SELECT &lt;selects&gt; FROM &lt;types&gt; ( WHERE &lt;conditions&gt; )? ( ORDER BY &lt;order&gt; )?
-</code></pre>
-
-<h3 id="toc_2">&lt;selects&gt; 返回字段（数据库列）</h3>
-
-<ul>
-<li>获取所有字段
-<ul>
-<li><code>{*}</code> 按 SQL 约定返回所有数据库列，例如：<code>SELECT {*} FROM {Product}</code>。</li>
-</ul></li>
-<li>获取指定字段
-<ul>
-<li><code>{attribute}</code> 指定属性标识符用必须使用<code>{}</code>包裹，例如：<code>SELECT {code} FROM {Product}</code>。</li>
-</ul></li>
-<li>获取国际化字段
-<ul>
-<li><code>{attribute[zh]}</code> 使用语言标识符作为属性名称中的后缀，并用<code>[]</code>包裹，例如<code>SELECT {name[zh]}, {name[en]} FROM {Product}</code>。</li>
-</ul></li>
-</ul>
-
-<h3 id="toc_3">&lt;types&gt; 对象模型 类型 code</h3>
-
-<ul>
-<li><code>FROM</code>子句中的<code>&lt;types&gt;</code>字段的值需要是<code>itemtype</code>的<code>code</code>属性，<code>FROM</code>子句必须用<code>{}</code>包裹</li>
-<li>可以使用<code>AS</code>给类型指定别名，例如<code>SELECT {p.code} FROM {Product AS p} ORDER BY {p.code}</code></li>
-<li>可以使用<code>JOIN</code>和<code>LEFT JOIN</code>联合查询，例如<code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></li>
-<li>子类型：默认查询搜索该类型和它的子类型所有数据，需要在<code>{}</code>中的类型后缀添加<code>!</code>，指定不查询子类型
-<ul>
-<li>查询子类型例子：<code>SELECT {code},{pk} FROM {Product}</code></li>
-<li>不查询子类型例子：<code>SELECT {code},{pk} FROM {Product!}</code></li>
-</ul></li>
-</ul>
-
-<h3 id="toc_4">条件</h3>
-
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>SQL命令/关键字</th>
-<th>说明</th>
-<th>代码示例</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>1</td>
-<td>ORDER BY {alias:attribute}</td>
-<td>按指定属性值排序（默认ASC）</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime}</code></td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>ASC</code></td>
-<td>按升序对结果进行排序（a ... z，0 ... 9）</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} ASC</code></td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>DESC</code></td>
-<td>按降序对结果进行排序（z ... a，9 ... 0）</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} ORDER BY {p:creationtime} DESC</code></td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>DISTINCT</code></td>
-<td>消除查询结果中的重复项</td>
-<td><code>SELECT DISTINCT({p.creationtime}),{p:pk},{p.modifiedtime} FROM {Product as p}</code></td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>OR</code></td>
-<td>或者</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; OR {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>AND</code></td>
-<td>并且</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; AND {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
-</tr>
-<tr>
-<td>7</td>
-<td><code>IS [NOT] NULL</code></td>
-<td>返回是null/非null结果</td>
-<td><code>... WHERE ... IS [NOT] NULL</code></td>
-</tr>
-<tr>
-<td>8</td>
-<td><code>[NOT] IN</code></td>
-<td>属于/不属于</td>
-<td><code>... WHERE ... [NOT] IN (... , ...)</code></td>
-</tr>
-<tr>
-<td>9</td>
-<td><code>[NOT] EXISTS</code></td>
-<td>存在/不存在</td>
-<td><code>SELECT {o.code}, FROM {order as o} WHERE 1=1 AND NOT EXISTS({{ SELECT {c.PK} FROM {Consignment as c} WHERE {c.order}={o.pk} }})</code></td>
-</tr>
-<tr>
-<td>10</td>
-<td><code>LIKE</code></td>
-<td>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的</td>
-<td><code>... WHERE ... LIKE &#39;...&#39;</code></td>
-</tr>
-<tr>
-<td>11</td>
-<td><code>%</code></td>
-<td>匹配任意数量字符的通配符</td>
-<td><code>... WHERE ... LIKE &#39;%...&#39; , &#39;...%...&#39; , &#39;...%&#39; , &#39;%...%&#39;</code></td>
-</tr>
-<tr>
-<td>12</td>
-<td><code>_</code></td>
-<td>匹配单个字符的通配符</td>
-<td><code>... WHERE ... LIKE &#39;_...&#39; , &#39;..._...&#39; , &#39;..._&#39;</code></td>
-</tr>
-<tr>
-<td>13</td>
-<td><code>LEFT JOIN ON</code></td>
-<td>左链接，左表返回符合条件的所有行，右表没有的数据显示null</td>
-<td><code>SELECT {c.code} 配货单号, {cs.code} 配货单状态 FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk}</code></td>
-</tr>
-<tr>
-<td>14</td>
-<td><code>= 、 !=, &lt;&gt; 、 &lt; 、 &lt;= 、 &gt; 、 &gt;=</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>15</td>
-<td><code>CONCAT</code></td>
-<td>连接两个结果 - 右侧的示例将返回字符串结果</td>
-<td><code>SELECT concat({c.code},&#39;-&#39;,{cs.code}) as &#39;配货单号-配货单状态&#39; FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk} } WHERE {cs.code} = &#39;APPROVED&#39;</code></td>
-</tr>
-<tr>
-<td>16</td>
-<td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-</tr>
-<tr>
-<td>17</td>
-<td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK WHERE lp_t0.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-</tr>
-<tr>
-<td>18</td>
-<td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 JOIN productslp lp_t0_l1 ON lp_t0.ITEMPK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-</tr>
-<tr>
-<td>19</td>
-<td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK LEFT JOIN productslp lp_t0_l1 ON item_t0.PK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-</tr>
-<tr>
-<td>21</td>
-<td><code>{locAttr[ANY]}</code></td>
-<td>所有国际化定义</td>
-<td><code>SELECT count(DISTINCT {p:PK}) FROM {Product AS p} WHERE {p:name[ANY]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-</tr>
-<tr>
-<td>22</td>
-<td><code>Product!</code></td>
-<td>ModelType加<code>!</code>FlexibleSearch查询仅搜索指定的类型并省略所有子类型</td>
-<td><code>SELECT {code},{pk} FROM {Product!}</code></td>
-</tr>
-</tbody>
-</table>
 
 ]]></content>
   </entry>
