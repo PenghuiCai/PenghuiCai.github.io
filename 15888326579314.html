@@ -28,9 +28,13 @@
 							
 							<a target="_self" class="navbar-item " href="index.html">Home</a>
 							
+							<a target="_self" class="navbar-item " href="Vuejs.html">Vuejs</a>
+							
 							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
 							
 							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="MySQL.html">MySQL</a>
 							
 							<a target="_self" class="navbar-item " href="other.html">Other</a>
 							
@@ -236,10 +240,16 @@ cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error
 <pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
 cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
 # ======================================<br/>
-# 2. 将检索多个“或”检索条件结果在屏幕上显示<br/>
+# 2. 将检索多个“或”检索条件结果打印在屏幕上显示<br/>
 cat [源文件名] | grep -E &quot;条件1|条件2&quot;<br/>
 # ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
+# 3. 将检索多个“并”检索条件结果打印在屏幕上显示<br/>
+cat [源文件名] | grep &quot;条件1&quot; | grep &quot;条件2&quot;<br/>
+# ======================================<br/>
+# 4. 将检索多个“或”+“并”检索条件结果打印在屏幕上显示<br/>
+cat [源文件名] | grep -E &quot;条件1|条件2&quot; | grep &quot;条件3&quot;<br/>
+# ======================================<br/>
+# 3. 将检索结果打印到目标文件中<br/>
 cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
 </code></pre></li>
 <li><p>显示包括字符串的行及上面的 5 行记录</p>

@@ -28,9 +28,13 @@
 							
 							<a target="_self" class="navbar-item " href="index.html">Home</a>
 							
+							<a target="_self" class="navbar-item " href="Vuejs.html">Vuejs</a>
+							
 							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
 							
 							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="MySQL.html">MySQL</a>
 							
 							<a target="_self" class="navbar-item " href="other.html">Other</a>
 							
@@ -126,6 +130,22 @@
                     <pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
 INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
+</code></pre>
+
+<p>ImpEx 导出 省市区</p>
+
+<pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {District}&quot;
+&quot;#% impex.setTargetFile(&quot;&quot;District.txt&quot;&quot;);&quot;
+INSERT_UPDATE District;code[alias=&#39;区县&#39;];name[lang=zh,alias=&#39;区县&#39;];city(code);city(name[lang=zh])[alias=&#39;市&#39;];city(region(isocode))[alias=&#39;省&#39;];city(region(name[lang=zh]))[alias=&#39;省&#39;];city(region(country(isocode)))[alias=&#39;国家&#39;];city(region(country(name[lang=zh])))[alias=&#39;国家&#39;];
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
+</code></pre>
+
+<p>导出</p>
+
+<pre class="line-numbers"><code class="language-text">&quot;$query=select {c.pk} from {consignment as c} where {c.modifiedtime} &lt; &#39;2021-04-07 09:40:00&#39; AND {c.acceptedStatus} = 8796118745179 &quot;
+&quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
+INSERT_UPDATE Consignment;code;status(name[lang=zh])[alias=&#39;状态&#39;];occupyStatus(name[lang=zh])[alias=&#39;占货状态&#39;];acceptedStatus(name[lang=zh])[alias=&#39;接受状态&#39;];abnormalType(name[lang=zh])[alias=&#39;异常类型&#39;];abnormalStatus(name[lang=zh])[alias=&#39;异常状态&#39;];
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
 

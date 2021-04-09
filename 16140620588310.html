@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-			正在运行中的脚本进程 npm run build Killed - 油脂青年
+			MySQL 索引使用情况统计 information_schema.INDEX_STATISTICS - 油脂青年
 			
 		</title>
 		
@@ -90,7 +90,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            正在运行中的脚本进程 npm run build Killed   
+                            MySQL 索引使用情况统计 information_schema.INDEX_STATISTICS   
                       </h1>
                      
                     
@@ -107,10 +107,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2020/07/21</span>
+                                 <span class="date">2021/02/23</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='linux.html'>Linux</a></span>
+                                      <span class="posted-in"><a href='MySQL.html'>MySQL</a></span>
                                          
                                   
 
@@ -127,126 +127,53 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <ul>
-<li>
-<a href="#toc_0">一、错误解释</a>
-</li>
-<li>
-<a href="#toc_1">二、创建交换区原则</a>
-<ul>
-<li>
-<a href="#toc_2">1. 创建的 swap 交换区容量创建原则</a>
-</li>
-<li>
-<a href="#toc_3">2. 内存 IO 请求频繁创建原则</a>
-</li>
-<li>
-<a href="#toc_4">3. 硬盘设备选择创建原则</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_5">三、创建步骤</a>
-<ul>
-<li>
-<a href="#toc_6">1. 创建 swap 交换区硬盘存储空白文件</a>
-</li>
-<li>
-<a href="#toc_7">2. 格式化文件为 swap 文件系统</a>
-</li>
-<li>
-<a href="#toc_8">3. 启用 swap 文件交换区</a>
-</li>
-<li>
-<a href="#toc_9">4. 设置开机启用</a>
-</li>
-<li>
-<a href="#toc_10">5. 查看 swap 交换区</a>
-</li>
-<li>
-<a href="#toc_11">6. 调整 swap 文件交换区大小或删除</a>
-</li>
-</ul>
-</li>
-</ul>
+                    <p>MySQL的开源版本 MariaDB、Percona MySQL Server 和 AliSQL 5.6 版本支持统计索引的信息，即可以统计出使用某个索引扫描的行数。依照此，可以找出未被使用的，或者使用频率较低的索引，从而进行下线。</p>
 
+<h2 id="toc_0">示例</h2>
 
-<h2 id="toc_0">一、错误解释</h2>
-
-<blockquote>
-<p>运行 npm run build 的时候需要使用很多内存（我们编译需要 8G 左右，系统物理内存只有 4G ），内存不足编译进程就会被系统 kill 。</p>
-
-<p>当服务器的总是内存不足，时常会因为内存不足而引发服务被强制 kill 掉进程的话，在不增加物理内存的情况下，启用 swap 交换区作为虚拟内存是一个不错的选择。</p>
-</blockquote>
-
-<h2 id="toc_1">二、创建交换区原则</h2>
-
-<h3 id="toc_2">1. 创建的 swap 交换区容量创建原则</h3>
-
-<blockquote>
-<p>交换区大小应该大于实际物理内存的容量大小，但是不要过大，以免造成硬盘空间浪费。通常创建物理内存 <code>2~2.5</code> 倍大小的文件作为交换区。</p>
-</blockquote>
-
-<h3 id="toc_3">2. 内存 IO 请求频繁创建原则</h3>
-
-<blockquote>
-<p>单一 swap 交换区 IO 队列等待时间过长的话，可以多创建几个 swap 交换区。</p>
-</blockquote>
-
-<h3 id="toc_4">3. 硬盘设备选择创建原则</h3>
-
-<blockquote>
-<p>优先在 IO 速度最快的硬盘设备上创建。</p>
-</blockquote>
-
-<h2 id="toc_5">三、创建步骤</h2>
-
-<h3 id="toc_6">1. 创建 swap 交换区硬盘存储空白文件</h3>
-
-<pre class="line-numbers"><code class="language-text"># $ free -h 
-# root 账号 
-# 创建一个 8G 的 swap 交换区空白文件
-$ dd if=/dev/zero of=/swap bs=1M count=8192
-# 运行之后 需要等一会儿 才会成功
+<pre class="line-numbers"><code class="language-text">mysql&gt; select * from wstest.test2 where name=&#39;aaax&#39;;  
++----+------+--------+------+-------+  
+| id | name | status | addr | addr2 |  
++----+------+--------+------+-------+  
+|  5 | aaax |      5 |      |     0 |  
++----+------+--------+------+-------+  
+1 row in set (0.00 sec)  
 </code></pre>
 
-<h3 id="toc_7">2. 格式化文件为 swap 文件系统</h3>
+<h2 id="toc_1">查看统计信息</h2>
 
-<pre class="line-numbers"><code class="language-text"># root 账号
-# -f 使用文件作为 swap 交换区
-$ mkswap -f /swap
+<p>注意：最开始查询 information_schema.INDEX_STATISTICS 表发现结果为空时需要打开参数才会进行统计。<br/>
+打开参数：<code>loose_rds_indexstat=1</code></p>
+
+<pre class="line-numbers"><code class="language-text">mysql&gt; select * from information_schema.INDEX_STATISTICS where table_schema=&#39;wstest&#39; and table_name=&#39;test2&#39;;  
++--------------+------------+------------+-----------+  
+| TABLE_SCHEMA | TABLE_NAME | INDEX_NAME | ROWS_READ |  
++--------------+------------+------------+-----------+  
+| wstest       | test2      | idx_name   |         1 |  
+| wstest       | test2      | PRIMARY    |   6314081 |  
++--------------+------------+------------+-----------+  
+2 rows in set (0.02 sec)  
 </code></pre>
 
-<h3 id="toc_8">3. 启用 swap 文件交换区</h3>
+<h2 id="toc_2">统计介绍</h2>
 
-<pre class="line-numbers"><code class="language-text">$ swapon /swap
-# $ free -h
+<p>由于在使用 idx_name查 询数据时，扫描行数为1所以在 information_schema.INDEX_STATISTICS 表的 ROWS_READ 字段对应的值为 1 ；<br/>
+若再次使用 idx_name 查询，则 ROWS_READ 会再次加 1 。</p>
+
+<h2 id="toc_3">索引下线</h2>
+
+<h3 id="toc_4">设置索引不可见</h3>
+
+<p>使索引不可见，避免突然下线导致某些应用出现慢查。</p>
+
+<pre class="line-numbers"><code class="language-text">mysql&gt; alter table test2 alter index idx_name invisible;
 </code></pre>
 
-<h3 id="toc_9">4. 设置开机启用</h3>
+<h3 id="toc_5">删除索引</h3>
 
-<pre class="line-numbers"><code class="language-text"># 修改/etc/fstab，增加一行
-$ vi /etc/fstab
- # i键 进入编辑模式
- # 加入下面这一行
- /swap swap swap defaults 0 0
- # exit键 退出编辑
- # :wq 保存文件并退出vi
-</code></pre>
+<p>设置索引不可见之后，可以过一段时间，选择低峰期将索引进行删除：</p>
 
-<h3 id="toc_10">5. 查看 swap 交换区</h3>
-
-<pre class="line-numbers"><code class="language-text">$ swapon --show
-</code></pre>
-
-<h3 id="toc_11">6. 调整 swap 文件交换区大小或删除</h3>
-
-<pre class="line-numbers"><code class="language-text"># 关闭 swap 
-$ swapoff /swap
-# $ free -h 
-# 删除 swap 文件
-$ rm -rf  /swap
-# 如需要调整 swap 交换区大小，删除之后 重新创建即可
+<pre class="line-numbers"><code class="language-text">mysql &gt; alter table test2 drop index idx_name;
 </code></pre>
 
                   </article>
