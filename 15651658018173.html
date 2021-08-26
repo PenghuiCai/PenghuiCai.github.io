@@ -42,6 +42,8 @@
 							
 							<a target="_self" class="navbar-item " href="adc.html">活动</a>
 							
+							<a target="_self" class="navbar-item " href="note.html">Note</a>
+							
 
 							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
 							 data-target="navbarSNSRssButtons">
@@ -242,7 +244,7 @@ REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
 [unique=true]
 </code></pre>
 
-<p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item 的数据的唯一值</p>
+<p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item 的唯一标识符</p>
 
 <pre class="line-numbers"><code class="language-text">status(code)
 baseStores(uid)
@@ -261,7 +263,7 @@ $version=version[default=$version]
 ;短袖1;m1
 ;短袖2;m2
 
-# 行数据 ImpExt头信息关联字段
+# 行数据 ImpEx头信息关联字段
 ;product;baseProduct(&amp;masterProduct)
 ;短袖1-L;m1
 ;短袖2-L;m2

@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-			LoadRunner 常用语法 - 油脂青年
+			删库跑路？如果能够快速删除一张亿级表？ - 油脂青年
 			
 		</title>
 		
@@ -92,7 +92,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            LoadRunner 常用语法   
+                            删库跑路？如果能够快速删除一张亿级表？   
                       </h1>
                      
                     
@@ -109,10 +109,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2019/09/04</span>
+                                 <span class="date">2021/08/25</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='loadrunner.html'>LoadRunner</a></span>
+                                      <span class="posted-in"><a href='MySQL.html'>MySQL</a></span>
                                          
                                   
 
@@ -129,94 +129,126 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <pre class="line-numbers"><code class="language-java">// 定义数组时一定要指明大小
-// 变量定义一定要放在所以操作之前，放在脚本最前面 
-int num ; // 定义数值变量
-int numArray[5]; // 定义整型数组
-char *str1,*str2,*str3; // 定义字符串变量
-char strArray[10],fileName[5],data[10]; // 定义字符串数组
+                    <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。<br/>
+<strong>恶意删库跑路属于删除计算机信息系统中存储的数据，如造成特别严重的后果，行为会构成破坏计算机信息系统罪。</strong></p>
+
+<ul>
+<li>
+<a href="#toc_0">一、DELETE TABLE</a>
+<ul>
+<li>
+<a href="#toc_1">DELETE 说明</a>
+</li>
+<li>
+<a href="#toc_2">DELETE 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_3">二、TRUNCATE TABLE</a>
+<ul>
+<li>
+<a href="#toc_4">TRUNCATE 说明</a>
+</li>
+<li>
+<a href="#toc_5">TRUNCATE 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">三、DROP TABLE</a>
+<ul>
+<li>
+<a href="#toc_7">DROP 说明</a>
+</li>
+<li>
+<a href="#toc_8">DROP 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">四、扩展点</a>
+<ul>
+<li>
+<a href="#toc_10">OPTIMIZE TABLE 命令优化表</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h1 id="toc_0">一、DELETE TABLE</h1>
+
+<h2 id="toc_1">DELETE 说明</h2>
+
+<ul>
+<li><strong>删除速度慢：</strong>操作会被放在 rollback segment 中，事物提交后才生效，如果有相应的 trigger 执行将被触发，如果删除大数据量的表速度会很慢；</li>
+<li><strong>可 rollback 操作：</strong>为 <code>DML</code> 数据操作语言，对数据库中记录做删除标记，每次从表中删除一行，并且同时讲该行的删除操作作为事物记录在日志中保存可以进行 rollback 操作；</li>
+<li><strong>不直接释放磁盘空间：</strong>删除表中的逻辑数据，但是物理数据不清除，如主键值、索引等不被清除；虽然未释放磁盘空间，但是下次插入数据的时候，仍然可以重用这部分空间(重用 -&gt; 覆盖)。也可以使用OPTIMIZE TABLE 对碎片进行整理可降低空间占用；</li>
+<li><strong>约束影响范围：</strong>删除范围可以添加 <code>WHERE</code> 约束影响范围。 </li>
+</ul>
+
+<h2 id="toc_2">DELETE 示例</h2>
+
+<p>删除整张表的数据：</p>
+
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name;
 </code></pre>
 
-<pre class="line-numbers"><code class="language-java">// 数值赋值
-num = 10;
-// 输出非字符串
-lr_output_message(&quot;%d&quot;, num)
-// 字符串变量赋值
-str1 = &quot;string1&quot;;
-str2 = &quot;string2&quot;;
-lr_output_message(str1);
-// 拼接字符串
-sprintf(strArray, &quot;%s+%s&quot;, str1, str2);
-lr_output_message(strArray);
-// 变量赋值给字符串数组
-strcpy(strArray,&quot;字符串赋值给数组变量stry:String&quot;);
-lr_output_message(strArray);
+<p>删除部分数据，添加 where 子句：</p>
+
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name WHERE ... ;
 </code></pre>
 
-<pre class="line-numbers"><code class="language-java">// 参数
+<p>分批删除数据，避免长事务，减少其他客户端资源等待的时间：</p>
 
-// 参数赋值（左边给右边赋值）
-// 左边值赋值给右边的参数
-lr_save_string(&quot;parameterString&quot;, &quot;parameter1&quot;);
-lr_output_message(lr_eval_string(&quot;{parameter1}&quot;));
-// 左边变量的值赋值给参数
-lr_save_string(strArray,&quot;parameter2&quot;);
-lr_output_message(lr_eval_string(&quot;{parameter2}&quot;));
-// 左边数值赋值给参数
-lr_save_int(999,&quot;parameterNumber1&quot;);
-lr_output_message(lr_eval_string(&quot;{parameterNumber1}&quot;));
-lr_output_message(&quot;%d&quot;,num);
-lr_save_int(num*2,&quot;parameterNumber2&quot;);
-lr_output_message(&quot;%d&quot;,num);
-lr_output_message(lr_eval_string(&quot;{parameterNumber2}&quot;));
-
-// 参数取值
-lr_eval_string(&quot;{parameter1}&quot;);
-lr_eval_string(&quot;{parameterNumber1}&quot;);
-
-// 参数转换为数组变量
-strcpy(strArray,lr_eval_string(&quot;{parameter1}&quot;));
-lr_output_message(&quot;%s&quot;,strArray);
-// 参数转换为数值
-num = atoi(lr_eval_string(&quot;{parameterNumber1}&quot;));
-lr_output_message(&quot;%d&quot;,num);
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name ORDER BY index_field LIMIT 1000；
 </code></pre>
 
-<pre class="line-numbers"><code class="language-java">// 时间 http://www.51testing.com/html/48/15163948-3713192.html
-// 当前时间戳
-web_save_timestamp_param(&quot;timestamp&quot;, LAST);
-lr_output_message(&quot;时间戳:%s&quot;,lr_eval_string(&quot;{timestamp}&quot;));
-// 格式化当前时间赋值给参数
-lr_save_datetime(&quot;%Y%m%d%H%M%S&quot;, DATE_NOW, &quot;now&quot;);
-lr_output_message(lr_eval_string(&quot;{now}&quot;))
-// 时间的偏移量
-DATE_NOW(现在的日期)
-TIME_NOW(现在的时间)
-ONE_DAY(一天的时间)
-ONE_HOUR(一小时的时间)
-ONE_MIN(一分钟的时间)
+<h1 id="toc_3">二、TRUNCATE TABLE</h1>
+
+<h2 id="toc_4">TRUNCATE 说明</h2>
+
+<ul>
+<li><strong>速度快：</strong>通过释放数据表数据所用的数据页，来删除数据，并且只在事务日志中记录页的释放，使用系统和事物日志资源少；</li>
+<li><strong>不能 rollback 操作：</strong>为 <code>DDL</code>  数据库模式定义语言，删除数据表所有行，操作立即生效，原数据不放到 rollback segment 中不可进行 rollback 操作。FOREIGN KEY 约束引用的表，不能使它，它不记录在日志所以 trigger 不能被激活；</li>
+<li><strong>立刻释放磁盘空间：</strong>同时针对具有自动递增值的字段，做计数重置归零重新计算；</li>
+<li><strong>无法控制影响范围：</strong>删除数据表内所有行，但表结构及其列、约束、索引结构等保持不变。</li>
+</ul>
+
+<h2 id="toc_5">TRUNCATE 示例</h2>
+
+<p>删除整张表的数据：</p>
+
+<pre class="line-numbers"><code class="language-mysql">TRUNCATE TABLE table_name
 </code></pre>
 
-<h1 id="toc_0">LoadRunner 参数类型</h1>
+<h1 id="toc_6">三、DROP TABLE</h1>
 
-<h2 id="toc_1">Random Number（随机数）</h2>
+<h2 id="toc_7">DROP 说明</h2>
 
-<p>随机数，在属性设置中可以设置产生随机数的范围和更新值得时间。</p>
+<ul>
+<li><strong>速度快</strong></li>
+<li><strong>不能 rollback 操作：</strong> 为 <code>DDL</code>  数据库模式定义语言，表数据和结构都会被删除；</li>
+<li><strong>立刻释放磁盘空间：</strong>删除表定义及该表的所有数据、索引、触发器、约束和权限规范；</li>
+<li><strong>无法控制影响范围：</strong>删除数据表内所有行。</li>
+</ul>
 
-<h3 id="toc_2">Update value on（更新值得时间）</h3>
+<h2 id="toc_8">DROP 示例</h2>
 
-<h4 id="toc_3">Each occurrence（每次出现）</h4>
+<pre class="line-numbers"><code class="language-mysql">DROP TABLE table_name;
+</code></pre>
 
-<p>每次出现该参数被调用就更新（取新的值），脚本中出现多次每次都更新值。</p>
+<h1 id="toc_9">四、扩展点</h1>
 
-<h4 id="toc_4">Each interaction（每次迭代）</h4>
+<h2 id="toc_10">OPTIMIZE TABLE 命令优化表</h2>
 
-<p>每次迭代时更新（取新的值），每次迭代不管多少个虚拟用户，都是迭代一次所有用户取相同的一个值。<br/>
-例如：有10个虚拟用户，每个虚拟用户都取第1次生成的数，执行完成，称为一次迭代完成。然后10个虚拟用户都取第2次生成的数，完成第二次迭代，后面以此类推。</p>
-
-<h4 id="toc_5">Once（只取一次）</h4>
-
-<p>在场景初始化时更新一次，在一个场景中的所有用户每次迭代值都相同。</p>
+<ul>
+<li>该命令会重新利用未使用的空间，并整理数据文件的碎片</li>
+<li>该命令将会整理表数据和相关的索引数据的物理存储空间，用来减少占用的磁盘空间，并提高访问表时候的IO性能；</li>
+<li>不可以频繁操作，释放磁盘空间，优化表期间会锁定表，所以要在空闲时段执行。</li>
+<li><code>OPTIMIZE TABLE table_name；</code></li>
+</ul>
 
                   </article>
                   <div class="comments-wrap">

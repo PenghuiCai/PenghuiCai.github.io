@@ -4,13 +4,255 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2021-02-23T14:45:38+08:00</updated>
+  <updated>2021-04-09T13:33:01+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[删库跑路？如果能够快速删除一张亿级表？]]></title>
+    <link href="https://penghuicai.github.io/16298733466823.html"/>
+    <updated>2021-08-25T14:35:46+08:00</updated>
+    <id>https://penghuicai.github.io/16298733466823.html</id>
+    <content type="html"><![CDATA[
+<p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。<br/>
+<strong>恶意删库跑路属于删除计算机信息系统中存储的数据，如造成特别严重的后果，行为会构成破坏计算机信息系统罪。</strong></p>
+
+<ul>
+<li>
+<a href="#toc_0">一、DELETE TABLE</a>
+<ul>
+<li>
+<a href="#toc_1">DELETE 说明</a>
+</li>
+<li>
+<a href="#toc_2">DELETE 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_3">二、TRUNCATE TABLE</a>
+<ul>
+<li>
+<a href="#toc_4">TRUNCATE 说明</a>
+</li>
+<li>
+<a href="#toc_5">TRUNCATE 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">三、DROP TABLE</a>
+<ul>
+<li>
+<a href="#toc_7">DROP 说明</a>
+</li>
+<li>
+<a href="#toc_8">DROP 示例</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">四、扩展点</a>
+<ul>
+<li>
+<a href="#toc_10">OPTIMIZE TABLE 命令优化表</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h1 id="toc_0">一、DELETE TABLE</h1>
+
+<h2 id="toc_1">DELETE 说明</h2>
+
+<ul>
+<li><strong>删除速度慢：</strong>操作会被放在 rollback segment 中，事物提交后才生效，如果有相应的 trigger 执行将被触发，如果删除大数据量的表速度会很慢；</li>
+<li><strong>可 rollback 操作：</strong>为 <code>DML</code> 数据操作语言，对数据库中记录做删除标记，每次从表中删除一行，并且同时讲该行的删除操作作为事物记录在日志中保存可以进行 rollback 操作；</li>
+<li><strong>不直接释放磁盘空间：</strong>删除表中的逻辑数据，但是物理数据不清除，如主键值、索引等不被清除；虽然未释放磁盘空间，但是下次插入数据的时候，仍然可以重用这部分空间(重用 -&gt; 覆盖)。也可以使用OPTIMIZE TABLE 对碎片进行整理可降低空间占用；</li>
+<li><strong>约束影响范围：</strong>删除范围可以添加 <code>WHERE</code> 约束影响范围。 </li>
+</ul>
+
+<h2 id="toc_2">DELETE 示例</h2>
+
+<p>删除整张表的数据：</p>
+
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name;
+</code></pre>
+
+<p>删除部分数据，添加 where 子句：</p>
+
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name WHERE ... ;
+</code></pre>
+
+<p>分批删除数据，避免长事务，减少其他客户端资源等待的时间：</p>
+
+<pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name ORDER BY index_field LIMIT 1000；
+</code></pre>
+
+<h1 id="toc_3">二、TRUNCATE TABLE</h1>
+
+<h2 id="toc_4">TRUNCATE 说明</h2>
+
+<ul>
+<li><strong>速度快：</strong>通过释放数据表数据所用的数据页，来删除数据，并且只在事务日志中记录页的释放，使用系统和事物日志资源少；</li>
+<li><strong>不能 rollback 操作：</strong>为 <code>DDL</code>  数据库模式定义语言，删除数据表所有行，操作立即生效，原数据不放到 rollback segment 中不可进行 rollback 操作。FOREIGN KEY 约束引用的表，不能使它，它不记录在日志所以 trigger 不能被激活；</li>
+<li><strong>立刻释放磁盘空间：</strong>同时针对具有自动递增值的字段，做计数重置归零重新计算；</li>
+<li><strong>无法控制影响范围：</strong>删除数据表内所有行，但表结构及其列、约束、索引结构等保持不变。</li>
+</ul>
+
+<h2 id="toc_5">TRUNCATE 示例</h2>
+
+<p>删除整张表的数据：</p>
+
+<pre class="line-numbers"><code class="language-mysql">TRUNCATE TABLE table_name
+</code></pre>
+
+<h1 id="toc_6">三、DROP TABLE</h1>
+
+<h2 id="toc_7">DROP 说明</h2>
+
+<ul>
+<li><strong>速度快</strong></li>
+<li><strong>不能 rollback 操作：</strong> 为 <code>DDL</code>  数据库模式定义语言，表数据和结构都会被删除；</li>
+<li><strong>立刻释放磁盘空间：</strong>删除表定义及该表的所有数据、索引、触发器、约束和权限规范；</li>
+<li><strong>无法控制影响范围：</strong>删除数据表内所有行。</li>
+</ul>
+
+<h2 id="toc_8">DROP 示例</h2>
+
+<pre class="line-numbers"><code class="language-mysql">DROP TABLE table_name;
+</code></pre>
+
+<h1 id="toc_9">四、扩展点</h1>
+
+<h2 id="toc_10">OPTIMIZE TABLE 命令优化表</h2>
+
+<ul>
+<li>该命令会重新利用未使用的空间，并整理数据文件的碎片</li>
+<li>该命令将会整理表数据和相关的索引数据的物理存储空间，用来减少占用的磁盘空间，并提高访问表时候的IO性能；</li>
+<li>不可以频繁操作，释放磁盘空间，优化表期间会锁定表，所以要在空闲时段执行。</li>
+<li><code>OPTIMIZE TABLE table_name；</code></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP HTTPS SSL TLS 相关知识]]></title>
+    <link href="https://penghuicai.github.io/16297846641794.html"/>
+    <updated>2021-08-24T13:57:44+08:00</updated>
+    <id>https://penghuicai.github.io/16297846641794.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">HTTP 相关</a>
+<ul>
+<li>
+<a href="#toc_1">一、HTTP 是什么？</a>
+</li>
+<li>
+<a href="#toc_2">二、HTTP 请求有哪些方法？</a>
+</li>
+<li>
+<a href="#toc_3">三、GET、POST 请求有哪些区别？</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">HTTP 相关</h2>
+
+<h3 id="toc_1">一、HTTP 是什么？</h3>
+
+<ul>
+<li>HTTP 协议是 Hyper Text Transfer Protocol（超文本传输协议）的缩写，是用于万维网（WWW : World Wide Web、3W、Web）服务器传输超文本到本地浏览器的传输协议。</li>
+<li>HTTP 是一个基于 TCP/IP 通信协议来传递数据（HTML文件，图片文件，查询结构等）</li>
+<li>HTTP 是一个数据应用层的面向对象协议，由于简洁快速的方式，适用于分布式超媒体信息系统。它与1990年提出，经历几年的使用与发展，得到了不断地完善和扩展。</li>
+<li>HTTP协议工作与客户端和服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端（WEB服务端）发送所有请求。Web服务器根据收到的请求，向客户端发送响应信息</li>
+</ul>
+
+<h3 id="toc_2">二、HTTP 请求有哪些方法？</h3>
+
+<p>在 <code>HTTP/1.1</code> 共定义了 <code>八种</code> 请求方法（也叫动作）来表明 Request-URL 指定的资源有不同的操作方式</p>
+
+<ul>
+<li>HTTP/0.9 定义 <code>一种</code> 请求方法：GET</li>
+<li>HTTP/1.0 新增加 <code>两种</code> 请求方法 ：POST 和 HEAD 方法</li>
+<li>HTTP/1.1 中，新增加 <code>五种</code> 请求方法：OPTIONS、PUT、DELETE、TRACE 和 CONNECT。</li>
+<li>我们一般常用的就是：GET、POST</li>
+<li>补充：</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GET</td>
+<td>向特定的资源发出请求，并返回实体主体</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>类似于GET，返回的响应实体没有具体的内容，用于获取响应消息头中的元数据</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向指定资源提交数据进行处理请求（列如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>向指定资源位置上传其最新内容</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向web服务器发送‘*’的请求来测试服务的功能性</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求服务器删除Request-URL所标识的资源</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>回显服务器收到的请求，主要用于测试或诊断</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_3">三、GET、POST 请求有哪些区别？</h3>
+
+<ol>
+<li>GET 请求在 URL 中传递的参数是有长度限制的，而 POST 没有；</li>
+<li>GET 比 POST 更不安全，因为参数直接暴露在URL中，不能传递敏感信息。而 POST 数据不会显示在 URL 中。是放在Request body中；</li>
+<li>对参数的数据类型，GET 只接受 ASCII 字符，而POST没有限制；</li>
+<li>GET 请求参数会被完整保留在浏览器历史记录里。POST 请求参数不会被浏览器保留；</li>
+<li>GET 请求只能进行URL编码（application/x-www-from-urlencoded），而 POST 支持多种编码格式；</li>
+<li>GET 请求会被浏览器主动缓存，而 POST 不会，除非手动设置；</li>
+<li>GET 在浏览器回退是无害的，而 POST 会再次提交请求。<br/>
+### 四、 GET 请求有 Request body？参数可以像 POST 请求一样放在这里吗？<br/>
+其实，前面我们说到 HTTP 是一个基于 TCP/IP，GET 和 POST 在本质上没有区别，都是 HTTP 发送请求的两种请求方法。所以 GET 和 POST 的底层也是TCP/IP。也就是说，GET 和 POST 都是 TCP 连接。所以 GET 加 Request body 或者 POST 的 URL 带上参数，从技术上是完全行的通的。<br/>
+TCP 就像汽车，我们用 TCP 运输数据很可靠，从来不会发生丢件少件的现象。<br/>
+但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能就被前面载满货物的汽车堵在路上，真个交通系统一定会瘫痪。<br/>
+为了避免这种情况发生，交通规则HTTP诞生了，HTTP给汽车运输设定了几个服务类别，包括 GET、POST、PUT 等等。<br/>
+HTTP 规定，当执行 GET 请求的时候，要给车贴上 GET 标签，要求其数据货物放在车顶（URL中）以方便记录。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MySQL 索引使用情况统计 information_schema.INDEX_STATISTICS]]></title>
@@ -1043,252 +1285,6 @@ AND {cs.code} = &#39;TRADE_CLOSE&#39;
 AND {c.orderCreationDate} &gt;= &#39;2020-04-12 00:00:00&#39;
 AND {c.orderCreationDate} &lt; &#39;2020-05-12 00:00:00&#39;
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux 查看日志文件常用命令集合]]></title>
-    <link href="https://penghuicai.github.io/15888326579314.html"/>
-    <updated>2020-05-07T14:24:17+08:00</updated>
-    <id>https://penghuicai.github.io/15888326579314.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0">tail</a>
-</li>
-<li>
-<a href="#toc_1">less</a>
-</li>
-<li>
-<a href="#toc_2">cat + grep 组合</a>
-</li>
-</ul>
-
-
-<h2 id="toc_0">tail</h2>
-
-<p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
-</code></pre></li>
-<li><p>无参：显示尾部 10 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail console.log
-</code></pre></li>
-<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
-<pre class="line-numbers"><code class="language-shell">tail -f console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 20 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 10 个字节内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
-</code></pre></li>
-</ul>
-
-<p>注意</p>
-
-<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
-2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
-3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
-</code></pre>
-
-<h2 id="toc_1">less</h2>
-
-<p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
-</code></pre></li>
-<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less console.log
-</code></pre></li>
-<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less -N console.log
-</code></pre></li>
-<li><p>查看文件，搜索指令时忽略大小写</p>
-<pre class="line-numbers"><code class="language-shell">less -i console.log
-</code></pre></li>
-<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">/字符串
-</code></pre></li>
-<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">?字符串
-</code></pre></li>
-<li><p>搜索指令，仅显示匹配“字符串”的行</p>
-<pre class="line-numbers"><code class="language-shell">&amp;字符串
-</code></pre></li>
-<li><p>滚动指令，向上一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
-</code></pre></li>
-<li><p>滚动指令，向下一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
-</code></pre></li>
-<li><p>滚动指令，向下滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">键盘空格键
-</code></pre></li>
-<li><p>滚动命令，向上滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">b
-</code></pre></li>
-<li><p>滚动命令，滚动到头部</p>
-<pre class="line-numbers"><code class="language-shell">g
-</code></pre></li>
-<li><p>滚动命令，滚动到尾部</p>
-<pre class="line-numbers"><code class="language-shell">G
-</code></pre></li>
-<li><p>退出less模式</p>
-<pre class="line-numbers"><code class="language-shell">q
-</code></pre></li>
-</ul>
-
-<h2 id="toc_2">cat + grep 组合</h2>
-
-<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
-
-<ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>示例</p>
-<pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
-cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
-</code></pre></li>
-<li><p>显示包括字符串的行及下面的 1 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索多个“或”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep -E &quot;条件1|条件2&quot;<br/>
-# ======================================<br/>
-# 3. 将检索多个“并”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep &quot;条件1&quot; | grep &quot;条件2&quot;<br/>
-# ======================================<br/>
-# 4. 将检索多个“或”+“并”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep -E &quot;条件1|条件2&quot; | grep &quot;条件3&quot;<br/>
-# ======================================<br/>
-# 3. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 5 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LoadRunner 常用语法]]></title>
-    <link href="https://penghuicai.github.io/15675650161144.html"/>
-    <updated>2019-09-04T10:43:36+08:00</updated>
-    <id>https://penghuicai.github.io/15675650161144.html</id>
-    <content type="html"><![CDATA[
-<pre class="line-numbers"><code class="language-java">// 定义数组时一定要指明大小
-// 变量定义一定要放在所以操作之前，放在脚本最前面 
-int num ; // 定义数值变量
-int numArray[5]; // 定义整型数组
-char *str1,*str2,*str3; // 定义字符串变量
-char strArray[10],fileName[5],data[10]; // 定义字符串数组
-</code></pre>
-
-<pre class="line-numbers"><code class="language-java">// 数值赋值
-num = 10;
-// 输出非字符串
-lr_output_message(&quot;%d&quot;, num)
-// 字符串变量赋值
-str1 = &quot;string1&quot;;
-str2 = &quot;string2&quot;;
-lr_output_message(str1);
-// 拼接字符串
-sprintf(strArray, &quot;%s+%s&quot;, str1, str2);
-lr_output_message(strArray);
-// 变量赋值给字符串数组
-strcpy(strArray,&quot;字符串赋值给数组变量stry:String&quot;);
-lr_output_message(strArray);
-</code></pre>
-
-<pre class="line-numbers"><code class="language-java">// 参数
-
-// 参数赋值（左边给右边赋值）
-// 左边值赋值给右边的参数
-lr_save_string(&quot;parameterString&quot;, &quot;parameter1&quot;);
-lr_output_message(lr_eval_string(&quot;{parameter1}&quot;));
-// 左边变量的值赋值给参数
-lr_save_string(strArray,&quot;parameter2&quot;);
-lr_output_message(lr_eval_string(&quot;{parameter2}&quot;));
-// 左边数值赋值给参数
-lr_save_int(999,&quot;parameterNumber1&quot;);
-lr_output_message(lr_eval_string(&quot;{parameterNumber1}&quot;));
-lr_output_message(&quot;%d&quot;,num);
-lr_save_int(num*2,&quot;parameterNumber2&quot;);
-lr_output_message(&quot;%d&quot;,num);
-lr_output_message(lr_eval_string(&quot;{parameterNumber2}&quot;));
-
-// 参数取值
-lr_eval_string(&quot;{parameter1}&quot;);
-lr_eval_string(&quot;{parameterNumber1}&quot;);
-
-// 参数转换为数组变量
-strcpy(strArray,lr_eval_string(&quot;{parameter1}&quot;));
-lr_output_message(&quot;%s&quot;,strArray);
-// 参数转换为数值
-num = atoi(lr_eval_string(&quot;{parameterNumber1}&quot;));
-lr_output_message(&quot;%d&quot;,num);
-</code></pre>
-
-<pre class="line-numbers"><code class="language-java">// 时间 http://www.51testing.com/html/48/15163948-3713192.html
-// 当前时间戳
-web_save_timestamp_param(&quot;timestamp&quot;, LAST);
-lr_output_message(&quot;时间戳:%s&quot;,lr_eval_string(&quot;{timestamp}&quot;));
-// 格式化当前时间赋值给参数
-lr_save_datetime(&quot;%Y%m%d%H%M%S&quot;, DATE_NOW, &quot;now&quot;);
-lr_output_message(lr_eval_string(&quot;{now}&quot;))
-// 时间的偏移量
-DATE_NOW(现在的日期)
-TIME_NOW(现在的时间)
-ONE_DAY(一天的时间)
-ONE_HOUR(一小时的时间)
-ONE_MIN(一分钟的时间)
-</code></pre>
-
-<h1 id="toc_0">LoadRunner 参数类型</h1>
-
-<h2 id="toc_1">Random Number（随机数）</h2>
-
-<p>随机数，在属性设置中可以设置产生随机数的范围和更新值得时间。</p>
-
-<h3 id="toc_2">Update value on（更新值得时间）</h3>
-
-<h4 id="toc_3">Each occurrence（每次出现）</h4>
-
-<p>每次出现该参数被调用就更新（取新的值），脚本中出现多次每次都更新值。</p>
-
-<h4 id="toc_4">Each interaction（每次迭代）</h4>
-
-<p>每次迭代时更新（取新的值），每次迭代不管多少个虚拟用户，都是迭代一次所有用户取相同的一个值。<br/>
-例如：有10个虚拟用户，每个虚拟用户都取第1次生成的数，执行完成，称为一次迭代完成。然后10个虚拟用户都取第2次生成的数，完成第二次迭代，后面以此类推。</p>
-
-<h4 id="toc_5">Once（只取一次）</h4>
-
-<p>在场景初始化时更新一次，在一个场景中的所有用户每次迭代值都相同。</p>
 
 ]]></content>
   </entry>
