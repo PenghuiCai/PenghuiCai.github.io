@@ -4,13 +4,113 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2022-06-23T10:45:58+08:00</updated>
+  <updated>2022-06-23T11:06:29+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[前端编译失败 `JavaScript heap out of memory`]]></title>
+    <link href="https://penghuicai.github.io/16559527064386.html"/>
+    <updated>2022-06-23T10:51:46+08:00</updated>
+    <id>https://penghuicai.github.io/16559527064386.html</id>
+    <content type="html"><![CDATA[
+<pre class="line-numbers"><code class="language-text">FATAL ERROR：Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+</code></pre>
+
+<h1 id="toc_0">启动服务</h1>
+
+<pre class="line-numbers"><code class="language-text">yarn install
+# 启动roadhog
+yarn build:dll
+# 启动应用
+yarn start
+</code></pre>
+
+<h1 id="toc_1">编译失败异常</h1>
+
+<p><img src="media/16559527064386/16559527798736.jpg" alt=""/></p>
+
+<h1 id="toc_2">原因可能是<code>nodejs</code>版本过低，升级版本后在尝试</h1>
+
+<p><img src="media/16559527064386/16559528035670.jpg" alt=""/></p>
+
+<h1 id="toc_3">查看<code>node</code>版本</h1>
+
+<pre class="line-numbers"><code class="language-text">node -v
+</code></pre>
+
+<h1 id="toc_4">升级<code>node</code>版本</h1>
+
+<h2 id="toc_5">mac系统</h2>
+
+<p>以下命令在终端中可能会遇到权限问题，在开始位置输入<code>sudo</code>即可</p>
+
+<ul>
+<li>清除<code>npm</code>缓存，执行命令</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">npm cache clean -f
+</code></pre>
+
+<ul>
+<li><code>n模块</code>是专门用来管理<code>nodejs</code>的版本，安装<code>n模块</code></li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">npm install -g n
+</code></pre>
+
+<ul>
+<li>更新升级<code>node</code>版本</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">// 把当前系统的 Node 更新成最新的 “稳定版本”
+ n stable
+// 长期支持版
+ n lts 
+// 最新版
+ n latest
+// 指定安装版本
+ n 10.14.2 
+</code></pre>
+
+<ul>
+<li>删除指定<code>node</code>版本</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">n rm 10.14.2
+</code></pre>
+
+<ul>
+<li>查看升级后的<code>node</code>版本</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">node -v
+</code></pre>
+
+<h2 id="toc_6">window系统</h2>
+
+<ul>
+<li><code>cmd</code>查看当前<code>node</code>版本和<code>node</code>安装位置</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">node -v
+where node
+</code></pre>
+
+<ul>
+<li>百度搜索<code>node+需要版本</code>官网下载<code>LTS版本nodejs</code>。安装到之前的目录即可</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">// node 下载地址 
+https://nodejs.org/zh-cn/download/releases/
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Redis 发布与订阅之查看订阅信息]]></title>
@@ -942,76 +1042,6 @@ export default {
         &quot;node_modules/xxxx&quot;
     ]
 }
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GIT 仓库迁移并保留分支和历史提交]]></title>
-    <link href="https://penghuicai.github.io/15905697716646.html"/>
-    <updated>2020-05-27T16:56:11+08:00</updated>
-    <id>https://penghuicai.github.io/15905697716646.html</id>
-    <content type="html"><![CDATA[
-<blockquote>
-</li>
-<li>
-<a href="#toc_1">进入本地 clone 的旧库目录</a>
-</li>
-<li>
-<a href="#toc_2">移除旧库的地址替换成新库地址</a>
-</li>
-<li>
-<a href="#toc_3">将新地址镜像 core 直接推到远程新库</a>
-</li>
-<li>
-<a href="#toc_4">删除本地库 core，然后再重新拉取</a>
-</li>
-<li>
-<a href="#toc_5">已搞定</a>
-</li>
-</ul>
-
-
-<h2 id="toc_0">clone 旧库的镜像</h2>
-</blockquote>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror https://xxx.com/old/core.git
-</code></pre>
-
-<h2 id="toc_1">进入本地 clone 的旧库目录</h2>
-
-<pre class="line-numbers"><code class="language-text">cd core.git
-</code></pre>
-
-<h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
-
-<pre class="line-numbers"><code class="language-text">git remote set-url --push origin https://xxx.com/new/core.git
-</code></pre>
-
-<h2 id="toc_3">将新地址镜像 core 直接推到远程新库</h2>
-
-<pre class="line-numbers"><code class="language-text">git push --mirror
-</code></pre>
-
-<h2 id="toc_4">删除本地库 core，然后再重新拉取</h2>
-
-<pre class="line-numbers"><code class="language-text">rm -rf core.git
-
-git clone -b prod https://xxx.com/new/core.git
-</code></pre>
-
-<h2 id="toc_5">已搞定</h2>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror old.git
-
-cd old.git
-
-git remote set-url --push origin new.git
-
-这一步的时候，可以删除不需要的分支和版本
-
-git push --mirror
 </code></pre>
 
 ]]></content>
