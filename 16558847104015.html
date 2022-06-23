@@ -143,6 +143,12 @@
 <li>
 <a href="#toc_1">获取指定频道的订阅者数量</a>
 </li>
+<li>
+<a href="#toc_2">频道发布者(pub)发布消息</a>
+</li>
+<li>
+<a href="#toc_3">频道订阅者(sub)订阅消息</a>
+</li>
 </ul>
 
 
@@ -156,8 +162,8 @@
 </code></pre>
 
 <ul>
-<li>功能：活跃频道组成的列表，用于返回服务器当前被订阅的频道。</li>
-<li><code>pattern</code>参数可选：
+<li>功能：活跃频道组成的列表，用于返回服务器当前被订阅的频道</li>
+<li>参数<code>pattern</code>可选：
 <ul>
 <li>不给定<code>pattern</code>参数，命令返回当前被订阅的<code>所有频道</code></li>
 <li>给定<code>pattern</code>参数，命令返回当前被订阅的频道中 与pattern模式<code>相匹配的频道</code></li>
@@ -176,12 +182,12 @@
 <li>命令：</li>
 </ul>
 
-<pre class="line-numbers"><code class="language-text">PUBSUB NUMSUB [channel-1 channel-2...channel-n]
+<pre class="line-numbers"><code class="language-text">PUBSUB NUMSUB [channel...]
 </code></pre>
 
 <ul>
-<li>功能：返回指定频道的订阅者数量</li>
-<li><code>channel</code> 参数必填。</li>
+<li>功能：返回指定频道的订阅者数量，返回接收到的信息</li>
+<li>参数：<code>channel</code> 必填</li>
 </ul>
 
 <pre class="line-numbers"><code class="language-text">redis:0&gt;PUBSUB NUMSUB notify:basestore:channel notify:city:channel
@@ -189,6 +195,42 @@
  2)  &quot;4&quot;
  3)  &quot;notify:city:channel&quot;
  4)  &quot;2&quot;
+</code></pre>
+
+<h1 id="toc_2">频道发布者(pub)发布消息</h1>
+
+<ul>
+<li>命令：</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">PUBLISH [channel] [message]
+</code></pre>
+
+<ul>
+<li>功能：返回<code>接收到消息</code>的<code>订阅者数量</code></li>
+<li>参数：<code>channel</code>与<code>message</code>必填</li>
+<li>代码示例：</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">PUBLISH notify:test:channel hello
+</code></pre>
+
+<h1 id="toc_3">频道订阅者(sub)订阅消息</h1>
+
+<ul>
+<li>命令：</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">SUBSCRIBE channel [channel ...]
+</code></pre>
+
+<ul>
+<li>功能：订阅指定的一个或多个频道的信息</li>
+<li>参数：<code>channel</code>必填</li>
+<li>代码示例：</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">SUBSCRIBE notify:test:channel
 </code></pre>
 
                   </article>
