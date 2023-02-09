@@ -34,7 +34,7 @@
 							
 							<a target="_self" class="navbar-item " href="Database.html">Database</a>
 							
-							<a target="_self" class="navbar-item " href="Fore-end.html">Fore-end</a>
+							<a target="_self" class="navbar-item " href="Front-End.html">Front-End</a>
 							
 							<a target="_self" class="navbar-item " href="other.html">Other</a>
 							
@@ -130,6 +130,12 @@
                     <pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
 INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
+
+##### ndcWarehouses是一个set集合，无多对多关联关系表，仅保留pk表的PK，导出对应字段model的任意字段，包括它关联model的字段
+&quot;$query=select {pk} FROM {UserGroup} WHERE {uid} = &#39;admingroup&#39;&quot;
+&quot;#% impex.setTargetFile(&quot;&quot;UserGroup.txt&quot;&quot;);&quot;
+INSERT_UPDATE UserGroup;uid;ndcWarehouses(code);
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
 

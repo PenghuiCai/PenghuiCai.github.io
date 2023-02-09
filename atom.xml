@@ -4,7 +4,7 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2022-10-27T15:45:36+08:00</updated>
+  <updated>2022-10-27T15:45:52+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -27,13 +27,33 @@
 
 <h2 id="toc_2"><a href="https://plugins.jetbrains.com/plugin/7160-camelcase">CamelCase</a></h2>
 
-<h2 id="toc_3"><a href="https://plugins.jetbrains.com/plugin/8579-translation">Translation</a></h2>
+<h2 id="toc_3"><a href="https://plugins.jetbrains.com/plugin/8579-translation?1=20221031001427687&amp;2=K8Lo5P94e5k9YrBgRxYJ">Translation</a></h2>
 
 <h2 id="toc_4"><a href="https://plugins.jetbrains.com/plugin/13710-chinese-simplified-language-pack----">Chinese ​(Simplified)​ Language Pack / 中文语言包</a></h2>
 
 <h2 id="toc_5"><a href="https://plugins.jetbrains.com/plugin/10080-rainbow-brackets">Rainbow Brackets</a></h2>
 
 <h2 id="toc_6"><a href="https://plugins.jetbrains.com/plugin/10044-atom-material-icons">Atom Material File Icons</a></h2>
+
+<h2 id="toc_7"><a href="https://plugins.jetbrains.com/plugin/13574-aixcoder-code-completer">AiXcoder Code Completer</a></h2>
+
+<h2 id="toc_8"><a href="https://plugins.jetbrains.com/plugin/18824-codeglance-pro">CodeGlance Pro</a></h2>
+
+<h2 id="toc_9"><a href="https://plugins.jetbrains.com/plugin/7125-grep-console">Grep Console</a></h2>
+
+<h2 id="toc_10"><a href="https://plugins.jetbrains.com/plugin/17320-highlightbracketpair">HighlightBracketPair</a></h2>
+
+<h2 id="toc_11"><a href="https://plugins.jetbrains.com/plugin/9792-key-promoter-x">Key Promoter X</a></h2>
+
+<h2 id="toc_12"><a href="https://plugins.jetbrains.com/plugin/7345-presentation-assistant">Presentation Assistant</a></h2>
+
+<h2 id="toc_13"><a href="https://plugins.jetbrains.com/plugin/12867-sap-commerce-developers-toolset">SAP Commerce Developers Toolset</a></h2>
+
+<h2 id="toc_14">设置</h2>
+
+<h3 id="toc_15">常量字符串过长</h3>
+
+<p><img src="media/16668551965194/16672984887608.jpg" alt="" style="width:979px;"/></p>
 
 ]]></content>
   </entry>
@@ -933,6 +953,12 @@ $ yarn run dev
 <pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
 INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
+
+##### ndcWarehouses是一个set集合，无多对多关联关系表，仅保留pk表的PK，导出对应字段model的任意字段，包括它关联model的字段
+&quot;$query=select {pk} FROM {UserGroup} WHERE {uid} = &#39;admingroup&#39;&quot;
+&quot;#% impex.setTargetFile(&quot;&quot;UserGroup.txt&quot;&quot;);&quot;
+INSERT_UPDATE UserGroup;uid;ndcWarehouses(code);
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
 
