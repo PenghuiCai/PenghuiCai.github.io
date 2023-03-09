@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-			Redis 发布与订阅之查看订阅信息 - 油脂青年
+			删除JOB日志 - 油脂青年
 			
 		</title>
 		
@@ -90,7 +90,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            Redis 发布与订阅之查看订阅信息   
+                            删除JOB日志   
                       </h1>
                      
                     
@@ -107,10 +107,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2022/06/22</span>
+                                 <span class="date">2023/02/09</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='Redis.html'>Redis</a></span>
+                                      <span class="posted-in"><a href='ImpEx.html'>ImpEx</a></span>
                                          
                                   
 
@@ -118,8 +118,6 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_Redis.html'>#Redis</a>
                                      
 
                                 </p>
@@ -129,108 +127,21 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。</p>
+                    <h2 id="toc_0">统计JOB日志数据</h2>
 
-<p><code>PUBSUB</code>命令是<code>Redis 2.8</code>新增加的命令之一，客户端可以通过这个命令来<code>查看频道</code>或者<code>模式</code>的相关信息<br/>
-比如某个频道目前有多少订阅者，又或者某个模式目前有多少订阅者<br/>
-消息之前保存消息：<code>SET cache:basestorerelwarehouse:r:8821127395054</code><br/>
-查看消息内容：<code>GET  cache:basestorerelwarehouse:r:8821127395054</code></p>
+<pre class="line-numbers"><code class="language-text">SELECT {CronJob.code},count(1) FROM {LogFile
+JOIN CronJob ON {CronJob.pk} = {owner}
+} WHERE {location} LIKE &#39;cronjob%&#39; GROUP BY {owner}
 
-<ul>
-<li>
-<a href="#toc_0">获取当前被订阅的频道</a>
-</li>
-<li>
-<a href="#toc_1">获取指定频道的订阅者数量</a>
-</li>
-<li>
-<a href="#toc_2">频道发布者(pub)发布消息</a>
-</li>
-<li>
-<a href="#toc_3">频道订阅者(sub)订阅消息</a>
-</li>
-</ul>
-
-
-<h1 id="toc_0">获取当前被订阅的频道</h1>
-
-<ul>
-<li>命令：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">PUBSUB CHANNELS [pattern]
+SELECT {CronJob.code}, count(1) FROM {LogFile
+JOIN CronJob ON {CronJob.pk} = {owner}
+} WHERE {CronJob.code} = &#39;HepRefundAutoAgreeReturnCronJob&#39; AND {location} LIKE &#39;cronjob%&#39; 
 </code></pre>
 
-<ul>
-<li>功能：活跃频道组成的列表，用于返回服务器当前被订阅的频道</li>
-<li>参数<code>pattern</code>可选：
-<ul>
-<li>不给定<code>pattern</code>参数，命令返回当前被订阅的<code>所有频道</code></li>
-<li>给定<code>pattern</code>参数，命令返回当前被订阅的频道中 与pattern模式<code>相匹配的频道</code></li>
-</ul></li>
-</ul>
+<h2 id="toc_1">删除job日志</h2>
 
-<pre class="line-numbers"><code class="language-text">redis:0&gt;PUBSUB CHANNELS
- 1)  &quot;notify:basestore:channel&quot;
- 2)  &quot;notify:warehouse:channel&quot;
- 3)  &quot;notify:city:channel&quot;
-</code></pre>
-
-<h1 id="toc_1">获取指定频道的订阅者数量</h1>
-
-<ul>
-<li>命令：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">PUBSUB NUMSUB [channel...]
-</code></pre>
-
-<ul>
-<li>功能：返回指定频道的订阅者数量，返回接收到的信息</li>
-<li>参数：<code>channel</code> 必填</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">redis:0&gt;PUBSUB NUMSUB notify:basestore:channel notify:city:channel
- 1)  &quot;notify:basestore:channel&quot;
- 2)  &quot;4&quot;
- 3)  &quot;notify:city:channel&quot;
- 4)  &quot;2&quot;
-</code></pre>
-
-<h1 id="toc_2">频道发布者(pub)发布消息</h1>
-
-<ul>
-<li>命令：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">PUBLISH [channel] [message]
-</code></pre>
-
-<ul>
-<li>功能：返回<code>接收到消息</code>的<code>订阅者数量</code></li>
-<li>参数：<code>channel</code>与<code>message</code>必填</li>
-<li>代码示例：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">PUBLISH notify:test:channel hello
-</code></pre>
-
-<h1 id="toc_3">频道订阅者(sub)订阅消息</h1>
-
-<ul>
-<li>命令：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">SUBSCRIBE channel [channel ...]
-</code></pre>
-
-<ul>
-<li>功能：订阅指定的一个或多个频道的信息</li>
-<li>参数：<code>channel</code>必填</li>
-<li>代码示例：</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">SUBSCRIBE notify:test:channel
+<pre class="line-numbers"><code class="language-text">REMOVE LogFile[batchmode=true];owner(code)[unique=true];
+;jobcode;
 </code></pre>
 
                   </article>

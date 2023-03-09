@@ -139,6 +139,9 @@
 <li>
 <a href="#toc_2">cat + grep 组合</a>
 </li>
+<li>
+<a href="#toc_3">日志文件时间排序</a>
+</li>
 </ul>
 
 
@@ -265,6 +268,28 @@ cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
 # ======================================<br/>
 # 2. 将检索结果打印到目标文件中<br/>
 cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
+</code></pre></li>
+</ul>
+
+<h2 id="toc_3">日志文件时间排序</h2>
+
+<ul>
+<li><p>按时间降序，从近到远</p>
+<pre class="line-numbers"><code class="language-shell">命令: ls -lt
+命令: ll -t <br/>
+详细解释:<br/>
+-l     use a long listing format  以长列表方式显示（详细信息方式）<br/>
+-t     sort by modification time 按修改时间排序（最新的在最前面）
+</code></pre></li>
+<li><p>按照时间升序，从远到近</p>
+<pre class="line-numbers"><code class="language-shell">命令: ls -ltr
+命令: ll -tr<br/>
+详细解释:<br/>
+-l     use a long listing format  以长列表方式显示（详细信息方式）<br/>
+-t     sort by modification time 按修改时间排序（最新的在最前面）<br/>
+-r     reverse order while sorting （反序）<br/>
+-n<br/>
+-h     以高可读方式打印 (比如1K 234M 2G)
 </code></pre></li>
 </ul>
 
