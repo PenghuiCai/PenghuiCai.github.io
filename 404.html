@@ -7,7 +7,7 @@
 		<title>Page Not Found - 油脂青年</title>
 		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
 		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
-		<script type="text/javascript">
+		<script>
 			function drawVisor() {
 				const canvas = document.getElementById('visor');
 				const ctx = canvas.getContext('2d');
@@ -84,14 +84,13 @@
 			}
 
 			function goBack() {
-				alert(“11111”)
 				if (window.history.length <= 1) {
-					this.$router.push({
+					window.history.push({
 						path: '/'
 					})
 					return false
 				} else {
-					this.$router.go(-1)
+					window.history.back()
 				}
 			}
 
@@ -502,7 +501,7 @@
 			<div class="error__title">404</div>
 			<div class="error__subtitle">Hmmm...</div>
 			<div class="error__description">It looks like one of the developers fell asleep</div>
-			<button class="error__button error__button--active" onclick="goBack()">go back</button>
+			<button class="error__button error__button--active" onclick="goBack()">GO BACK</button>
 		</div>
 
 		<div class="astronaut">
