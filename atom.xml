@@ -4,7 +4,7 @@
   <title><![CDATA[油脂青年]]></title>
   <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
   <link href="https://penghuicai.github.io/"/>
-  <updated>2023-03-10T22:33:00+08:00</updated>
+  <updated>2023-03-13T18:03:17+08:00</updated>
   <id>https://penghuicai.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,7 +13,332 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[`尚硅谷_ShardingSphere5`                                                                                       让天下没有难学的技术]]></title>
+    <title type="html"><![CDATA[HYBRIS HAC 禁用初始化以及控制系统更新]]></title>
+    <link href="https://penghuicai.github.io/16786989126665.html"/>
+    <updated>2023-03-13T17:15:12+08:00</updated>
+    <id>https://penghuicai.github.io/16786989126665.html</id>
+    <content type="html"><![CDATA[
+<blockquote>
+<p>hybris 的 admingroup 组中的所有用户，均具备操作 HAC 的初始化和更新功能的权限。<br/>
+然而，一旦系统上线，运维工作人员可能会继续使用该组的成员账户。<br/>
+为了防止这些账户误操作导致数据库初始化或更新，我们需要一些额外的控制措施来限制它们的访问</p>
+</blockquote>
+
+<h2 id="toc_0">文件结构</h2>
+
+<pre class="line-numbers"><code class="language-text"># 增加hac模块
+xixiangbase
+├── hac
+│       └──src/de/hybris/platform/hac/controller/InitUpdatePlatformController.java
+│       └──resources
+│               └──jsp/init.jsp
+│               └──static
+│                       └──css/init.css
+│                       └──js/init.js
+├── extensioninfo.xml
+├── project.properties
+├── resources
+│       └──hac-tab-config.json
+├── hmc
+├── lib
+├── src
+</code></pre>
+
+<h2 id="toc_1">新增配置项</h2>
+
+<pre class="line-numbers"><code class="language-text"># project.properties
+
+# true表示禁用，false表示开放
+hac.initialization.disable=true
+</code></pre>
+
+<h2 id="toc_2">扩展配置添加</h2>
+
+<pre class="line-numbers"><code class="language-markup">&lt;!-- extensioninfo.xml --&gt;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;extensioninfo xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:noNamespaceSchemaLocation=&quot;extensioninfo.xsd&quot;&gt;
+  &lt;extension abstractclassprefix=&quot;Generated&quot; classprefix=&quot;Xixiangbase&quot; managername=&quot;XixiangbaseManager&quot; managersuperclass=&quot;de.hybris.platform.jalo.extension.Extension&quot; name=&quot;xixiangbase&quot; usemaven=&quot;false&quot;&gt;
+    &lt;requires-extension name=&quot;hmc&quot; /&gt;
+    &lt;coremodule generated=&quot;true&quot; manager=&quot;com.xixiang.jalo.HepbaseManager&quot; packageroot=&quot;com.xixiang&quot;/&gt;
+    &lt;hmcmodule extensionclassname=&quot;com.xixiang.core.hmc.HepCoreHMCExtension&quot;/&gt;
+    &lt;!-- 增加 hac 配置 --&gt;
+    &lt;meta key=&quot;hac-module&quot; value=&quot;true&quot;/&gt;
+  &lt;/extension&gt;
+&lt;/extensioninfo&gt;
+</code></pre>
+
+<h2 id="toc_3">初始化更新接口覆盖</h2>
+
+<pre class="line-numbers"><code class="language-java">package de.hybris.platform.hac.controller;
+
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.core.Tenant;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.hac.data.dto.BeautifulInitializationData;
+import de.hybris.platform.hac.data.dto.BeautifulInitializationData.InitMethod;
+import de.hybris.platform.hac.facade.DatabaseFacade;
+import de.hybris.platform.hac.facade.InitUpdateFacade;
+import de.hybris.platform.hac.facade.TenantsFacade;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.web.TenantAvailabilityService;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+/**
+ * @ClassName InitUpdatePlatformController
+ * @Description 初始化更新接口覆盖
+ * @Author xixiang
+ * @Date 2023/3/1
+ */
+@Controller
+@RequestMapping(&quot;/platform&quot;)
+public class InitUpdatePlatformController {
+
+
+    private static final Logger LOG = LoggerFactory.getLogger(InitUpdatePlatformController.class);
+
+    private static final String HAC_PLATFORM_INITIALIZATION = &quot;HAC_PLATFORM_INITIALIZATION&quot;;
+    private static final String HAC_PLATFORM_UPDATE = &quot;HAC_PLATFORM_UPDATE&quot;;
+    @Autowired
+    private TenantsFacade tenantsFacade;
+    @Autowired
+    private DatabaseFacade databaseInfoFacade;
+    @Autowired
+    private InitUpdateFacade initUpdateFacade;
+    @Value(&quot;${hac.extlinks.wiki.initandupdate}&quot;)
+    private String wikiInitAndUpdate;
+    @Autowired
+    private UserService userService;
+    @Value(&quot;${hac.initialization.disable}&quot;)
+    private boolean disable;
+
+    @RequestMapping(value = &quot;/init&quot;, method = RequestMethod.GET)
+    public String init(final Model model) {
+        if (disable) {
+            model.addAttribute(&quot;message&quot;, &quot;您好，初始化功能已禁用。&quot;);
+            return &quot;init&quot;;
+        } else if (verify(HAC_PLATFORM_INITIALIZATION, &quot;init&quot;)) {
+            model.addAttribute(&quot;wikiInitAndUpdate&quot;, this.wikiInitAndUpdate);
+            this.setUpModelForInitUpdate(model, InitMethod.INIT);
+            return &quot;platform/init&quot;;
+        } else {
+            model.addAttribute(&quot;message&quot;, &quot;您好，您无初始化权限。&quot;);
+            return &quot;init&quot;;
+        }
+    }
+
+    @RequestMapping(value = &quot;/update&quot;)
+    public String update(Model model) {
+        if (verify(HAC_PLATFORM_UPDATE, &quot;update&quot;)) {
+            model.addAttribute(&quot;wikiInitAndUpdate&quot;, this.wikiInitAndUpdate);
+            this.setUpModelForInitUpdate(model, InitMethod.UPDATE);
+            return &quot;platform/init&quot;;
+        } else {
+            model.addAttribute(&quot;message&quot;, &quot;您好，您无更新权限。&quot;);
+            return &quot;init&quot;;
+        }
+    }
+
+    @RequestMapping(value = &quot;/init/execute&quot;, method = RequestMethod.POST, produces = &quot;application/json;charset=UTF-8&quot;)
+    public Map&lt;String, Object&gt; initExecuteWrap(@RequestBody BeautifulInitializationData data, Model model) {
+        InitMethod initMethod = data.getInitMethod();
+        boolean falg = false;
+        if (InitMethod.UPDATE.equals(initMethod) &amp;&amp; verify(HAC_PLATFORM_UPDATE, &quot;update execute&quot;)) {
+            falg = true;
+        } else if (!disable &amp;&amp; InitMethod.INIT.equals(initMethod) &amp;&amp; verify(HAC_PLATFORM_INITIALIZATION, &quot;init execute&quot;)) {
+            falg = true;
+        }
+        Map&lt;String, Object&gt; result = new HashMap&lt;&gt;();
+        result.put(&quot;success&quot;, Boolean.FALSE);
+        result.put(&quot;log&quot;, &quot;Platform Init/Update Failed...&quot;);
+        return falg ? this.initUpdateFacade.executeInitUpdate(data) : result;
+    }
+
+
+    private boolean verify(String groupId, String option) {
+        Tenant tenant = Registry.getCurrentTenantNoFallback();
+        TenantAvailabilityService availabilityService = TenantAvailabilityService.createDefault();
+        UserModel user = userService.getCurrentUser();
+        if (null == user) {
+            // 没有用户登录，并且没有初始化过系统，说明首次执行，同意执行
+            return null == tenant || !availabilityService.isTenantAvailable(tenant.getTenantID());
+        }
+        boolean flag = false;
+        Set&lt;PrincipalGroupModel&gt; groupModels = user.getGroups();
+        for (PrincipalGroupModel group : groupModels) {
+            if (groupId.equalsIgnoreCase(group.getUid())) {
+                flag = true;
+                break;
+            }
+        }
+        LOG.info(&quot;user {} {} verify {}...&quot;, user.getUid(), option, flag);
+        return flag;
+    }
+
+
+    private void setUpModelForInitUpdate(Model model, BeautifulInitializationData.InitMethod initMethod) {
+        model.addAttribute(this.databaseInfoFacade.getDatabaseInfoForInitUpdatePage());
+        model.addAttribute(&quot;locked&quot;, this.initUpdateFacade.isLocked());
+        model.addAttribute(&quot;unlockable&quot;, this.initUpdateFacade.isUnlockable());
+        model.addAttribute(&quot;initialized&quot;, this.initUpdateFacade.isInitialized());
+        model.addAttribute(&quot;type&quot;, initMethod.toString());
+        model.addAttribute(&quot;title&quot;, this.capitalize(initMethod.toString()));
+        model.addAttribute(&quot;masterTenant&quot;, this.tenantsFacade.isCurrentTenantMaster());
+    }
+
+    private String capitalize(String input) {
+        return StringUtils.capitalize(input.toLowerCase());
+    }
+
+}
+</code></pre>
+
+<h2 id="toc_4">页面覆盖</h2>
+
+<pre class="line-numbers"><code class="language-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;
+&lt;% pageContext.setAttribute(&quot;newLineChar&quot;, &quot;\n&quot;); %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;初始化&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style=&quot;text-align: center; padding-top: 6em; height: 1.5em;&quot;&gt;${message}&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="toc_5">菜单覆盖</h2>
+
+<pre class="line-numbers"><code class="language-javascript"># hac-tab-config.json
+[
+  {
+    &quot;basePath&quot;: &quot;/platform&quot;,
+    &quot;mainTabLabel&quot;: &quot;platform&quot;,
+    &quot;subTabs&quot;: [
+      {
+        &quot;path&quot;: &quot;/tenants&quot;,
+        &quot;label&quot;: &quot;tenants&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_TENANTS&quot;
+        ],
+        &quot;skipPrefix&quot;: true
+      },
+      {
+        &quot;path&quot;: &quot;/config&quot;,
+        &quot;label&quot;: &quot;configuration&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_CONFIGURATION&quot;,
+          &quot;ROLE_HAC_PLATFORM_CONFIGURATION_LIMITED&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/system&quot;,
+        &quot;label&quot;: &quot;system&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SYSTEM&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/log4j&quot;,
+        &quot;label&quot;: &quot;logging&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_LOGGING&quot;,
+          &quot;ROLE_HAC_PLATFORM_LOGGING_LIMITED&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/extensions&quot;,
+        &quot;label&quot;: &quot;extensions&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_EXTENSIONS&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/init&quot;,
+        &quot;label&quot;: &quot;initialization&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_INITIALIZATION&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/update&quot;,
+        &quot;label&quot;: &quot;update&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_UPDATE&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/dryrun&quot;,
+        &quot;label&quot;: &quot;SQL scripts&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SQLSCIPTS&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/license&quot;,
+        &quot;label&quot;: &quot;license&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_LICENSE&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/support&quot;,
+        &quot;label&quot;: &quot;support&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SUPPORT&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/pkanalyzer&quot;,
+        &quot;label&quot;: &quot;PK analyzer&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_PKANALYZER&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/jars&quot;,
+        &quot;label&quot;: &quot;classpath analyzer&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_CLASSPATHANALYZER&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      }
+    ]
+  }
+]
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ShardingSphere5]]></title>
     <link href="https://penghuicai.github.io/16774110810352.html"/>
     <updated>2023-02-26T19:31:21+08:00</updated>
     <id>https://penghuicai.github.io/16774110810352.html</id>
@@ -3186,53 +3511,6 @@ $ yarn run dev
 <p>因为做了Nginx HTTP 重定向到 HTTPS，他们这种访问 API 的方式才出错的。<br/>
 大多数 HTTP 浏览器客户端会将引起 302 的 POST 请求转化为 GET 请求发出去。<br/>
 其实这是将 302 当做 303 来处理，至于为什么会将 302 当做 303 来处理，据说这是很多老服务器的期望行为，所以一切都是为了兼容性。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ImpEx 多表单行导出]]></title>
-    <link href="https://penghuicai.github.io/16045412531522.html"/>
-    <updated>2020-11-05T09:54:13+08:00</updated>
-    <id>https://penghuicai.github.io/16045412531522.html</id>
-    <content type="html"><![CDATA[
-<pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
-&quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
-INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
-
-##### ndcWarehouses是一个set集合，无多对多关联关系表，仅保留pk表的PK，导出对应字段model的任意字段，包括它关联model的字段
-&quot;$query=select {pk} FROM {UserGroup} WHERE {uid} = &#39;admingroup&#39;&quot;
-&quot;#% impex.setTargetFile(&quot;&quot;UserGroup.txt&quot;&quot;);&quot;
-INSERT_UPDATE UserGroup;uid;ndcWarehouses(code);
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
-</code></pre>
-
-<p>ImpEx 导出 省市区</p>
-
-<pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {District}&quot;
-&quot;#% impex.setTargetFile(&quot;&quot;District.txt&quot;&quot;);&quot;
-INSERT_UPDATE District;code[alias=&#39;区县&#39;];name[lang=zh,alias=&#39;区县&#39;];city(code);city(name[lang=zh])[alias=&#39;市&#39;];city(region(isocode))[alias=&#39;省&#39;];city(region(name[lang=zh]))[alias=&#39;省&#39;];city(region(country(isocode)))[alias=&#39;国家&#39;];city(region(country(name[lang=zh])))[alias=&#39;国家&#39;];
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
-</code></pre>
-
-<p>导出</p>
-
-<pre class="line-numbers"><code class="language-text">&quot;$query=select {c.pk} from {consignment as c} where {c.modifiedtime} &lt; &#39;2021-04-07 09:40:00&#39; AND {c.acceptedStatus} = 8796118745179 &quot;
-&quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
-INSERT_UPDATE Consignment;code;status(name[lang=zh])[alias=&#39;状态&#39;];occupyStatus(name[lang=zh])[alias=&#39;占货状态&#39;];acceptedStatus(name[lang=zh])[alias=&#39;接受状态&#39;];abnormalType(name[lang=zh])[alias=&#39;异常类型&#39;];abnormalStatus(name[lang=zh])[alias=&#39;异常状态&#39;];
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
-</code></pre>
-
-<h1 id="toc_0">ImpEx 多表单行导入</h1>
-
-<pre class="line-numbers"><code class="language-text">INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);consignmentExtend(isNoticeNewPosStatus(code));
-;XS20062200002001;1;2;PENDING
-
-
-INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);
-;XS20062200002001;1;2;
-</code></pre>
 
 ]]></content>
   </entry>

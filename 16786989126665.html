@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			HYBRIS HAC 禁用初始化以及控制系统更新 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="Database.html">Database</a>
+							
+							<a target="_self" class="navbar-item " href="Front-End.html">Front-End</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+							<a target="_self" class="navbar-item " href="mac_tools.html">Mac Tools</a>
+							
+							<a target="_self" class="navbar-item " href="note.html">Note</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            HYBRIS HAC 禁用初始化以及控制系统更新   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2023/03/13</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='hybris.html'>Hybris</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_Hybris.html'>#Hybris</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <blockquote>
+<p>hybris 的 admingroup 组中的所有用户，均具备操作 HAC 的初始化和更新功能的权限。<br/>
+然而，一旦系统上线，运维工作人员可能会继续使用该组的成员账户。<br/>
+为了防止这些账户误操作导致数据库初始化或更新，我们需要一些额外的控制措施来限制它们的访问</p>
+</blockquote>
+
+<h2 id="toc_0">文件结构</h2>
+
+<pre class="line-numbers"><code class="language-text"># 增加hac模块
+xixiangbase
+├── hac
+│       └──src/de/hybris/platform/hac/controller/InitUpdatePlatformController.java
+│       └──resources
+│               └──jsp/init.jsp
+│               └──static
+│                       └──css/init.css
+│                       └──js/init.js
+├── extensioninfo.xml
+├── project.properties
+├── resources
+│       └──hac-tab-config.json
+├── hmc
+├── lib
+├── src
+</code></pre>
+
+<h2 id="toc_1">新增配置项</h2>
+
+<pre class="line-numbers"><code class="language-text"># project.properties
+
+# true表示禁用，false表示开放
+hac.initialization.disable=true
+</code></pre>
+
+<h2 id="toc_2">扩展配置添加</h2>
+
+<pre class="line-numbers"><code class="language-markup">&lt;!-- extensioninfo.xml --&gt;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;extensioninfo xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:noNamespaceSchemaLocation=&quot;extensioninfo.xsd&quot;&gt;
+  &lt;extension abstractclassprefix=&quot;Generated&quot; classprefix=&quot;Xixiangbase&quot; managername=&quot;XixiangbaseManager&quot; managersuperclass=&quot;de.hybris.platform.jalo.extension.Extension&quot; name=&quot;xixiangbase&quot; usemaven=&quot;false&quot;&gt;
+    &lt;requires-extension name=&quot;hmc&quot; /&gt;
+    &lt;coremodule generated=&quot;true&quot; manager=&quot;com.xixiang.jalo.HepbaseManager&quot; packageroot=&quot;com.xixiang&quot;/&gt;
+    &lt;hmcmodule extensionclassname=&quot;com.xixiang.core.hmc.HepCoreHMCExtension&quot;/&gt;
+    &lt;!-- 增加 hac 配置 --&gt;
+    &lt;meta key=&quot;hac-module&quot; value=&quot;true&quot;/&gt;
+  &lt;/extension&gt;
+&lt;/extensioninfo&gt;
+</code></pre>
+
+<h2 id="toc_3">初始化更新接口覆盖</h2>
+
+<pre class="line-numbers"><code class="language-java">package de.hybris.platform.hac.controller;
+
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.core.Tenant;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.hac.data.dto.BeautifulInitializationData;
+import de.hybris.platform.hac.data.dto.BeautifulInitializationData.InitMethod;
+import de.hybris.platform.hac.facade.DatabaseFacade;
+import de.hybris.platform.hac.facade.InitUpdateFacade;
+import de.hybris.platform.hac.facade.TenantsFacade;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.web.TenantAvailabilityService;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+/**
+ * @ClassName InitUpdatePlatformController
+ * @Description 初始化更新接口覆盖
+ * @Author xixiang
+ * @Date 2023/3/1
+ */
+@Controller
+@RequestMapping(&quot;/platform&quot;)
+public class InitUpdatePlatformController {
+
+
+    private static final Logger LOG = LoggerFactory.getLogger(InitUpdatePlatformController.class);
+
+    private static final String HAC_PLATFORM_INITIALIZATION = &quot;HAC_PLATFORM_INITIALIZATION&quot;;
+    private static final String HAC_PLATFORM_UPDATE = &quot;HAC_PLATFORM_UPDATE&quot;;
+    @Autowired
+    private TenantsFacade tenantsFacade;
+    @Autowired
+    private DatabaseFacade databaseInfoFacade;
+    @Autowired
+    private InitUpdateFacade initUpdateFacade;
+    @Value(&quot;${hac.extlinks.wiki.initandupdate}&quot;)
+    private String wikiInitAndUpdate;
+    @Autowired
+    private UserService userService;
+    @Value(&quot;${hac.initialization.disable}&quot;)
+    private boolean disable;
+
+    @RequestMapping(value = &quot;/init&quot;, method = RequestMethod.GET)
+    public String init(final Model model) {
+        if (disable) {
+            model.addAttribute(&quot;message&quot;, &quot;您好，初始化功能已禁用。&quot;);
+            return &quot;init&quot;;
+        } else if (verify(HAC_PLATFORM_INITIALIZATION, &quot;init&quot;)) {
+            model.addAttribute(&quot;wikiInitAndUpdate&quot;, this.wikiInitAndUpdate);
+            this.setUpModelForInitUpdate(model, InitMethod.INIT);
+            return &quot;platform/init&quot;;
+        } else {
+            model.addAttribute(&quot;message&quot;, &quot;您好，您无初始化权限。&quot;);
+            return &quot;init&quot;;
+        }
+    }
+
+    @RequestMapping(value = &quot;/update&quot;)
+    public String update(Model model) {
+        if (verify(HAC_PLATFORM_UPDATE, &quot;update&quot;)) {
+            model.addAttribute(&quot;wikiInitAndUpdate&quot;, this.wikiInitAndUpdate);
+            this.setUpModelForInitUpdate(model, InitMethod.UPDATE);
+            return &quot;platform/init&quot;;
+        } else {
+            model.addAttribute(&quot;message&quot;, &quot;您好，您无更新权限。&quot;);
+            return &quot;init&quot;;
+        }
+    }
+
+    @RequestMapping(value = &quot;/init/execute&quot;, method = RequestMethod.POST, produces = &quot;application/json;charset=UTF-8&quot;)
+    public Map&lt;String, Object&gt; initExecuteWrap(@RequestBody BeautifulInitializationData data, Model model) {
+        InitMethod initMethod = data.getInitMethod();
+        boolean falg = false;
+        if (InitMethod.UPDATE.equals(initMethod) &amp;&amp; verify(HAC_PLATFORM_UPDATE, &quot;update execute&quot;)) {
+            falg = true;
+        } else if (!disable &amp;&amp; InitMethod.INIT.equals(initMethod) &amp;&amp; verify(HAC_PLATFORM_INITIALIZATION, &quot;init execute&quot;)) {
+            falg = true;
+        }
+        Map&lt;String, Object&gt; result = new HashMap&lt;&gt;();
+        result.put(&quot;success&quot;, Boolean.FALSE);
+        result.put(&quot;log&quot;, &quot;Platform Init/Update Failed...&quot;);
+        return falg ? this.initUpdateFacade.executeInitUpdate(data) : result;
+    }
+
+
+    private boolean verify(String groupId, String option) {
+        Tenant tenant = Registry.getCurrentTenantNoFallback();
+        TenantAvailabilityService availabilityService = TenantAvailabilityService.createDefault();
+        UserModel user = userService.getCurrentUser();
+        if (null == user) {
+            // 没有用户登录，并且没有初始化过系统，说明首次执行，同意执行
+            return null == tenant || !availabilityService.isTenantAvailable(tenant.getTenantID());
+        }
+        boolean flag = false;
+        Set&lt;PrincipalGroupModel&gt; groupModels = user.getGroups();
+        for (PrincipalGroupModel group : groupModels) {
+            if (groupId.equalsIgnoreCase(group.getUid())) {
+                flag = true;
+                break;
+            }
+        }
+        LOG.info(&quot;user {} {} verify {}...&quot;, user.getUid(), option, flag);
+        return flag;
+    }
+
+
+    private void setUpModelForInitUpdate(Model model, BeautifulInitializationData.InitMethod initMethod) {
+        model.addAttribute(this.databaseInfoFacade.getDatabaseInfoForInitUpdatePage());
+        model.addAttribute(&quot;locked&quot;, this.initUpdateFacade.isLocked());
+        model.addAttribute(&quot;unlockable&quot;, this.initUpdateFacade.isUnlockable());
+        model.addAttribute(&quot;initialized&quot;, this.initUpdateFacade.isInitialized());
+        model.addAttribute(&quot;type&quot;, initMethod.toString());
+        model.addAttribute(&quot;title&quot;, this.capitalize(initMethod.toString()));
+        model.addAttribute(&quot;masterTenant&quot;, this.tenantsFacade.isCurrentTenantMaster());
+    }
+
+    private String capitalize(String input) {
+        return StringUtils.capitalize(input.toLowerCase());
+    }
+
+}
+</code></pre>
+
+<h2 id="toc_4">页面覆盖</h2>
+
+<pre class="line-numbers"><code class="language-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;
+&lt;% pageContext.setAttribute(&quot;newLineChar&quot;, &quot;\n&quot;); %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;初始化&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style=&quot;text-align: center; padding-top: 6em; height: 1.5em;&quot;&gt;${message}&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="toc_5">菜单覆盖</h2>
+
+<pre class="line-numbers"><code class="language-javascript"># hac-tab-config.json
+[
+  {
+    &quot;basePath&quot;: &quot;/platform&quot;,
+    &quot;mainTabLabel&quot;: &quot;platform&quot;,
+    &quot;subTabs&quot;: [
+      {
+        &quot;path&quot;: &quot;/tenants&quot;,
+        &quot;label&quot;: &quot;tenants&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_TENANTS&quot;
+        ],
+        &quot;skipPrefix&quot;: true
+      },
+      {
+        &quot;path&quot;: &quot;/config&quot;,
+        &quot;label&quot;: &quot;configuration&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_CONFIGURATION&quot;,
+          &quot;ROLE_HAC_PLATFORM_CONFIGURATION_LIMITED&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/system&quot;,
+        &quot;label&quot;: &quot;system&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SYSTEM&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/log4j&quot;,
+        &quot;label&quot;: &quot;logging&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_LOGGING&quot;,
+          &quot;ROLE_HAC_PLATFORM_LOGGING_LIMITED&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/extensions&quot;,
+        &quot;label&quot;: &quot;extensions&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_EXTENSIONS&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/init&quot;,
+        &quot;label&quot;: &quot;initialization&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_INITIALIZATION&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/update&quot;,
+        &quot;label&quot;: &quot;update&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_UPDATE&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/dryrun&quot;,
+        &quot;label&quot;: &quot;SQL scripts&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SQLSCIPTS&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/license&quot;,
+        &quot;label&quot;: &quot;license&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_LICENSE&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/support&quot;,
+        &quot;label&quot;: &quot;support&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_SUPPORT&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/pkanalyzer&quot;,
+        &quot;label&quot;: &quot;PK analyzer&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_PKANALYZER&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      },
+      {
+        &quot;path&quot;: &quot;/jars&quot;,
+        &quot;label&quot;: &quot;classpath analyzer&quot;,
+        &quot;roles&quot;: [
+          &quot;ROLE_HAC_PLATFORM_CLASSPATHANALYZER&quot;
+        ],
+        &quot;skipPrefix&quot;: false
+      }
+    ]
+  }
+]
+</code></pre>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>
