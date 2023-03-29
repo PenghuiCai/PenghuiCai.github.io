@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[油脂青年]]></title>
-  <link href="https://penghuicai.github.io/atom.xml" rel="self"/>
-  <link href="https://penghuicai.github.io/"/>
-  <updated>2023-03-27T05:24:25+08:00</updated>
-  <id>https://penghuicai.github.io/</id>
+  <link href="https://xixiang.tech/atom.xml" rel="self"/>
+  <link href="https://xixiang.tech/"/>
+  <updated>2023-03-29T10:41:23+08:00</updated>
+  <id>https://xixiang.tech/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -13,10 +13,42 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
+    <title type="html"><![CDATA[一步一步教您创建 ChatGPT 账户]]></title>
+    <link href="https://xixiang.tech/16799040403171.html"/>
+    <updated>2023-03-27T16:00:40+08:00</updated>
+    <id>https://xixiang.tech/16799040403171.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">1. 准备工作</h2>
+
+<h3 id="toc_1">1.1 创建短信接收平台账户，接受ChatGPT账号短信验证</h3>
+
+<p>平台地址<a href="https://sms-activate.org/?ref=5361921">sms-activate短信平台</a><br/>
+目前印度尼西亚的最便宜，可以使用支付宝（最低2美元）和银行卡支付下UnionPay(最低1美元)</p>
+
+<h4 id="toc_2">1.1.1 选择支付方式-&gt;银行卡支付-&gt;UnionPay</h4>
+
+<p><img src="media/16799040403171/16799045482018.jpg" alt="" style="width:920px;"/></p>
+
+<h4 id="toc_3">1.1.2 选择支付方式-&gt;支付宝</h4>
+
+<p><img src="media/16799040403171/16799045774784.jpg" alt="" style="width:920px;"/></p>
+
+<h4 id="toc_4">1.1.3 选择激活-&gt;openai服务-&gt;选择优惠的国家</h4>
+
+<p><img src="media/16799040403171/16799052091779.jpg" alt="" style="width:920px;"/></p>
+
+<h3 id="toc_5">1.2 购买VPS，全网比较台湾超低价</h3>
+
+<p>平台地址<a href="https://my.yecaoyun.com/aff.php?aff=2510">VPS</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[HYBRIS HAC 禁用初始化以及控制系统更新]]></title>
-    <link href="https://penghuicai.github.io/16786989126665.html"/>
+    <link href="https://xixiang.tech/16786989126665.html"/>
     <updated>2023-03-13T17:15:12+08:00</updated>
-    <id>https://penghuicai.github.io/16786989126665.html</id>
+    <id>https://xixiang.tech/16786989126665.html</id>
     <content type="html"><![CDATA[
 <blockquote>
 <p>hybris 的 admingroup 组中的所有用户，均具备操作 HAC 的初始化和更新功能的权限。<br/>
@@ -339,9 +371,9 @@ public class InitUpdatePlatformController {
   
   <entry>
     <title type="html"><![CDATA[ShardingSphere5]]></title>
-    <link href="https://penghuicai.github.io/16774110810352.html"/>
+    <link href="https://xixiang.tech/16774110810352.html"/>
     <updated>2023-02-26T19:31:21+08:00</updated>
-    <id>https://penghuicai.github.io/16774110810352.html</id>
+    <id>https://xixiang.tech/16774110810352.html</id>
     <content type="html"><![CDATA[
 <hr/>
 
@@ -2401,9 +2433,9 @@ mysql&gt; select * from t_dict; --测试广播表
   
   <entry>
     <title type="html"><![CDATA[MySQL修改表名大小写敏感配置时，一定要注意这个问题]]></title>
-    <link href="https://penghuicai.github.io/16768818963496.html"/>
+    <link href="https://xixiang.tech/16768818963496.html"/>
     <updated>2023-02-20T16:31:36+08:00</updated>
-    <id>https://penghuicai.github.io/16768818963496.html</id>
+    <id>https://xixiang.tech/16768818963496.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">查询表名大小写敏感设置</h2>
 
@@ -2449,9 +2481,9 @@ WHERE
   
   <entry>
     <title type="html"><![CDATA[系统架构的发展过程]]></title>
-    <link href="https://penghuicai.github.io/16762779297017.html"/>
+    <link href="https://xixiang.tech/16762779297017.html"/>
     <updated>2023-02-13T16:45:29+08:00</updated>
-    <id>https://penghuicai.github.io/16762779297017.html</id>
+    <id>https://xixiang.tech/16762779297017.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">传统架构</h2>
 
@@ -2557,9 +2589,9 @@ WHERE
   
   <entry>
     <title type="html"><![CDATA[删除JOB日志]]></title>
-    <link href="https://penghuicai.github.io/16759135328486.html"/>
+    <link href="https://xixiang.tech/16759135328486.html"/>
     <updated>2023-02-09T11:32:12+08:00</updated>
-    <id>https://penghuicai.github.io/16759135328486.html</id>
+    <id>https://xixiang.tech/16759135328486.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">统计JOB日志数据</h2>
 
@@ -2583,9 +2615,9 @@ JOIN CronJob ON {CronJob.pk} = {owner}
   
   <entry>
     <title type="html"><![CDATA[IDEA 常用插件]]></title>
-    <link href="https://penghuicai.github.io/16668551965194.html"/>
+    <link href="https://xixiang.tech/16668551965194.html"/>
     <updated>2022-10-27T15:19:56+08:00</updated>
-    <id>https://penghuicai.github.io/16668551965194.html</id>
+    <id>https://xixiang.tech/16668551965194.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0"><a href="https://plugins.jetbrains.com/plugin/7499-gittoolbox">GitToolBox</a></h2>
 
@@ -2629,9 +2661,9 @@ JOIN CronJob ON {CronJob.pk} = {owner}
   
   <entry>
     <title type="html"><![CDATA[IDEA 常用Java自定义模板快捷输入]]></title>
-    <link href="https://penghuicai.github.io/16668544609244.html"/>
+    <link href="https://xixiang.tech/16668544609244.html"/>
     <updated>2022-10-27T15:07:40+08:00</updated>
-    <id>https://penghuicai.github.io/16668544609244.html</id>
+    <id>https://xixiang.tech/16668544609244.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">注意部分冲突，可去掉相关勾选</h2>
 
@@ -2684,9 +2716,9 @@ LOG.error($END$);
   
   <entry>
     <title type="html"><![CDATA[Redis 哈希(Hash)  hscan Jedis正确使用方式]]></title>
-    <link href="https://penghuicai.github.io/16577005420355.html"/>
+    <link href="https://xixiang.tech/16577005420355.html"/>
     <updated>2022-07-13T16:22:22+08:00</updated>
-    <id>https://penghuicai.github.io/16577005420355.html</id>
+    <id>https://xixiang.tech/16577005420355.html</id>
     <content type="html"><![CDATA[
 <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。</p>
 
@@ -2771,9 +2803,9 @@ jedis.del(stKey);
   
   <entry>
     <title type="html"><![CDATA[MySQL EXPLAIN 解读]]></title>
-    <link href="https://penghuicai.github.io/16570104381381.html"/>
+    <link href="https://xixiang.tech/16570104381381.html"/>
     <updated>2022-07-05T16:40:38+08:00</updated>
-    <id>https://penghuicai.github.io/16570104381381.html</id>
+    <id>https://xixiang.tech/16570104381381.html</id>
     <content type="html"><![CDATA[
 <p><code>EXPLAIN</code>作为<code>MySQL</code>的性能分析神器，可用来分析<code>SQL</code>的执行计划</p>
 
@@ -2871,9 +2903,9 @@ WHERE
   
   <entry>
     <title type="html"><![CDATA[前端编译失败 `JavaScript heap out of memory`]]></title>
-    <link href="https://penghuicai.github.io/16559527064386.html"/>
+    <link href="https://xixiang.tech/16559527064386.html"/>
     <updated>2022-06-23T10:51:46+08:00</updated>
-    <id>https://penghuicai.github.io/16559527064386.html</id>
+    <id>https://xixiang.tech/16559527064386.html</id>
     <content type="html"><![CDATA[
 <pre class="line-numbers"><code class="language-text">FATAL ERROR：Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
 </code></pre>
@@ -2971,9 +3003,9 @@ https://nodejs.org/zh-cn/download/releases/
   
   <entry>
     <title type="html"><![CDATA[Redis 发布与订阅之查看订阅信息]]></title>
-    <link href="https://penghuicai.github.io/16558847104015.html"/>
+    <link href="https://xixiang.tech/16558847104015.html"/>
     <updated>2022-06-22T15:58:30+08:00</updated>
-    <id>https://penghuicai.github.io/16558847104015.html</id>
+    <id>https://xixiang.tech/16558847104015.html</id>
     <content type="html"><![CDATA[
 <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。</p>
 
@@ -3084,9 +3116,9 @@ https://nodejs.org/zh-cn/download/releases/
   
   <entry>
     <title type="html"><![CDATA[ZOC Terminal 8.01.5 序列号版 最好用的终端仿真器]]></title>
-    <link href="https://penghuicai.github.io/16304764801806.html"/>
+    <link href="https://xixiang.tech/16304764801806.html"/>
     <updated>2021-09-01T14:08:00+08:00</updated>
-    <id>https://penghuicai.github.io/16304764801806.html</id>
+    <id>https://xixiang.tech/16304764801806.html</id>
     <content type="html"><![CDATA[
 <p>版本：8.01.5</p>
 
@@ -3109,9 +3141,9 @@ and the second sn part being:
   
   <entry>
     <title type="html"><![CDATA[cisco AnyConnect Secure Mobility Client v4.8 for Mac 思科]]></title>
-    <link href="https://penghuicai.github.io/16304749732861.html"/>
+    <link href="https://xixiang.tech/16304749732861.html"/>
     <updated>2021-09-01T13:42:53+08:00</updated>
-    <id>https://penghuicai.github.io/16304749732861.html</id>
+    <id>https://xixiang.tech/16304749732861.html</id>
     <content type="html"><![CDATA[
 <p>版本：4.8.00175</p>
 
@@ -3127,9 +3159,9 @@ and the second sn part being:
   
   <entry>
     <title type="html"><![CDATA[Mac 工具网站记录]]></title>
-    <link href="https://penghuicai.github.io/16304746256161.html"/>
+    <link href="https://xixiang.tech/16304746256161.html"/>
     <updated>2021-09-01T13:37:05+08:00</updated>
-    <id>https://penghuicai.github.io/16304746256161.html</id>
+    <id>https://xixiang.tech/16304746256161.html</id>
     <content type="html"><![CDATA[
 <ol>
 <li><a href="https://xclient.info/s/">Xclient</a></li>
@@ -3140,9 +3172,9 @@ and the second sn part being:
   
   <entry>
     <title type="html"><![CDATA[删库跑路？如果能够快速删除一张亿级表？]]></title>
-    <link href="https://penghuicai.github.io/16298733466823.html"/>
+    <link href="https://xixiang.tech/16298733466823.html"/>
     <updated>2021-08-25T14:35:46+08:00</updated>
-    <id>https://penghuicai.github.io/16298733466823.html</id>
+    <id>https://xixiang.tech/16298733466823.html</id>
     <content type="html"><![CDATA[
 <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。<br/>
 <strong>恶意删库跑路属于删除计算机信息系统中存储的数据，如造成特别严重的后果，行为会构成破坏计算机信息系统罪。</strong></p>
@@ -3270,9 +3302,9 @@ and the second sn part being:
   
   <entry>
     <title type="html"><![CDATA[HTTP HTTPS SSL TLS 相关知识]]></title>
-    <link href="https://penghuicai.github.io/16297846641794.html"/>
+    <link href="https://xixiang.tech/16297846641794.html"/>
     <updated>2021-08-24T13:57:44+08:00</updated>
-    <id>https://penghuicai.github.io/16297846641794.html</id>
+    <id>https://xixiang.tech/16297846641794.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>
@@ -3387,9 +3419,9 @@ HTTP 规定，当执行 GET 请求的时候，要给车贴上 GET 标签，要�
   
   <entry>
     <title type="html"><![CDATA[MySQL 索引使用情况统计 information_schema.INDEX_STATISTICS]]></title>
-    <link href="https://penghuicai.github.io/16140620588310.html"/>
+    <link href="https://xixiang.tech/16140620588310.html"/>
     <updated>2021-02-23T14:34:18+08:00</updated>
-    <id>https://penghuicai.github.io/16140620588310.html</id>
+    <id>https://xixiang.tech/16140620588310.html</id>
     <content type="html"><![CDATA[
 <p>MySQL的开源版本 MariaDB、Percona MySQL Server 和 AliSQL 5.6 版本支持统计索引的信息，即可以统计出使用某个索引扫描的行数。依照此，可以找出未被使用的，或者使用频率较低的索引，从而进行下线。</p>
 
@@ -3445,9 +3477,9 @@ HTTP 规定，当执行 GET 请求的时候，要给车贴上 GET 标签，要�
   
   <entry>
     <title type="html"><![CDATA[Vuejs 脚手架 vue-cli 开始 Vuejs 项目]]></title>
-    <link href="https://penghuicai.github.io/16068990354499.html"/>
+    <link href="https://xixiang.tech/16068990354499.html"/>
     <updated>2020-12-02T16:50:35+08:00</updated>
-    <id>https://penghuicai.github.io/16068990354499.html</id>
+    <id>https://xixiang.tech/16068990354499.html</id>
     <content type="html"><![CDATA[
 <pre class="line-numbers"><code class="language-shell">$ sudo npm install -g vue-cli
 
@@ -3478,39 +3510,14 @@ $ yarn run dev
   
   <entry>
     <title type="html"><![CDATA[Mac 允许任何来源 App 运行]]></title>
-    <link href="https://penghuicai.github.io/16052597148068.html"/>
+    <link href="https://xixiang.tech/16052597148068.html"/>
     <updated>2020-11-13T17:28:34+08:00</updated>
-    <id>https://penghuicai.github.io/16052597148068.html</id>
+    <id>https://xixiang.tech/16052597148068.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0">打开终端应用 执行下方命令，并按提示输入密码即可显示</h2>
 
 <pre class="line-numbers"><code class="language-text"> sudo spctl --master-disable
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTP POST 请求被浏览器强制转换为 GET 请求]]></title>
-    <link href="https://penghuicai.github.io/16045635590464.html"/>
-    <updated>2020-11-05T16:05:59+08:00</updated>
-    <id>https://penghuicai.github.io/16045635590464.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">遇到这种情况，检查一下访问的 URL 是 HTTP 还是 HTTPS</h2>
-
-<h2 id="toc_1">原因 Nginx 做 HTTP 重定向到 HTTPS ，POST 才变成 GET 请求</h2>
-
-<ol>
-<li>浏览器客户端发送 POST 请求，Nginx 返回 302 暂时性转移到 HTTPS</li>
-<li>浏览器客户端收到 302 后，通过 HTTPS 向服务器发起新的请求</li>
-<li>新的请求就变成了 GET 请求</li>
-</ol>
-
-<h2 id="toc_2">说明</h2>
-
-<p>因为做了Nginx HTTP 重定向到 HTTPS，他们这种访问 API 的方式才出错的。<br/>
-大多数 HTTP 浏览器客户端会将引起 302 的 POST 请求转化为 GET 请求发出去。<br/>
-其实这是将 302 当做 303 来处理，至于为什么会将 302 当做 303 来处理，据说这是很多老服务器的期望行为，所以一切都是为了兼容性。</p>
 
 ]]></content>
   </entry>
