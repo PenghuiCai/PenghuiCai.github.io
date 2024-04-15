@@ -142,76 +142,50 @@
                 </div>
                   <article class="markdown-body single-content">
                     <blockquote>
-<p>SAP Commerce 附带了一个名为 ImpEx 的基于文本的导入和导出功能。 </p>
+<p>SAP Commerce 附带了一个名为 ImpEx 的基于文本的导入和导出功能。</p>
 </blockquote>
-
+<div class="mweb_toc"><ul>
+<li><a href="#impex%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E5%8C%85%E6%8B%AC%EF%BC%9A">ImpEx 的主要功能包括：</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8impex%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9A">使用 ImpEx 做什么：</a>
 <ul>
-<li>
-<a href="#toc_0">ImpEx 的主要功能包括：</a>
-</li>
-<li>
-<a href="#toc_1">使用 ImpEx 做什么：</a>
+<li><a href="#impex%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95">ImpEx 导入语法</a>
 <ul>
-<li>
-<a href="#toc_2">ImpEx 导入语法</a>
-<ul>
-<li>
-<a href="#toc_3">1. 操作方式标识</a>
-</li>
-<li>
-<a href="#toc_4">2. 常用关键符号</a>
-</li>
-<li>
-<a href="#toc_5">3. 常用关键字</a>
-</li>
-<li>
-<a href="#toc_6">4. 别名</a>
-</li>
+<li><a href="#1%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F%E6%A0%87%E8%AF%86">1. 操作方式标识</a></li>
+<li><a href="#2%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E7%AC%A6%E5%8F%B7">2. 常用关键符号</a></li>
+<li><a href="#3%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97">3. 常用关键字</a></li>
+<li><a href="#4%E5%88%AB%E5%90%8D">4. 别名</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_7">修改用户和用户组的访问权限</a>
+<li><a href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90">修改用户和用户组的访问权限</a>
 <ul>
-<li>
-<a href="#toc_8">示例</a>
-</li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<a href="#toc_9">如何使用impex</a>
-</li>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8impex">如何使用impex</a></li>
 </ul>
-
-
-<h2 id="toc_0">ImpEx 的主要功能包括：</h2>
-
+</div>
+<h2><a id="impex%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E5%8C%85%E6%8B%AC%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 的主要功能包括：</h2>
 <ul>
 <li>ImpEx 导入</li>
 <li>ImpEx 导出</li>
 </ul>
-
-<h2 id="toc_1">使用 ImpEx 做什么：</h2>
-
+<h2><a id="%E4%BD%BF%E7%94%A8impex%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用 ImpEx 做什么：</h2>
 <ul>
 <li>在运行时创建更新删除数据。</li>
 <li>为项目创建初始数据。</li>
 <li>修改用户和用户组的访问权限。</li>
 </ul>
-
-<h3 id="toc_2">ImpEx 导入语法</h3>
-
-<pre class="line-numbers"><code class="language-text"># mode：方式标识
+<h3><a id="impex%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 导入语法</h3>
+<pre class="line-numbers"><code class="language-plain_text"># mode：方式标识
 # type：要处理的 item 类型
 # attribute：Item 的属性
 # modifier：属性的附加条件
 # attribute(subtype.subtype_attribute) 字段在子类~~~~ 
 mode type[modifier=value];attribute[modifier=value];attribute[modifier=value];attribute(subtype.subtype_attribute)
 </code></pre>
-
-<h4 id="toc_3">1. 操作方式标识</h4>
-
+<h4><a id="1%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F%E6%A0%87%E8%AF%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 操作方式标识</h4>
 <pre class="line-numbers"><code class="language-shell"># 插入  INSERT 
 INSERT Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 ;TMProductCatalog12617;中国XX旗舰店;12617
@@ -233,40 +207,27 @@ REMOVE UserGroup[batchmode=false];uid[unique=true];
 REMOVE ItemTypeCode[batchmode=true];itemtype(code)[unique=true]
 ;ItemTypeCode
 </code></pre>
-
-<h4 id="toc_4">2. 常用关键符号</h4>
-
+<h4><a id="2%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E7%AC%A6%E5%8F%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. 常用关键符号</h4>
 <p><code>;</code> 列分隔符</p>
-
-<pre class="line-numbers"><code class="language-text">Catalog;id[unique=true];name[lang=zh];baseStores(uid)
+<pre class="line-numbers"><code class="language-plain_text">Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 </code></pre>
-
 <p><code>,</code> 多数据分隔符</p>
-
-<pre class="line-numbers"><code class="language-text">xx,yy,zz
+<pre class="line-numbers"><code class="language-plain_text">xx,yy,zz
 </code></pre>
-
 <p><code>[]</code> 声明功能和特性</p>
-
-<pre class="line-numbers"><code class="language-text">[default=Online]
+<pre class="line-numbers"><code class="language-plain_text">[default=Online]
 [unique=true]
 </code></pre>
-
 <p><code>()</code> 用在字段名后，紧跟字段名，声明字段关联 Item 的唯一标识符</p>
-
-<pre class="line-numbers"><code class="language-text">status(code)
+<pre class="line-numbers"><code class="language-plain_text">status(code)
 baseStores(uid)
 </code></pre>
-
 <p><code>$</code> 定义和使用别名</p>
-
-<pre class="line-numbers"><code class="language-text">$version=Staged
+<pre class="line-numbers"><code class="language-plain_text">$version=Staged
 $version=version[default=$version]
 </code></pre>
-
 <p><code>&amp;</code> 引用符号，当主数据与行数据有关联关系时候</p>
-
-<pre class="line-numbers"><code class="language-text"># 主数据 ImpEx头信息增加定义
+<pre class="line-numbers"><code class="language-plain_text"># 主数据 ImpEx头信息增加定义
 ;name;&amp;masterProduct
 ;短袖1;m1
 ;短袖2;m2
@@ -276,9 +237,7 @@ $version=version[default=$version]
 ;短袖1-L;m1
 ;短袖2-L;m2
 </code></pre>
-
-<h4 id="toc_5">3. 常用关键字</h4>
-
+<h4><a id="3%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 常用关键字</h4>
 <pre class="line-numbers"><code class="language-shell"># 唯一性：unique
 code[unique=true]  
 # 默认值：default
@@ -286,26 +245,20 @@ version[default=Online]
 # 语言：lang
 name[lang=zh]
 # 时间格式
-startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;]
+startTime[dateformat='yyyy-MM-dd HH:mm:ss']
 # 批处理模式：batchmode（紧跟 item code）
 UserGroup[batchmode=true]
 </code></pre>
-
-<h4 id="toc_6">4. 别名</h4>
-
+<h4><a id="4%E5%88%AB%E5%90%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 别名</h4>
 <p>缩短 ImpEx 头定义，重复使用。</p>
-
 <pre class="line-numbers"><code class="language-shell"># Staged/Online
 $version=version[default=Online]
 $catalog=catalog(id[default=masterProductCatalog])
 $catalogVersion=catalogversion($catalog,$version)[unique=true]
 </code></pre>
-
-<h3 id="toc_7">修改用户和用户组的访问权限</h3>
-
-<h4 id="toc_8">示例</h4>
-
-<pre class="line-numbers"><code class="language-text"># 用户权限管理开头语
+<h3><a id="%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>修改用户和用户组的访问权限</h3>
+<h4><a id="%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>示例</h4>
+<pre class="line-numbers"><code class="language-plain_text"># 用户权限管理开头语
 $START_USERRIGHTS
     # 头信息，它定义要设置的属性。这个头是特定于用户权限管理
     Type;UID;MemberOfGroups;Password;Target;read;change;create;delete;change_perm
@@ -318,8 +271,7 @@ $START_USERRIGHTS
     # 用户权限管理结束语
 $END_USERRIGHTS
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text">$START_USERRIGHTS
+<pre class="line-numbers"><code class="language-plain_text">$START_USERRIGHTS
     # 头信息，必须存在的列Type、UID、MemberOfGroups、Password和Target
     Type;UID;MemberOfGroups;Password;Target;read;change;create;delete;change_perm
     UserGroup;testGroup;employeegroup;
@@ -327,9 +279,7 @@ $END_USERRIGHTS
     ;;;;Product.ean;-;-;;;;
 $END_USERRIGHTS
 </code></pre>
-
-<h2 id="toc_9">如何使用impex</h2>
-
+<h2><a id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8impex" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何使用impex</h2>
 <p><a href="https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac">https://help.sap.com/viewer/50c996852b32456c96d3161a95544cdb/6.3.0.0/en-US/1c8f5bebdc6e434782ff0cfdb0ca1847.html#loio52a105bb992e48959e5142b98779aeac</a></p>
 
                   </article>
@@ -359,6 +309,9 @@ $END_USERRIGHTS
 
 
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
   
 
 
@@ -381,7 +334,11 @@ $END_USERRIGHTS
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

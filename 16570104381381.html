@@ -138,95 +138,231 @@
                 </div>
                   <article class="markdown-body single-content">
                     <p><code>EXPLAIN</code>作为<code>MySQL</code>的性能分析神器，可用来分析<code>SQL</code>的执行计划</p>
-
-<h2 id="toc_0">EXPLAIN 示例</h2>
-
-<pre class="line-numbers"><code class="language-text">EXPLAIN SELECT
-    c.PK 
+<h2><a id="explain%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>EXPLAIN 示例</h2>
+<pre class="line-numbers"><code class="language-plain_text">EXPLAIN SELECT
+	c.PK 
 FROM
-    consignments c
-    JOIN pointofservice p ON p.PK = c.p_pointofservice
-    JOIN orders o ON o.PK = c.p_order 
+	consignments c
+	JOIN pointofservice p ON p.PK = c.p_pointofservice
+	JOIN orders o ON o.PK = c.p_order 
 WHERE
-    (
-    c.p_consignmentdoctype IN ( 8796118450267, 8796118351963, 8796118384731 ) 
-    AND c.p_status = 8796104753243 
-    AND c.p_accountdocstatus = 8796093087835 
-    AND (
-    ( o.p_orderbstype = 8796854648923 AND p.p_bstype IN ( &#39;DS&#39;, &#39;JM&#39;, &#39;JR&#39; ) ) 
-    OR ( o.p_orderbstype = 8796854616155 AND p.p_bstype IN ( &#39;MD&#39;, &#39;RD&#39;, &#39;DS&#39; ) ) 
-    OR ( o.p_orderbstype = 8796854681691 AND p.p_bstype = &#39;DS&#39; ) 
-    OR ( o.p_orderbstype = 8796854583387 AND p.p_bstype = &#39;JM&#39; ) 
-    ) 
-    ) 
-    AND ( ( c.TypePkString = 8796107407442 AND p.TypePkString = 8796095250514 AND o.TypePkString = 8796094136402 ) ) 
-    LIMIT 0,
-    1000;
+	(
+	c.p_consignmentdoctype IN ( 8796118450267, 8796118351963, 8796118384731 ) 
+	AND c.p_status = 8796104753243 
+	AND c.p_accountdocstatus = 8796093087835 
+	AND (
+	( o.p_orderbstype = 8796854648923 AND p.p_bstype IN ( 'DS', 'JM', 'JR' ) ) 
+	OR ( o.p_orderbstype = 8796854616155 AND p.p_bstype IN ( 'MD', 'RD', 'DS' ) ) 
+	OR ( o.p_orderbstype = 8796854681691 AND p.p_bstype = 'DS' ) 
+	OR ( o.p_orderbstype = 8796854583387 AND p.p_bstype = 'JM' ) 
+	) 
+	) 
+	AND ( ( c.TypePkString = 8796107407442 AND p.TypePkString = 8796095250514 AND o.TypePkString = 8796094136402 ) ) 
+	LIMIT 0,
+	1000;
 </code></pre>
-
+<h2><a id="%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>字段介绍</h2>
 <table>
 <thead>
 <tr>
 <th>字段</th>
-<th>含义</th>
+<th>描述</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>id</td>
-<td>该语句的唯一标识。如果<code>explain</code>的结果包括多个<code>id</code>值，则数字<code>越大越先执行</code>；而对于<code>相同id</code>的行，则表示<code>从上往下依次执行</code>。</td>
+<td>表示查询中的每个操作的唯一标识符，如果<code>explain</code>的结果包括多个<code>id</code>值，则数字<code>越大越先执行</code>；而对于<code>相同id</code>的行，则表示<code>从上往下依次执行</code>。</td>
 </tr>
 <tr>
 <td>select_type</td>
-<td>查询类型</td>
+<td>表示查询类型，常见的有SIMPLE、PRIMARY、SUBQUERY、DERIVED、UNION等。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>table</td>
+<td>表示表的名称或者表的别名。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>partitions</td>
+<td>表示访问的分区。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>type</td>
+<td>表示访问类型，包括：system、const、eq_ref、ref、fulltext、ref_or_null、index_merge、unique_subquery、index_subquery、range、index、ALL等。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>possible_keys</td>
+<td>表示查询可能使用的索引。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>key</td>
+<td>表示实际使用的索引。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>key_len</td>
+<td>表示索引字段的长度。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>ref</td>
+<td>表示使用索引的哪个列与表的哪个列进行比较。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>rows</td>
+<td>表示MySQL估计需要扫描的行数。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>filtered</td>
+<td>表示查询结果集的行数与扫描的行数之比。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
+<td>Extra</td>
+<td>表示执行查询时的额外信息，包括Using filesort、Using temporary、Using index等。</td>
 </tr>
 </tbody>
 </table>
+<h2><a id="select-type%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>select_type介绍</h2>
+<table>
+<thead>
+<tr>
+<th>select_type</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIMPLE</td>
+<td>简单的SELECT查询，不使用UNION或子查询等。</td>
+<td>SELECT * FROM table WHERE column = 123</td>
+</tr>
+<tr>
+<td>PRIMARY</td>
+<td>最外层的查询，即包含所有的子查询的查询。</td>
+<td>SELECT * FROM table WHERE column IN (SELECT column FROM ...)</td>
+</tr>
+<tr>
+<td>UNION</td>
+<td>UNION中的第二个或后面的SELECT查询。</td>
+<td>SELECT column FROM table1 UNION SELECT column FROM table2</td>
+</tr>
+<tr>
+<td>DEPENDENT UNION</td>
+<td>UNION中的第二个或后面的SELECT查询，依赖于外部查询的结果。</td>
+<td>SELECT * FROM table1 WHERE column = (SELECT column FROM table2 WHERE ...)</td>
+</tr>
+<tr>
+<td>UNION RESULT</td>
+<td>UNION的结果集。</td>
+<td>(SELECT column FROM table1) UNION (SELECT column FROM table2)</td>
+</tr>
+<tr>
+<td>SUBQUERY</td>
+<td>子查询中的第一个SELECT查询，该查询在外部查询之前执行。</td>
+<td>SELECT * FROM table WHERE column = (SELECT column FROM ...)</td>
+</tr>
+<tr>
+<td>DEPENDENT SUBQUERY</td>
+<td>子查询中的第一个SELECT查询，该查询依赖于外部查询的结果。</td>
+<td>SELECT * FROM table1 WHERE column = (SELECT column FROM table2 WHERE ...)</td>
+</tr>
+<tr>
+<td>DERIVED</td>
+<td>派生表的SELECT查询，包含子查询中的第一个SELECT查询，该查询在外部查询之前执行。</td>
+<td>SELECT * FROM (SELECT column FROM table1) AS t</td>
+</tr>
+<tr>
+<td>MATERIALIZED</td>
+<td>派生表的SELECT查询，包含子查询中的第一个SELECT查询，该查询在外部查询之前执行，但结果会被缓存起来以便后续查询使用。</td>
+<td>WITH t AS (SELECT column FROM table1) SELECT * FROM t</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="type" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>type</h2>
+<p>需要注意的是，排序是根据查询效率从高到低排序的，并不是绝对的顺序。同时，不同类型的查询在不同的场景下具有不同的效率和优化策略，具体的查询优化需要根据实际情况进行调整。同时，索引示例和SQL示例仅用于说明，实际查询语句和索引结构可能更加复杂。</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>排序</th>
+<th>描述</th>
+<th>索引示例</th>
+<th>SQL示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all</td>
+<td>8</td>
+<td>全表扫描，性能最差。</td>
+<td>NULL</td>
+<td>SELECT * FROM table</td>
+</tr>
+<tr>
+<td>index</td>
+<td>7</td>
+<td>全表扫描，但只扫描索引。</td>
+<td>INDEX</td>
+<td>SELECT column FROM table WHERE column LIKE 'value%'</td>
+</tr>
+<tr>
+<td>range</td>
+<td>6</td>
+<td>使用索引范围匹配查询，通常使用BETWEEN、&lt;、&gt;、&lt;=、&gt;=等操作符。</td>
+<td>INDEX</td>
+<td>SELECT * FROM table WHERE column BETWEEN 1 AND 10</td>
+</tr>
+<tr>
+<td>index_subquery</td>
+<td>5</td>
+<td>在子查询中使用普通索引进行匹配。</td>
+<td>INDEX</td>
+<td>SELECT * FROM table WHERE column IN (SELECT column FROM ...)</td>
+</tr>
+<tr>
+<td>unique_subquery</td>
+<td>4</td>
+<td>在子查询中使用唯一索引进行匹配。</td>
+<td>PRIMARY</td>
+<td>SELECT * FROM table WHERE column = (SELECT column FROM ...)</td>
+</tr>
+<tr>
+<td>index_merge</td>
+<td>3</td>
+<td>使用多个索引进行匹配，然后将结果合并。</td>
+<td>INDEX1, INDEX2</td>
+<td>SELECT * FROM table WHERE column1 = 'value' OR column2 = 'value'</td>
+</tr>
+<tr>
+<td>ref_or_null</td>
+<td>2</td>
+<td>和ref类似，但包含了NULL值的行。</td>
+<td>INDEX</td>
+<td>SELECT * FROM table WHERE column = 'value' OR column IS NULL</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>1</td>
+<td>使用普通索引查找匹配的查询，通常用于一个表中查找一些数据。</td>
+<td>INDEX</td>
+<td>SELECT * FROM table WHERE column = 'value'</td>
+</tr>
+<tr>
+<td>eq_ref</td>
+<td>0</td>
+<td>使用唯一索引查找匹配的查询，通常是多表连接中一个表的主键或唯一索引作为另一个表的外键。</td>
+<td>PRIMARY, UNIQUE</td>
+<td>SELECT * FROM table1 JOIN table2 ON table1.id = table2.id</td>
+</tr>
+<tr>
+<td>const</td>
+<td>-1</td>
+<td>使用常数值匹配的查询，例如使用主键或唯一索引进行精确查找。</td>
+<td>PRIMARY</td>
+<td>SELECT * FROM table WHERE id = 123</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="extra%E5%AD%97%E6%AE%B5%E7%9A%84%E5%8F%96%E5%80%BC%E3%80%81%E6%8F%8F%E8%BF%B0%E5%92%8C%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extra字段的取值、描述和示例</h2>
 
                   </article>
                   <div class="comments-wrap">
@@ -277,7 +413,11 @@ WHERE
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

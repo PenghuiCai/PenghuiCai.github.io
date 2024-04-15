@@ -137,28 +137,23 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">查询表名大小写敏感设置</h2>
-
-<pre class="line-numbers"><code class="language-text"># 指定表名是否使用小写
-show GLOBAL VARIABLES like &#39;lower_case_table_names&#39;;
+                    <h2><a id="%E6%9F%A5%E8%AF%A2%E8%A1%A8%E5%90%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查询表名大小写敏感设置</h2>
+<pre class="line-numbers"><code class="language-plain_text"># 指定表名是否使用小写
+show GLOBAL VARIABLES like 'lower_case_table_names';
 </code></pre>
-
-<p><code>1</code>表名全部转化为小写。<br/>
+<p><code>1</code>表名全部转化为小写。<br />
 <code>0</code>表名是严格区分大小写的，若查询时大小写弄混淆就会直接报错表不存在。</p>
-
-<h2 id="toc_1">修改表名大小写敏感前注意事项</h2>
-
-<p>严格区分大小写<code>0</code>改为<code>1</code>全部转为小写的时候，如果<code>表名</code>中<code>出现任意一个大写字母</code>，都需要将其改为小写之，之后再修改配置。<br/>
-否者<code>存在大写字母的表</code>会报<code>doesn&#39;t exist</code>的错误，导致系统无法正常运行。</p>
-
-<pre class="line-numbers"><code class="language-sql"># 查询所有包含大写字母的表
+<h2><a id="%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%90%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F%E5%89%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>修改表名大小写敏感前注意事项</h2>
+<p>严格区分大小写<code>0</code>改为<code>1</code>全部转为小写的时候，如果<code>表名</code>中<code>出现任意一个大写字母</code>，都需要将其改为小写之，之后再修改配置。<br />
+否者<code>存在大写字母的表</code>会报<code>doesn't exist</code>的错误，导致系统无法正常运行。</p>
+<pre class="line-numbers"><code class="language-SQL"># 查询所有包含大写字母的表
 SELECT 
-    TABLE_SCHEMA,
-    TABLE_NAME
+	TABLE_SCHEMA,
+	TABLE_NAME
 FROM 
-    information_schema.`TABLES` 
-WHERE table_type != &#39;SYSTEM VIEW&#39; 
-    AND TABLE_NAME REGEXP BINARY &#39;[a-z]&#39;
+	information_schema.`TABLES` 
+WHERE table_type != 'SYSTEM VIEW' 
+	AND TABLE_NAME REGEXP BINARY '[a-z]'
 
 # 将大写表重命名为小写表 
 RENAME table TEST to test;
@@ -168,11 +163,11 @@ RENAME table TESTDB.test_tb to testdb.test_tb;
 
 # 拼接SQL 将大写库中的表转移到小写库
 SELECT
-    CONCAT( &#39;rename table TESTDB.&#39;, TABLE_NAME, &#39; to testdb.&#39;, TABLE_NAME, &#39;;&#39; ) 
+	CONCAT( 'rename table TESTDB.', TABLE_NAME, ' to testdb.', TABLE_NAME, ';' ) 
 FROM
-    information_schema.TABLES 
+	information_schema.TABLES 
 WHERE
-    TABLE_SCHEMA = &#39;TESTDB&#39;;
+	TABLE_SCHEMA = 'TESTDB';
 
 </code></pre>
 
@@ -225,7 +220,11 @@ WHERE
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

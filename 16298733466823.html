@@ -139,120 +139,77 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。<br/>
+                    <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。<br />
 <strong>恶意删库跑路属于删除计算机信息系统中存储的数据，如造成特别严重的后果，行为会构成破坏计算机信息系统罪。</strong></p>
-
+<div class="mweb_toc"><ul>
+<li><a href="#%E4%B8%80%E3%80%81delete-table">一、DELETE TABLE</a>
 <ul>
-<li>
-<a href="#toc_0">一、DELETE TABLE</a>
-<ul>
-<li>
-<a href="#toc_1">DELETE 说明</a>
-</li>
-<li>
-<a href="#toc_2">DELETE 示例</a>
-</li>
+<li><a href="#delete%E8%AF%B4%E6%98%8E">DELETE 说明</a></li>
+<li><a href="#delete%E7%A4%BA%E4%BE%8B">DELETE 示例</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_3">二、TRUNCATE TABLE</a>
+<li><a href="#%E4%BA%8C%E3%80%81truncate-table">二、TRUNCATE TABLE</a>
 <ul>
-<li>
-<a href="#toc_4">TRUNCATE 说明</a>
-</li>
-<li>
-<a href="#toc_5">TRUNCATE 示例</a>
-</li>
+<li><a href="#truncate%E8%AF%B4%E6%98%8E">TRUNCATE 说明</a></li>
+<li><a href="#truncate%E7%A4%BA%E4%BE%8B">TRUNCATE 示例</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_6">三、DROP TABLE</a>
+<li><a href="#%E4%B8%89%E3%80%81drop-table">三、DROP TABLE</a>
 <ul>
-<li>
-<a href="#toc_7">DROP 说明</a>
-</li>
-<li>
-<a href="#toc_8">DROP 示例</a>
-</li>
+<li><a href="#drop%E8%AF%B4%E6%98%8E">DROP 说明</a></li>
+<li><a href="#drop%E7%A4%BA%E4%BE%8B">DROP 示例</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_9">四、扩展点</a>
+<li><a href="#%E5%9B%9B%E3%80%81%E6%89%A9%E5%B1%95%E7%82%B9">四、扩展点</a>
 <ul>
-<li>
-<a href="#toc_10">OPTIMIZE TABLE 命令优化表</a>
-</li>
+<li><a href="#optimize-table%E5%91%BD%E4%BB%A4%E4%BC%98%E5%8C%96%E8%A1%A8">OPTIMIZE TABLE 命令优化表</a></li>
 </ul>
 </li>
 </ul>
-
-
-<h1 id="toc_0">一、DELETE TABLE</h1>
-
-<h2 id="toc_1">DELETE 说明</h2>
-
+</div>
+<h1><a id="%E4%B8%80%E3%80%81delete-table" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、DELETE TABLE</h1>
+<h2><a id="delete%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DELETE 说明</h2>
 <ul>
-<li><strong>删除速度慢：</strong>操作会被放在 rollback segment 中，事物提交后才生效，如果有相应的 trigger 执行将被触发，如果删除大数据量的表速度会很慢；</li>
-<li><strong>可 rollback 操作：</strong>为 <code>DML</code> 数据操作语言，对数据库中记录做删除标记，每次从表中删除一行，并且同时讲该行的删除操作作为事物记录在日志中保存可以进行 rollback 操作；</li>
-<li><strong>不直接释放磁盘空间：</strong>删除表中的逻辑数据，但是物理数据不清除，如主键值、索引等不被清除；虽然未释放磁盘空间，但是下次插入数据的时候，仍然可以重用这部分空间(重用 -&gt; 覆盖)。也可以使用OPTIMIZE TABLE 对碎片进行整理可降低空间占用；</li>
-<li><strong>约束影响范围：</strong>删除范围可以添加 <code>WHERE</code> 约束影响范围。 </li>
+<li>**删除速度慢：**操作会被放在 rollback segment 中，事物提交后才生效，如果有相应的 trigger 执行将被触发，如果删除大数据量的表速度会很慢；</li>
+<li>**可 rollback 操作：**为 <code>DML</code> 数据操作语言，对数据库中记录做删除标记，每次从表中删除一行，并且同时讲该行的删除操作作为事物记录在日志中保存可以进行 rollback 操作；</li>
+<li>**不直接释放磁盘空间：**删除表中的逻辑数据，但是物理数据不清除，如主键值、索引等不被清除；虽然未释放磁盘空间，但是下次插入数据的时候，仍然可以重用这部分空间(重用 -&gt; 覆盖)。也可以使用OPTIMIZE TABLE 对碎片进行整理可降低空间占用；</li>
+<li>**约束影响范围：**删除范围可以添加 <code>WHERE</code> 约束影响范围。</li>
 </ul>
-
-<h2 id="toc_2">DELETE 示例</h2>
-
+<h2><a id="delete%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DELETE 示例</h2>
 <p>删除整张表的数据：</p>
-
 <pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name;
 </code></pre>
-
 <p>删除部分数据，添加 where 子句：</p>
-
 <pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name WHERE ... ;
 </code></pre>
-
 <p>分批删除数据，避免长事务，减少其他客户端资源等待的时间：</p>
-
 <pre class="line-numbers"><code class="language-mysql">DELETE FROM table_name ORDER BY index_field LIMIT 1000；
 </code></pre>
-
-<h1 id="toc_3">二、TRUNCATE TABLE</h1>
-
-<h2 id="toc_4">TRUNCATE 说明</h2>
-
+<h1><a id="%E4%BA%8C%E3%80%81truncate-table" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、TRUNCATE TABLE</h1>
+<h2><a id="truncate%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TRUNCATE 说明</h2>
 <ul>
-<li><strong>速度快：</strong>通过释放数据表数据所用的数据页，来删除数据，并且只在事务日志中记录页的释放，使用系统和事物日志资源少；</li>
-<li><strong>不能 rollback 操作：</strong>为 <code>DDL</code>  数据库模式定义语言，删除数据表所有行，操作立即生效，原数据不放到 rollback segment 中不可进行 rollback 操作。FOREIGN KEY 约束引用的表，不能使它，它不记录在日志所以 trigger 不能被激活；</li>
-<li><strong>立刻释放磁盘空间：</strong>同时针对具有自动递增值的字段，做计数重置归零重新计算；</li>
-<li><strong>无法控制影响范围：</strong>删除数据表内所有行，但表结构及其列、约束、索引结构等保持不变。</li>
+<li>**速度快：**通过释放数据表数据所用的数据页，来删除数据，并且只在事务日志中记录页的释放，使用系统和事物日志资源少；</li>
+<li>**不能 rollback 操作：**为 <code>DDL</code>  数据库模式定义语言，删除数据表所有行，操作立即生效，原数据不放到 rollback segment 中不可进行 rollback 操作。FOREIGN KEY 约束引用的表，不能使它，它不记录在日志所以 trigger 不能被激活；</li>
+<li>**立刻释放磁盘空间：**同时针对具有自动递增值的字段，做计数重置归零重新计算；</li>
+<li>**无法控制影响范围：**删除数据表内所有行，但表结构及其列、约束、索引结构等保持不变。</li>
 </ul>
-
-<h2 id="toc_5">TRUNCATE 示例</h2>
-
+<h2><a id="truncate%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TRUNCATE 示例</h2>
 <p>删除整张表的数据：</p>
-
 <pre class="line-numbers"><code class="language-mysql">TRUNCATE TABLE table_name
 </code></pre>
-
-<h1 id="toc_6">三、DROP TABLE</h1>
-
-<h2 id="toc_7">DROP 说明</h2>
-
+<h1><a id="%E4%B8%89%E3%80%81drop-table" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、DROP TABLE</h1>
+<h2><a id="drop%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DROP 说明</h2>
 <ul>
 <li><strong>速度快</strong></li>
 <li><strong>不能 rollback 操作：</strong> 为 <code>DDL</code>  数据库模式定义语言，表数据和结构都会被删除；</li>
-<li><strong>立刻释放磁盘空间：</strong>删除表定义及该表的所有数据、索引、触发器、约束和权限规范；</li>
-<li><strong>无法控制影响范围：</strong>删除数据表内所有行。</li>
+<li>**立刻释放磁盘空间：**删除表定义及该表的所有数据、索引、触发器、约束和权限规范；</li>
+<li>**无法控制影响范围：**删除数据表内所有行。</li>
 </ul>
-
-<h2 id="toc_8">DROP 示例</h2>
-
+<h2><a id="drop%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DROP 示例</h2>
 <pre class="line-numbers"><code class="language-mysql">DROP TABLE table_name;
 </code></pre>
-
-<h1 id="toc_9">四、扩展点</h1>
-
-<h2 id="toc_10">OPTIMIZE TABLE 命令优化表</h2>
-
+<h1><a id="%E5%9B%9B%E3%80%81%E6%89%A9%E5%B1%95%E7%82%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>四、扩展点</h1>
+<h2><a id="optimize-table%E5%91%BD%E4%BB%A4%E4%BC%98%E5%8C%96%E8%A1%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>OPTIMIZE TABLE 命令优化表</h2>
 <ul>
 <li>该命令会重新利用未使用的空间，并整理数据文件的碎片</li>
 <li>该命令将会整理表数据和相关的索引数据的物理存储空间，用来减少占用的磁盘空间，并提高访问表时候的IO性能；</li>
@@ -309,7 +266,11 @@
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

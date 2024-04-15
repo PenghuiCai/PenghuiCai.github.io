@@ -144,7 +144,6 @@ int numArray[5]; // 定义整型数组
 char *str1,*str2,*str3; // 定义字符串变量
 char strArray[10],fileName[5],data[10]; // 定义字符串数组
 </code></pre>
-
 <pre class="line-numbers"><code class="language-java">// 数值赋值
 num = 10;
 // 输出非字符串
@@ -160,7 +159,6 @@ lr_output_message(strArray);
 strcpy(strArray,&quot;字符串赋值给数组变量stry:String&quot;);
 lr_output_message(strArray);
 </code></pre>
-
 <pre class="line-numbers"><code class="language-java">// 参数
 
 // 参数赋值（左边给右边赋值）
@@ -189,7 +187,6 @@ lr_output_message(&quot;%s&quot;,strArray);
 num = atoi(lr_eval_string(&quot;{parameterNumber1}&quot;));
 lr_output_message(&quot;%d&quot;,num);
 </code></pre>
-
 <pre class="line-numbers"><code class="language-java">// 时间 http://www.51testing.com/html/48/15163948-3713192.html
 // 当前时间戳
 web_save_timestamp_param(&quot;timestamp&quot;, LAST);
@@ -204,26 +201,16 @@ ONE_DAY(一天的时间)
 ONE_HOUR(一小时的时间)
 ONE_MIN(一分钟的时间)
 </code></pre>
-
-<h1 id="toc_0">LoadRunner 参数类型</h1>
-
-<h2 id="toc_1">Random Number（随机数）</h2>
-
+<h1><a id="loadrunner%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>LoadRunner 参数类型</h1>
+<h2><a id="random-number%EF%BC%88%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Random Number（随机数）</h2>
 <p>随机数，在属性设置中可以设置产生随机数的范围和更新值得时间。</p>
-
-<h3 id="toc_2">Update value on（更新值得时间）</h3>
-
-<h4 id="toc_3">Each occurrence（每次出现）</h4>
-
+<h3><a id="update-value-on%EF%BC%88%E6%9B%B4%E6%96%B0%E5%80%BC%E5%BE%97%E6%97%B6%E9%97%B4%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update value on（更新值得时间）</h3>
+<h4><a id="each-occurrence%EF%BC%88%E6%AF%8F%E6%AC%A1%E5%87%BA%E7%8E%B0%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Each occurrence（每次出现）</h4>
 <p>每次出现该参数被调用就更新（取新的值），脚本中出现多次每次都更新值。</p>
-
-<h4 id="toc_4">Each interaction（每次迭代）</h4>
-
-<p>每次迭代时更新（取新的值），每次迭代不管多少个虚拟用户，都是迭代一次所有用户取相同的一个值。<br/>
+<h4><a id="each-interaction%EF%BC%88%E6%AF%8F%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Each interaction（每次迭代）</h4>
+<p>每次迭代时更新（取新的值），每次迭代不管多少个虚拟用户，都是迭代一次所有用户取相同的一个值。<br />
 例如：有10个虚拟用户，每个虚拟用户都取第1次生成的数，执行完成，称为一次迭代完成。然后10个虚拟用户都取第2次生成的数，完成第二次迭代，后面以此类推。</p>
-
-<h4 id="toc_5">Once（只取一次）</h4>
-
+<h4><a id="once%EF%BC%88%E5%8F%AA%E5%8F%96%E4%B8%80%E6%AC%A1%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Once（只取一次）</h4>
 <p>在场景初始化时更新一次，在一个场景中的所有用户每次迭代值都相同。</p>
 
                   </article>
@@ -275,7 +262,11 @@ ONE_MIN(一分钟的时间)
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

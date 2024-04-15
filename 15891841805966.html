@@ -141,23 +141,23 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <pre class="line-numbers"><code class="language-text">SELECT DISTINCT({o.ecsOrderId}) FROM {
+                    <pre class="line-numbers"><code class="language-plain_text">SELECT DISTINCT({o.ecsOrderId}) FROM {
 Consignment AS c
 JOIN ConsignmentStatus AS cs ON {cs.pk} = {c.status}
 JOIN Order! AS o ON {o.pk} = {c.order}
 } 
 WHERE EXISTS({{
-    select {c.order} from {
-    Consignment 
-    join ConsignmentStatus on {ConsignmentStatus.pk} = {Consignment.status} 
-    join BaseStore on {BaseStore.pk} = {Consignment.baseStore} 
-    join ChannelType on {ChannelType.pk} = {BaseStore.channelType}
-    }
-    where {ConsignmentStatus.code} = &#39;SHIPPED&#39; and {ChannelType.code} != &#39;EC&#39; and {c.order} = {Consignment.order}
+	select {c.order} from {
+	Consignment 
+	join ConsignmentStatus on {ConsignmentStatus.pk} = {Consignment.status} 
+	join BaseStore on {BaseStore.pk} = {Consignment.baseStore} 
+	join ChannelType on {ChannelType.pk} = {BaseStore.channelType}
+	}
+	where {ConsignmentStatus.code} = 'SHIPPED' and {ChannelType.code} != 'EC' and {c.order} = {Consignment.order}
 }})
-AND {cs.code} = &#39;TRADE_CLOSE&#39;
-AND {c.orderCreationDate} &gt;= &#39;2020-04-12 00:00:00&#39;
-AND {c.orderCreationDate} &lt; &#39;2020-05-12 00:00:00&#39;
+AND {cs.code} = 'TRADE_CLOSE'
+AND {c.orderCreationDate} &gt;= '2020-04-12 00:00:00'
+AND {c.orderCreationDate} &lt; '2020-05-12 00:00:00'
 </code></pre>
 
                   </article>
@@ -209,7 +209,11 @@ AND {c.orderCreationDate} &lt; &#39;2020-05-12 00:00:00&#39;
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

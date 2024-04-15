@@ -138,27 +138,19 @@
                 </div>
                   <article class="markdown-body single-content">
                     <p><em>本文仅做为知识分享能力提升，分享不同业务需求场景应对的方式</em>。</p>
-
 <p>Redis <code>HSCAN</code> 命令用于迭代哈希表中的键值对。</p>
-
 <p><code>SCAN</code> 命令是一个基于游标的迭代器，每次被调用之后， 都会向用户返回一个新的游标， 用户在下次迭代时需要使用这个新游标作为 SCAN 命令的游标参数， 以此来延续之前的迭代过程。</p>
-
 <p><code>SCAN</code> 返回一个包含两个元素的数组， 第一个元素是用于进行下一次迭代的新游标， 而第二个元素则是一个数组， 这个数组中包含了所有被迭代的元素。如果新游标返回 0 表示迭代已结束。</p>
-
-<h1 id="toc_0">语法</h1>
-
-<pre class="line-numbers"><code class="language-text">HSCAN key cursor [MATCH pattern] [COUNT count]
+<h1><a id="%E8%AF%AD%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>语法</h1>
+<pre class="line-numbers"><code class="language-plain_text">HSCAN key cursor [MATCH pattern] [COUNT count]
 </code></pre>
-
 <ul>
 <li>cursor - 游标</li>
 <li>pattern - 匹配的模式[*]</li>
-<li>count - 指定从数据集里返回多少元素，默认值为 10 </li>
+<li>count - 指定从数据集里返回多少元素，默认值为 10</li>
 </ul>
-
-<h1 id="toc_1">语法示例</h1>
-
-<pre class="line-numbers"><code class="language-text">redis 127.0.0.1:6379&gt; scan inv-key 0   # 使用 0 作为游标，开始新的迭代
+<h1><a id="%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>语法示例</h1>
+<pre class="line-numbers"><code class="language-plain_text">redis 127.0.0.1:6379&gt; scan inv-key 0   # 使用 0 作为游标，开始新的迭代
 1) &quot;17&quot; # 第一次迭代时返回的新游标
 2)  1) &quot;key12&quot;
     2) &quot;value12&quot;
@@ -183,9 +175,7 @@ redis 127.0.0.1:6379&gt; scan inv-key 17   # 使用的是第一次迭代时返�
    7) &quot;key6&quot;
    8) &quot;value6&quot;
 </code></pre>
-
-<h1 id="toc_2">Java Jedis</h1>
-
+<h1><a id="java-jedis" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java Jedis</h1>
 <pre class="line-numbers"><code class="language-java">String stKey = &quot;xxx:xxx&quot;;
 ScanParams scanParams = new ScanParams();
 scanParams.count(10);
@@ -264,7 +254,11 @@ jedis.del(stKey);
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

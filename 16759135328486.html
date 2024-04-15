@@ -141,21 +141,28 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">统计JOB日志数据</h2>
-
-<pre class="line-numbers"><code class="language-text">SELECT {CronJob.code},count(1) FROM {LogFile
+                    <h2><a id="%E7%BB%9F%E8%AE%A1job%E6%97%A5%E5%BF%97%E6%95%B0%E6%8D%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>统计JOB日志数据</h2>
+<pre class="line-numbers"><code class="language-plain_text">SELECT {CronJob.code},count(1) FROM {LogFile
 JOIN CronJob ON {CronJob.pk} = {owner}
-} WHERE {location} LIKE &#39;cronjob%&#39; GROUP BY {owner}
+} WHERE {location} LIKE 'cronjob%' GROUP BY {owner}
 
 SELECT {CronJob.code}, count(1) FROM {LogFile
 JOIN CronJob ON {CronJob.pk} = {owner}
-} WHERE {CronJob.code} = &#39;HepRefundAutoAgreeReturnCronJob&#39; AND {location} LIKE &#39;cronjob%&#39; 
+} WHERE {CronJob.code} = 'HepRefundAutoAgreeReturnCronJob' AND {location} LIKE 'cronjob%' 
 </code></pre>
-
-<h2 id="toc_1">删除job日志</h2>
-
-<pre class="line-numbers"><code class="language-text">REMOVE LogFile[batchmode=true];owner(code)[unique=true];
+<h2><a id="%E5%88%A0%E9%99%A4job%E6%97%A5%E5%BF%97" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>删除job日志</h2>
+<pre class="line-numbers"><code class="language-plain_text">REMOVE LogFile[batchmode=true];owner(code)[unique=true];
 ;jobcode;
+</code></pre>
+<h2><a id="%E5%88%A0%E9%99%A4sql" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>删除SQL</h2>
+<pre class="line-numbers"><code class="language-SQL">DELETE FROM medias WHERE OwnerPkString = 8839740031477;
+
+# SELECT count(1) FROM medias WHERE  p_location  LIKE 'cronjob%';
+
+# DELETE FROM medias WHERE  p_location  LIKE 'cronjob%';
+</code></pre>
+<h2><a id="%E6%9F%A5%E8%AF%A2%E5%88%A0%E9%99%A4%E8%BF%9B%E5%BA%A6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查询删除进度</h2>
+<pre class="line-numbers"><code class="language-SQL">SELECT count(1) FROM {LogFile} WHERE {owner} = 8839740031477
 </code></pre>
 
                   </article>
@@ -207,7 +214,11 @@ JOIN CronJob ON {CronJob.pk} = {owner}
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

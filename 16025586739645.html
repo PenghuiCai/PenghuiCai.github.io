@@ -140,27 +140,22 @@
                 </div>
                   <article class="markdown-body single-content">
                     <p>hmc 字段加了索引，查询依旧很慢</p>
-
-<h2 id="toc_0">快速解决</h2>
-
-<pre class="line-numbers"><code class="language-text"># local.properties 
+<h2><a id="%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>快速解决</h2>
+<pre class="line-numbers"><code class="language-plain_text"># local.properties 
 # 配置文件 新增字符串属性搜索不区分大小写配置为false
 hmc.caseinsensitivestringsearch=false
 </code></pre>
-
-<h2 id="toc_1">原因</h2>
-
+<h2><a id="%E5%8E%9F%E5%9B%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>原因</h2>
 <p>当 <code>hmc.caseinsensitivestringsearch=true</code> 时，当拼接 SQL 语句里会自动拼接上忽略大小写的语法，非常影响查询效率。</p>
-
-<h2 id="toc_2">补充说明</h2>
-
+<h2><a id="%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>补充说明</h2>
 <ul>
 <li>Mysql 默认的字符检索策略
 <ul>
 <li><code>utf8_general_ci</code> 表示不区分大小写，a 和 A 会在字符判断中会被当做一样的</li>
 <li><code>utf8_general_cs</code> 表示区分大小写</li>
 <li><code>utf8_bin</code> 表示二进制比较，同样也区分大小写</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
                   </article>
@@ -212,7 +207,11 @@ hmc.caseinsensitivestringsearch=false
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

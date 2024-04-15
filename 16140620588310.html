@@ -140,10 +140,8 @@
                 </div>
                   <article class="markdown-body single-content">
                     <p>MySQL的开源版本 MariaDB、Percona MySQL Server 和 AliSQL 5.6 版本支持统计索引的信息，即可以统计出使用某个索引扫描的行数。依照此，可以找出未被使用的，或者使用频率较低的索引，从而进行下线。</p>
-
-<h2 id="toc_0">示例</h2>
-
-<pre class="line-numbers"><code class="language-text">mysql&gt; select * from wstest.test2 where name=&#39;aaax&#39;;  
+<h2><a id="%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>示例</h2>
+<pre class="line-numbers"><code class="language-plain_text">mysql&gt; select * from wstest.test2 where name='aaax';  
 +----+------+--------+------+-------+  
 | id | name | status | addr | addr2 |  
 +----+------+--------+------+-------+  
@@ -151,13 +149,10 @@
 +----+------+--------+------+-------+  
 1 row in set (0.00 sec)  
 </code></pre>
-
-<h2 id="toc_1">查看统计信息</h2>
-
-<p>注意：最开始查询 information_schema.INDEX_STATISTICS 表发现结果为空时需要打开参数才会进行统计。<br/>
+<h2><a id="%E6%9F%A5%E7%9C%8B%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看统计信息</h2>
+<p>注意：最开始查询 information_schema.INDEX_STATISTICS 表发现结果为空时需要打开参数才会进行统计。<br />
 打开参数：<code>loose_rds_indexstat=1</code></p>
-
-<pre class="line-numbers"><code class="language-text">mysql&gt; select * from information_schema.INDEX_STATISTICS where table_schema=&#39;wstest&#39; and table_name=&#39;test2&#39;;  
+<pre class="line-numbers"><code class="language-plain_text">mysql&gt; select * from information_schema.INDEX_STATISTICS where table_schema='wstest' and table_name='test2';  
 +--------------+------------+------------+-----------+  
 | TABLE_SCHEMA | TABLE_NAME | INDEX_NAME | ROWS_READ |  
 +--------------+------------+------------+-----------+  
@@ -166,26 +161,17 @@
 +--------------+------------+------------+-----------+  
 2 rows in set (0.02 sec)  
 </code></pre>
-
-<h2 id="toc_2">统计介绍</h2>
-
-<p>由于在使用 idx_name查 询数据时，扫描行数为1所以在 information_schema.INDEX_STATISTICS 表的 ROWS_READ 字段对应的值为 1 ；<br/>
+<h2><a id="%E7%BB%9F%E8%AE%A1%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>统计介绍</h2>
+<p>由于在使用 idx_name查 询数据时，扫描行数为1所以在 information_schema.INDEX_STATISTICS 表的 ROWS_READ 字段对应的值为 1 ；<br />
 若再次使用 idx_name 查询，则 ROWS_READ 会再次加 1 。</p>
-
-<h2 id="toc_3">索引下线</h2>
-
-<h3 id="toc_4">设置索引不可见</h3>
-
+<h2><a id="%E7%B4%A2%E5%BC%95%E4%B8%8B%E7%BA%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>索引下线</h2>
+<h3><a id="%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E4%B8%8D%E5%8F%AF%E8%A7%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置索引不可见</h3>
 <p>使索引不可见，避免突然下线导致某些应用出现慢查。</p>
-
-<pre class="line-numbers"><code class="language-text">mysql&gt; alter table test2 alter index idx_name invisible;
+<pre class="line-numbers"><code class="language-plain_text">mysql&gt; alter table test2 alter index idx_name invisible;
 </code></pre>
-
-<h3 id="toc_5">删除索引</h3>
-
+<h3><a id="%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>删除索引</h3>
 <p>设置索引不可见之后，可以过一段时间，选择低峰期将索引进行删除：</p>
-
-<pre class="line-numbers"><code class="language-text">mysql &gt; alter table test2 drop index idx_name;
+<pre class="line-numbers"><code class="language-plain_text">mysql &gt; alter table test2 drop index idx_name;
 </code></pre>
 
                   </article>
@@ -237,7 +223,11 @@
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

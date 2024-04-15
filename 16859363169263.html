@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			
+			MySQL的事务隔离级别 - 油脂青年
+			
+		</title>
+		
+		<link rel="shortcut icon" href="asset/images/icon_64.png" type="image/png" />
+
+		
+		
+		<link href="atom.xml" rel="alternate" title="油脂青年" type="application/atom+xml">
+		<link rel="stylesheet" href="asset/css/style.min.css">
+		<link rel="stylesheet" href="asset/css/doc.css">
+		<script src="asset/app.js"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1928345618986646" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<section class="hero">
+			<div class="hero-head">
+				<nav class="navbar" role="navigation" aria-label="main navigation">
+					<div class="container">
+						<div class="navbar-brand">
+							
+							<a target="_self" class="navbar-item " href="index.html">Home</a>
+							
+							<a target="_self" class="navbar-item " href="hybris.html">Hybris</a>
+							
+							<a target="_self" class="navbar-item " href="linux.html">Linux</a>
+							
+							<a target="_self" class="navbar-item " href="Database.html">Database</a>
+							
+							<a target="_self" class="navbar-item " href="Front-End.html">Front-End</a>
+							
+							<a target="_self" class="navbar-item " href="other.html">Other</a>
+							
+							<a target="_self" class="navbar-item " href="mac_tools.html">Mac Tools</a>
+							
+							<a target="_self" class="navbar-item " href="note.html">Note</a>
+							
+
+							<a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+							 data-target="navbarSNSRssButtons">
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+								<span aria-hidden="true"></span>
+							</a>
+						</div>
+
+						<div id="navbarSNSRssButtons" class="navbar-menu">
+							<div class="navbar-start">
+
+							</div>
+
+							<div class="navbar-end">
+								<div class="navbar-item">
+									<!--buttons start-->
+									<div class="buttons">
+										
+										
+										
+										
+										<a href="https://github.com/beanion" target="_blank" title="github">
+											<span class="icon is-large has-text-grey-darker">
+												<svg class="svg-inline--fa fa-github fa-w-16 fa-lg" aria-hidden="true" focusable="false" data-prefix="fab"
+												 data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg="">
+													<path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+												</svg><!-- <i class="fab fa-github fa-lg"></i> -->
+											</span>
+										</a>
+										
+										
+										
+										<!-- <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+										<!-- </span>
+                      </a>
+                    </div> -->
+										<!--buttons end-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</nav>
+			</div>
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            MySQL的事务隔离级别   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <figure class="media-left">
+                              <p class="image is-48x48">
+                                
+                                  <img class="is-rounded" src="asset/images/icon_192.png">
+                                
+                              </p>
+                            </figure>
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2023/06/05</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='MySQL.html'>MySQL</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <h2><a id="mysql%E6%8F%90%E4%BE%9B%E4%BA%86%E5%9B%9B%E4%B8%AA%E6%A0%87%E5%87%86%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL 提供了四个标准的事务隔离级别</h2>
+<p>事务隔离级别是指控制并发事务之间相互影响的机制。MySQL 提供了四个标准的事务隔离级别，每个级别具有不同的特性和影响：</p>
+<ol>
+<li>READ UNCOMMITTED（读取未提交数据）：最低的隔离级别，允许一个事务读取其他事务未提交的数据。它可能导致脏读（Dirty Read），即读取到了其他事务未完成的数据。</li>
+<li>READ COMMITTED（读取已提交数据）：允许一个事务只读取其他已经提交的事务所做的更改。它避免了脏读，但仍然可能遇到不可重复读（Non-Repeatable Read）和幻读（Phantom Read）的问题。</li>
+<li>REPEATABLE READ（可重复读）：保证在同一个事务中多次读取同一行数据时，结果保持一致。它避免了不可重复读，但仍然可能遇到幻读的问题。MySQL 默认的隔离级别就是 REPEATABLE READ。</li>
+<li>SERIALIZABLE（串行化）：最高的隔离级别，确保每个事务之间完全隔离，串行执行。它避免了脏读、不可重复读和幻读的问题，但也对并发性能有较大影响，并发度较低。</li>
+</ol>
+<h3><a id="%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%AD%98%E5%9C%A8%E4%BB%A5%E4%B8%8B4%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>数据库并发控制中存在以下4个常见的问题：</h3>
+<h4><a id="%E8%84%8F%E8%AF%BB%EF%BC%88dirty-read%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>脏读（Dirty Read）</h4>
+<p>脏读（Dirty Read）是指一个事务读取到了另一个事务尚未提交的数据，当后者最终回滚时，前者等于是读取到了无效的数据。</p>
+<p>具体来说，脏读的情况过程如下：</p>
+<ol>
+<li>事务A开始一个操作，并对一些数据进行了修改。</li>
+<li>在此期间，<strong>事务B读取了事务A尚未提交的数据</strong>。</li>
+<li>之后，<strong>事务A回滚了之前的修改操作</strong>，导致事务B读取到了未提交无效的数据。</li>
+</ol>
+<h4><a id="%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88non-repeatable-read%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>不可重复读（Non-Repeatable Read）</h4>
+<p>不可重复读（Non-Repeatable Read）是指一个事务在同一个查询中多次读取相同的数据，但由于其他事务并发地修改和提交，导致两次读取之间<strong>数据发生了变化</strong>。</p>
+<p>具体来说，不可重复读的情况过程如下：</p>
+<ol>
+<li>事务A开始一个查询，并获得了一个读取锁来保护查询的数据范围。</li>
+<li>在此期间，事务B对<strong>查询范围内的数据进行了修改</strong>并提交。</li>
+<li>事务A再次执行相同的查询，但发现在第二次查询中<strong>数据已经发生了变化</strong>，与第一次查询的结果不一致。</li>
+</ol>
+<h4><a id="%E5%B9%BB%E8%AF%BB%EF%BC%88phantom-read%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>幻读（Phantom Read）</h4>
+<p>幻读（Phantom Read）是指在同一个事务中执行相同的查询，但在第二次查询时发现出现了<strong>新增或删除的数据行</strong>。</p>
+<p>幻读通常发生在并发事务环境中，其中一个事务中在多次执行相同的查询语句的过程中，另一个事务在此期间进行了插入、删除或更新操作，导致第二次查询返回了不同的数据行，产生了&quot;幻觉&quot;般的新增或删除的数据。</p>
+<p>具体来说，幻读的情况过程如下：</p>
+<ol>
+<li>事务A开始一个查询，并获得了一个读取锁来保护查询的数据范围。</li>
+<li>在此期间，事务B<strong>插入了一行新数据</strong>，符合事务A查询的条件。</li>
+<li>事务A再次执行相同的查询，但发现在第二次查询<strong>结果中新增了一行数据</strong>，这条数据在第一次查询时并不存在这个数据。</li>
+</ol>
+<h4><a id="%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0%EF%BC%88lost-update%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>丢失更新（Lost Update）</h4>
+<p>丢失更新（Lost Update）是指两个事务同时读取相同的数据，并对其进行修改，但只有一个事务的修改能够成功提交，另一个事务的修改被覆盖，导致数据丢失。</p>
+<p>具体来说，丢失更新的情况如下：</p>
+<ol>
+<li>事务A和事务B同时读取同一行数据。</li>
+<li>事务A修改了数据并提交事务。</li>
+<li>紧接着，事务B也对同一行数据进行了修改，并尝试提交事务。</li>
+<li>由于事务A已经修改了数据并提交，事务B的修改操作会覆盖事务A的修改，导致事务A的修改丢失。</li>
+</ol>
+<h3><a id="%E4%BA%8B%E7%89%A9%E9%9A%94%E7%A6%BB%E7%9A%84%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>事物隔离的介绍</h3>
+<h4><a id="read-uncommitted%EF%BC%88%E8%AF%BB%E5%8F%96%E6%9C%AA%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>READ UNCOMMITTED（读取未提交数据）</h4>
+<p>READ UNCOMMITTED（读取未提交数据）是最低级别的事务隔离级别，也被称为脏读隔离级别。在READ UNCOMMITTED级别下，一个事务可以读取到其他事务尚未提交的数据，可能读取到不一致或无效的数据。</p>
+<p>READ UNCOMMITTED隔离级别具有以下特点和适用场景：</p>
+<ol>
+<li>数据不一致性：READ UNCOMMITTED级别允许事务读取到其他事务尚未提交的数据，这可能导致读取到不一致或无效的数据。因为其他事务可以对数据进行修改，而读取事务可能读取到已经被修改但尚未提交的数据，从而产生不一致性。</li>
+<li>高并发性和性能：由于READ UNCOMMITTED级别允许事务读取未提交的数据，因此它提供了最高的并发性和性能。事务不需要等待其他事务的提交，可以立即读取到最新的未提交数据。这对于需要高并发读取操作的场景可能是有用的。</li>
+</ol>
+<p>适用场景：READ UNCOMMITTED级别适用于对数据一致性要求较低的场景。例如，在某些报表查询或临时数据处理任务中，可以使用READ UNCOMMITTED级别来获得更高的性能，而数据的准确性和一致性要求相对较低。</p>
+<p>可能出现的问题：</p>
+<ol>
+<li>脏读问题：因为READ UNCOMMITTED级别允许读取未提交的数据，可能导致脏读问题。如果一个事务读取到了其他事务尚未提交的数据，而该数据在后续被回滚或修改，读取事务就读取到了无效或错误的数据。</li>
+<li>数据冲突和不可重复读问题：由于事务可以读取到其他事务尚未提交的数据，可能会遇到数据冲突和不可重复读的问题。如果一个事务在读取数据后，其他事务对相同的数据进行修改并提交，那么之后的读取操作可能会返回不同的结果，导致不可重复读问题。</li>
+</ol>
+<p>需要注意的是，由于READ UNCOMMITTED级别存在严重的数据一致性问题，一般情况下不建议在生产环境中使用。它主要用于某些特定的临时性任务或特殊要求的数据处理场景，需要在确保数据一致性的情况下谨慎使用。大多数应用程序通常选择使用较高级别的隔离级别，如READ COMMITTED或REPEATABLE READ，以获得更好的数据一致性保证。</p>
+<h4><a id="read-committed%EF%BC%88%E8%AF%BB%E5%8F%96%E5%B7%B2%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>READ COMMITTED（读取已提交数据）</h4>
+<p>READ COMMITTED（读取已提交数据）是一种较为常见的事务隔离级别，它提供了一定程度的数据一致性和并发控制。在READ COMMITTED级别下，一个事务只能读取到已经提交的数据，不会读取到其他事务尚未提交的数据。</p>
+<p>READ COMMITTED隔离级别具有以下特点和适用场景：</p>
+<ol>
+<li>数据一致性：READ COMMITTED级别保证了事务只能读取到已经提交的数据，避免了脏读问题。这意味着事务读取到的数据是其他事务已经确认为有效的数据，具有一定的数据一致性。</li>
+<li>并发性和性能：相比较较高级别的隔离级别，如REPEATABLE READ或SERIALIZABLE，READ COMMITTED级别具有更高的并发性和性能。它允许多个事务同时进行读取操作，不会互相阻塞。这对于并发访问频繁的场景非常有用。</li>
+<li>数据冲突和不可重复读问题：尽管READ COMMITTED级别避免了脏读问题，但它仍然可能出现数据冲突和不可重复读的问题。如果一个事务在读取数据后，其他事务对相同的数据进行了修改并提交，那么之后的读取操作可能会返回不同的结果，导致不可重复读问题。</li>
+</ol>
+<p>适用场景：READ COMMITTED级别适用于大多数应用程序的常规操作，对数据一致性有一定要求的场景。它提供了较好的并发性和性能，同时避免了脏读问题，适用于多用户、高并发的业务环境。</p>
+<p>需要注意的是，READ COMMITTED级别仍然可能导致不可重复读的问题，因为在同一个事务中多次读取同一行数据时，其他事务可能会对该数据进行修改。如果应用程序对数据的准确性和一致性要求较高，可能需要考虑使用更高的隔离级别，如REPEATABLE READ或SERIALIZABLE，以提供更严格的数据一致性保证。</p>
+<p>总的来说，READ COMMITTED隔离级别适用于大多数应用程序，提供了一定的数据一致性和较高的并发性能。然而，需要在具体的应用场景中综合考虑数据的一致性需求和并发访问的特点，选择适当的隔离级别来确保数据的正确性和应用程序的性能。</p>
+<h4><a id="repeatable-read%EF%BC%88%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>REPEATABLE READ（可重复读）</h4>
+<p>REPEATABLE READ（可重复读）是一种中等级别的事务隔离级别，它提供了更高的数据一致性和隔离性。在REPEATABLE READ级别下，一个事务在开始时读取的数据集将保持不变，即使其他事务对同一数据进行了修改和提交。</p>
+<p>REPEATABLE READ隔离级别具有以下特点和适用场景：</p>
+<ol>
+<li>数据一致性：REPEATABLE READ级别保证在一个事务中读取的数据集不会发生变化。这意味着事务内部多次读取同一数据时，将得到一致的结果，不受其他并发事务的影响。这可以提供较高的数据一致性，适用于对数据准确性要求较高的场景。</li>
+<li>隔离性：REPEATABLE READ级别提供了较高的隔离性，确保一个事务不会读取到其他事务尚未提交的数据。这避免了脏读和读取未提交数据的问题，确保事务读取到的数据是已经提交并具有一定一致性的数据。</li>
+<li>并发性和性能：相比较较高级别的隔离级别，如SERIALIZABLE，REPEATABLE READ级别具有更高的并发性和性能。它允许并发事务进行读取操作，不会被其他事务的修改操作阻塞。这对于多用户、高并发的业务场景非常有用。</li>
+<li>可能出现的问题：尽管REPEATABLE READ级别提供了较高的数据一致性和隔离性，但仍可能出现幻读问题。幻读指的是在同一事务中多次查询时，由于其他事务插入或删除了符合查询条件的数据，导致结果集发生变化的现象。这是因为REPEATABLE READ级别只保证了已经存在的数据不会发生变化，但不保证新插入的数据或被删除的数据在同一事务内不可见。</li>
+</ol>
+<p>适用场景：REPEATABLE READ隔离级别适用于对数据一致性要求较高的场景，例如需要确保事务内部读取到的数据集保持不变，而不受其他并发事务的干扰。适用于对数据一致性要求高、并发访问较多的业务场景，如订单处理、库存管理等。</p>
+<p>需要注意的是，REPEATABLE READ级别仍然可能导致幻读问题。如果应用程序对幻读问题特别敏感，可以考虑使用更高的隔离级别，如SERIALIZABLE。然而，更高的隔离级别可能会带来性能的降低，需要综合考虑数据一致性和并发性能之间的权衡。在选择REPEATABLE READ级别时，应该仔细评估业务需求和系统性能，并确保通过其他手段（如锁机制或业务逻辑控制）来处理可能的幻读问题。</p>
+<p>此外，使用REPEATABLE READ级别时，应注意事务的持续时间。由于REPEATABLE READ级别会在整个事务期间锁定读取的数据，长时间持有锁可能会影响并发性能和系统的吞吐量。因此，对于较长的事务，建议尽量缩小事务范围，减少锁的持有时间，以提高系统的并发性能。</p>
+<p>总之，REPEATABLE READ隔离级别适用于对数据一致性要求较高、并发访问较多的业务场景。它提供了较高的数据一致性和隔离性，并具备较好的并发性能。然而，应该注意幻读问题的存在，并根据具体业务需求和系统特点进行评估和权衡，选择适当的事务隔离级别。</p>
+<h4><a id="serializable%EF%BC%88%E4%B8%B2%E8%A1%8C%E5%8C%96%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>SERIALIZABLE（串行化）</h4>
+<p>SERIALIZABLE（串行化）是最高级别的事务隔离级别，它提供了最严格的数据一致性和隔离性。在SERIALIZABLE级别下，事务按照串行的方式执行，确保事务之间互不干扰，避免了各种并发性问题。</p>
+<p>SERIALIZABLE隔离级别具有以下特点和适用场景：</p>
+<ol>
+<li>数据一致性：SERIALIZABLE级别提供了最高的数据一致性，确保事务读取的数据是从事务开始时的一致状态。在一个事务中，后续读取操作将读取到相同的数据，即使其他事务对数据进行了修改和提交。</li>
+<li>高隔离性：SERIALIZABLE级别提供了最高的隔离性，确保事务之间相互隔离，彼此不会产生任何干扰。这意味着并发事务之间无法读取或修改彼此的数据，从而避免了脏读、不可重复读和幻读等问题。</li>
+</ol>
+<p>适用场景：SERIALIZABLE级别适用于对数据一致性要求极高的场景，特别是在高并发写入和读取的情况下。它适用于对数据准确性要求非常严格的业务场景，如金融交易、银行系统、电子商务等。</p>
+<p>可能出现的问题：</p>
+<ol>
+<li>并发性能降低：由于SERIALIZABLE级别保证了最高的数据一致性和隔离性，事务需要按照串行方式执行，这可能导致并发性能降低。因为事务需要等待其他事务完成后才能继续执行，可能会引起较高的锁竞争和事务等待。</li>
+<li>死锁：由于SERIALIZABLE级别对事务之间的并发操作进行严格控制，可能导致死锁的发生。当多个事务相互等待对方释放锁资源时，可能会形成死锁，导致事务无法继续执行。</li>
+</ol>
+<p>需要注意的是，由于SERIALIZABLE级别的严格性和性能影响，一般情况下只在必要时才使用。大多数应用程序可以通过选择适当的隔离级别来平衡数据一致性和并发性能。如果应用程序对数据一致性的要求非常高，同时并发访问相对较少，才考虑使用SERIALIZABLE级别。否则，通常可以选择较低级别的隔离级别，如REPEATABLE READ或READ COMMITTED。</p>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2020-2023 油脂青年
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
+
+  </body>
+</html>

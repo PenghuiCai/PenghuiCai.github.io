@@ -140,56 +140,35 @@
                 </div>
                   <article class="markdown-body single-content">
                     <blockquote>
-</li>
-<li>
-<a href="#toc_1">进入本地 clone 的旧库目录</a>
-</li>
-<li>
-<a href="#toc_2">移除旧库的地址替换成新库地址</a>
-</li>
-<li>
-<a href="#toc_3">将新地址镜像 core 直接推到远程新库</a>
-</li>
-<li>
-<a href="#toc_4">删除本地库 core，然后再重新拉取</a>
-</li>
-<li>
-<a href="#toc_5">已搞定</a>
-</li>
+<div class="mweb_toc"><ul>
+<li><a href="#clone%E6%97%A7%E5%BA%93%E7%9A%84%E9%95%9C%E5%83%8F">clone 旧库的镜像</a></li>
+<li><a href="#%E8%BF%9B%E5%85%A5%E6%9C%AC%E5%9C%B0clone%E7%9A%84%E6%97%A7%E5%BA%93%E7%9B%AE%E5%BD%95">进入本地 clone 的旧库目录</a></li>
+<li><a href="#%E7%A7%BB%E9%99%A4%E6%97%A7%E5%BA%93%E7%9A%84%E5%9C%B0%E5%9D%80%E6%9B%BF%E6%8D%A2%E6%88%90%E6%96%B0%E5%BA%93%E5%9C%B0%E5%9D%80">移除旧库的地址替换成新库地址</a></li>
+<li><a href="#%E5%B0%86%E6%96%B0%E5%9C%B0%E5%9D%80%E9%95%9C%E5%83%8Fcore%E7%9B%B4%E6%8E%A5%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%96%B0%E5%BA%93">将新地址镜像 core 直接推到远程新库</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%BA%93core%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%8D%E9%87%8D%E6%96%B0%E6%8B%89%E5%8F%96">删除本地库 core，然后再重新拉取</a></li>
+<li><a href="#%E5%B7%B2%E6%90%9E%E5%AE%9A">已搞定</a></li>
 </ul>
-
-
-<h2 id="toc_0">clone 旧库的镜像</h2>
+</div>
 </blockquote>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror https://xxx.com/old/core.git
+<h2><a id="clone%E6%97%A7%E5%BA%93%E7%9A%84%E9%95%9C%E5%83%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>clone 旧库的镜像</h2>
+<pre class="line-numbers"><code class="language-plain_text">git clone --mirror https://xxx.com/old/core.git
 </code></pre>
-
-<h2 id="toc_1">进入本地 clone 的旧库目录</h2>
-
-<pre class="line-numbers"><code class="language-text">cd core.git
+<h2><a id="%E8%BF%9B%E5%85%A5%E6%9C%AC%E5%9C%B0clone%E7%9A%84%E6%97%A7%E5%BA%93%E7%9B%AE%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>进入本地 clone 的旧库目录</h2>
+<pre class="line-numbers"><code class="language-plain_text">cd core.git
 </code></pre>
-
-<h2 id="toc_2">移除旧库的地址替换成新库地址</h2>
-
-<pre class="line-numbers"><code class="language-text">git remote set-url --push origin https://xxx.com/new/core.git
+<h2><a id="%E7%A7%BB%E9%99%A4%E6%97%A7%E5%BA%93%E7%9A%84%E5%9C%B0%E5%9D%80%E6%9B%BF%E6%8D%A2%E6%88%90%E6%96%B0%E5%BA%93%E5%9C%B0%E5%9D%80" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>移除旧库的地址替换成新库地址</h2>
+<pre class="line-numbers"><code class="language-plain_text">git remote set-url --push origin https://xxx.com/new/core.git
 </code></pre>
-
-<h2 id="toc_3">将新地址镜像 core 直接推到远程新库</h2>
-
-<pre class="line-numbers"><code class="language-text">git push --mirror
+<h2><a id="%E5%B0%86%E6%96%B0%E5%9C%B0%E5%9D%80%E9%95%9C%E5%83%8Fcore%E7%9B%B4%E6%8E%A5%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%96%B0%E5%BA%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>将新地址镜像 core 直接推到远程新库</h2>
+<pre class="line-numbers"><code class="language-plain_text">git push --mirror
 </code></pre>
-
-<h2 id="toc_4">删除本地库 core，然后再重新拉取</h2>
-
-<pre class="line-numbers"><code class="language-text">rm -rf core.git
+<h2><a id="%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%BA%93core%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%8D%E9%87%8D%E6%96%B0%E6%8B%89%E5%8F%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>删除本地库 core，然后再重新拉取</h2>
+<pre class="line-numbers"><code class="language-plain_text">rm -rf core.git
 
 git clone -b prod https://xxx.com/new/core.git
 </code></pre>
-
-<h2 id="toc_5">已搞定</h2>
-
-<pre class="line-numbers"><code class="language-text">git clone --mirror old.git
+<h2><a id="%E5%B7%B2%E6%90%9E%E5%AE%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>已搞定</h2>
+<pre class="line-numbers"><code class="language-plain_text">git clone --mirror old.git
 
 cd old.git
 
@@ -249,7 +228,11 @@ git push --mirror
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

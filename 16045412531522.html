@@ -141,37 +141,31 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {Consignment} where {code}=&#39;XS20062200002001&#39;&quot;
+                    <pre class="line-numbers"><code class="language-plain_text">&quot;$query=select {pk} from {Consignment} where {code}='XS20062200002001'&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
-INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias=&#39;ConsignmentExtend.orderApproveTimes&#39;];consignmentExtend(isNoticeNewPosStatus(code))[alias=&#39;通知新POS状态&#39;];
+INSERT_UPDATE Consignment;code;consignmentExtend(orderApproveTimes)[alias='ConsignmentExtend.orderApproveTimes'];consignmentExtend(isNoticeNewPosStatus(code))[alias='通知新POS状态'];
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 
 ##### ndcWarehouses是一个set集合，无多对多关联关系表，仅保留pk表的PK，导出对应字段model的任意字段，包括它关联model的字段
-&quot;$query=select {pk} FROM {UserGroup} WHERE {uid} = &#39;admingroup&#39;&quot;
+&quot;$query=select {pk} FROM {UserGroup} WHERE {uid} = 'admingroup'&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;UserGroup.txt&quot;&quot;);&quot;
 INSERT_UPDATE UserGroup;uid;ndcWarehouses(code);
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
-
 <p>ImpEx 导出 省市区</p>
-
-<pre class="line-numbers"><code class="language-text">&quot;$query=select {pk} from {District}&quot;
+<pre class="line-numbers"><code class="language-plain_text">&quot;$query=select {pk} from {District}&quot;
 &quot;#% impex.setTargetFile(&quot;&quot;District.txt&quot;&quot;);&quot;
-INSERT_UPDATE District;code[alias=&#39;区县&#39;];name[lang=zh,alias=&#39;区县&#39;];city(code);city(name[lang=zh])[alias=&#39;市&#39;];city(region(isocode))[alias=&#39;省&#39;];city(region(name[lang=zh]))[alias=&#39;省&#39;];city(region(country(isocode)))[alias=&#39;国家&#39;];city(region(country(name[lang=zh])))[alias=&#39;国家&#39;];
+INSERT_UPDATE District;code[alias='区县'];name[lang=zh,alias='区县'];city(code);city(name[lang=zh])[alias='市'];city(region(isocode))[alias='省'];city(region(name[lang=zh]))[alias='省'];city(region(country(isocode)))[alias='国家'];city(region(country(name[lang=zh])))[alias='国家'];
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
-
 <p>导出</p>
-
-<pre class="line-numbers"><code class="language-text">&quot;$query=select {c.pk} from {consignment as c} where {c.modifiedtime} &lt; &#39;2021-04-07 09:40:00&#39; AND {c.acceptedStatus} = 8796118745179 &quot;
+<pre class="line-numbers"><code class="language-plain_text">&quot;$query=select {c.pk} from {consignment as c} where {c.modifiedtime} &lt; '2021-04-07 09:40:00' AND {c.acceptedStatus} = 8796118745179 &quot;
 &quot;#% impex.setTargetFile(&quot;&quot;consignment.txt&quot;&quot;);&quot;
-INSERT_UPDATE Consignment;code;status(name[lang=zh])[alias=&#39;状态&#39;];occupyStatus(name[lang=zh])[alias=&#39;占货状态&#39;];acceptedStatus(name[lang=zh])[alias=&#39;接受状态&#39;];abnormalType(name[lang=zh])[alias=&#39;异常类型&#39;];abnormalStatus(name[lang=zh])[alias=&#39;异常状态&#39;];
+INSERT_UPDATE Consignment;code;status(name[lang=zh])[alias='状态'];occupyStatus(name[lang=zh])[alias='占货状态'];acceptedStatus(name[lang=zh])[alias='接受状态'];abnormalType(name[lang=zh])[alias='异常类型'];abnormalStatus(name[lang=zh])[alias='异常状态'];
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1);&quot;
 </code></pre>
-
-<h1 id="toc_0">ImpEx 多表单行导入</h1>
-
-<pre class="line-numbers"><code class="language-text">INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);consignmentExtend(isNoticeNewPosStatus(code));
+<h1><a id="impex%E5%A4%9A%E8%A1%A8%E5%8D%95%E8%A1%8C%E5%AF%BC%E5%85%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 多表单行导入</h1>
+<pre class="line-numbers"><code class="language-plain_text">INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orderApproveTimes);consignmentExtend(isNoticeNewPosStatus(code));
 ;XS20062200002001;1;2;PENDING
 
 
@@ -228,7 +222,11 @@ INSERT_UPDATE Consignment;code[unique=true];approvedTimes;consignmentExtend(orde
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

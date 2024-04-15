@@ -141,94 +141,59 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <ul>
-<li>
-<a href="#toc_0">脚本在底部</a>
-</li>
-<li>
-<a href="#toc_1">GOGS 安装</a>
-</li>
-<li>
-<a href="#toc_2">GOGS 配置</a>
+                    <div class="mweb_toc"><ul>
+<li><a href="#%E8%84%9A%E6%9C%AC%E5%9C%A8%E5%BA%95%E9%83%A8">脚本在底部</a></li>
+<li><a href="#gogs%E5%AE%89%E8%A3%85">GOGS 安装</a></li>
+<li><a href="#gogs%E9%85%8D%E7%BD%AE">GOGS 配置</a>
 <ul>
-<li>
-<a href="#toc_3">1、数据库设置</a>
-</li>
-<li>
-<a href="#toc_4">2、应用基本设置</a>
-</li>
-<li>
-<a href="#toc_5">3、选择设置</a>
-</li>
-<li>
-<a href="#toc_6">4、立即安装</a>
-</li>
+<li><a href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E7%BD%AE">1、数据库设置</a></li>
+<li><a href="#2%E3%80%81%E5%BA%94%E7%94%A8%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE">2、应用基本设置</a></li>
+<li><a href="#3%E3%80%81%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE">3、选择设置</a></li>
+<li><a href="#4%E3%80%81%E7%AB%8B%E5%8D%B3%E5%AE%89%E8%A3%85">4、立即安装</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_7">GOGS 启动、停止、重启脚本</a>
-</li>
-<li>
-<a href="#toc_8">GOGS安装脚本</a>
-</li>
-<li>
-<a href="#toc_9">GOGS启动脚本</a>
-</li>
+<li><a href="#gogs%E5%90%AF%E5%8A%A8%E3%80%81%E5%81%9C%E6%AD%A2%E3%80%81%E9%87%8D%E5%90%AF%E8%84%9A%E6%9C%AC">GOGS 启动、停止、重启脚本</a></li>
+<li><a href="#gogs%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC">GOGS安装脚本</a></li>
+<li><a href="#gogs%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC">GOGS启动脚本</a></li>
 </ul>
-
-
-<h2 id="toc_0">脚本在底部</h2>
-
-<h2 id="toc_1">GOGS 安装</h2>
-
-<p><img src="media/15891852674965/2.png" alt="安装"/></p>
-
-<h2 id="toc_2">GOGS 配置</h2>
-
-<h3 id="toc_3">1、数据库设置</h3>
-
+</div>
+<h2><a id="%E8%84%9A%E6%9C%AC%E5%9C%A8%E5%BA%95%E9%83%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>脚本在底部</h2>
+<h2><a id="gogs%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOGS 安装</h2>
+<p><img src="media/15891852674965/2.png" alt="安装" /></p>
+<h2><a id="gogs%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOGS 配置</h2>
+<h3><a id="1%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1、数据库设置</h3>
 <blockquote>
-<p>修改数据库类型为: <mark>SQLite3</mark><br/>
-数据库文件路径: <mark>/home/git/gogs-data/gogs.db</mark></p>
+<p>修改数据库类型为: ==SQLite3==<br />
+数据库文件路径: ==/home/git/gogs-data/gogs.db==</p>
 </blockquote>
-
-<h3 id="toc_4">2、应用基本设置</h3>
-
+<h3><a id="2%E3%80%81%E5%BA%94%E7%94%A8%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2、应用基本设置</h3>
 <blockquote>
-<p>应用名称为: <mark>XXXGIT</mark><br/>
-仓库根目录: <mark>/home/git/gogs-repositories</mark><br/>
-运行系统用户: <mark>git</mark><br/>
-域名: <mark>host_ip</mark> （<em>服务器 ip 地址/域名 如：10.1.255.156</em>）<br/>
-SSH 端口号: <mark>22</mark><br/>
-HTTP 端口号: <mark>3000</mark>（<em>3000</em>）<br/>
-应用 URL: <mark>http://host_ip:3000</mark>（<em>服务器 ip:80 地址/域名 如：<a href="http://10.1.255.156:3000">http://10.1.255.156:3000</a></em>）<br/>
-日志路径: <mark>/home/git/gogs-log</mark></p>
+<p>应用名称为: ==XXXGIT==<br />
+仓库根目录: ==/home/git/gogs-repositories==<br />
+运行系统用户: ==git==<br />
+域名: ==host_ip== （<em>服务器 ip 地址/域名 如：10.1.255.156</em>）<br />
+SSH 端口号: ==22==<br />
+HTTP 端口号: ==3000==（<em>3000</em>）<br />
+应用 URL: ==http://host_ip:3000==（*服务器 ip:80 地址/域名 如：<a href="http://10.1.255.156:3000*%EF%BC%89">http://10.1.255.156:3000*）</a><br />
+日志路径: ==/home/git/gogs-log==</p>
 </blockquote>
-
-<h3 id="toc_5">3、选择设置</h3>
-
+<h3><a id="3%E3%80%81%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3、选择设置</h3>
 <blockquote>
-<p>管理员帐号设置<br/>
-管理员用户名: <mark>gogsadmin</mark><br/>
-管理员密码: <mark>123456</mark><br/>
-确认密码: <mark>同上</mark><br/>
-管理员邮箱: <mark><a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a></mark></p>
+<p>管理员帐号设置<br />
+管理员用户名: ==gogsadmin==<br />
+管理员密码: ==123456==<br />
+确认密码: ==同上==<br />
+管理员邮箱: ==<a href="mailto:kellen.cai@126.com">kellen.cai@126.com</a>==</p>
 </blockquote>
-
-<h3 id="toc_6">4、立即安装</h3>
-
+<h3><a id="4%E3%80%81%E7%AB%8B%E5%8D%B3%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4、立即安装</h3>
 <blockquote>
 <p>点击【立即安装】按钮即可</p>
 </blockquote>
-
-<h2 id="toc_7">GOGS 启动、停止、重启脚本</h2>
-
-<p><code>shell脚本在底部</code><br/>
-<img src="media/15891852674965/3.png" alt="shell脚本在底部"/></p>
-
-<h2 id="toc_8">GOGS安装脚本</h2>
-
-<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+<h2><a id="gogs%E5%90%AF%E5%8A%A8%E3%80%81%E5%81%9C%E6%AD%A2%E3%80%81%E9%87%8D%E5%90%AF%E8%84%9A%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOGS 启动、停止、重启脚本</h2>
+<p><code>shell脚本在底部</code><br />
+<img src="media/15891852674965/3.png" alt="shell脚本在底部" /></p>
+<h2><a id="gogs%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOGS安装脚本</h2>
+<pre class="line-numbers"><code class="language-plain_text">#!/usr/bin/env bash
 set -e
 # Root执行 CentOS7
 sleep 1s
@@ -298,7 +263,7 @@ iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
 # iptables -t nat -F PREROUTING
 
 sleep 1s
-PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+PID=$(ps -ef | grep gogs | grep -v grep | awk '{print $2}')
 
 if [[ ! $PID ]]; then
     echo &quot;################ 检测 gogs 服务未启动&quot;
@@ -313,8 +278,8 @@ echo &quot;################ 开始启动 gogs 服务&quot;
 sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
 
 sleep 3s
-PID2=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
-HOST_IP=`ip a |grep eth0 | grep inet | grep -v inet6 | grep -v 127 | sed &#39;s/^[ \t]*//g&#39; | cut -d &#39; &#39; -f2 | cut -d / -f 1`
+PID2=$(ps -ef | grep gogs | grep -v grep | awk '{print $2}')
+HOST_IP=`ip a |grep eth0 | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | cut -d ' ' -f2 | cut -d / -f 1`
 echo &quot;PID = $PID2&quot;
 if [[ ! $PID2 ]]; then
     echo -e &quot;\033[31m gogs 服务启动失败！请尝试重新启动\033[0m&quot;
@@ -326,13 +291,11 @@ else
     echo &quot;#######################################################################&quot;
 fi
 </code></pre>
-
-<h2 id="toc_9">GOGS启动脚本</h2>
-
-<pre class="line-numbers"><code class="language-text">#!/usr/bin/env bash
+<h2><a id="gogs%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GOGS启动脚本</h2>
+<pre class="line-numbers"><code class="language-plain_text">#!/usr/bin/env bash
 set -e
 
-PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+PID=$(ps -ef | grep gogs | grep -v grep | awk '{print $2}')
 MODE=$1
 case &quot;${MODE}&quot; in
     stop)
@@ -351,7 +314,7 @@ case &quot;${MODE}&quot; in
           echo &quot;已停止gogs服务&quot;
         fi
         sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
-        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        PID=$(ps -ef | grep gogs | grep -v grep | awk '{print $2}')
         echo &quot;gogs服务启动成功PID=${PID}&quot;
     ;;
     start)
@@ -362,7 +325,7 @@ case &quot;${MODE}&quot; in
           echo &quot;已停止gogs服务&quot;
         fi
         sudo su - git -c &quot;cd /opt/gogs &amp;&amp; nohup ./gogs web &amp;&quot;
-        PID=$(ps -ef | grep gogs | grep -v grep | awk &#39;{print $2}&#39;)
+        PID=$(ps -ef | grep gogs | grep -v grep | awk '{print $2}')
         echo &quot;gogs服务启动成功PID=${PID}&quot;
     ;;
     *)
@@ -398,6 +361,9 @@ esac
 
 
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
   
 
 
@@ -420,7 +386,11 @@ esac
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

@@ -139,66 +139,43 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <pre class="line-numbers"><code class="language-text">error reading property field &#39;attributeCode&#39;/&#39;p_attributeCode&#39; of item &#39;8951708354515&#39;/&#39;8951708354515&#39; (info was [attributeCode,p_attributeCode,class de.hybris.platform.util.Itemxxxxxxxx
+                    <pre class="line-numbers"><code class="language-plain_text">error reading property field 'attributeCode'/'p_attributeCode' of item '8951708354515'/'8951708354515' (info was [attributeCode,p_attributeCode,class de.hybris.platform.util.Itemxxxxxxxx
 xxxxxxxx
 xxxxxxxx
 xxxxxxxx
-Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column &#39;p_attributeCode&#39; not found.
+Caused by: de.hybris.platform.persistence.hjmp.HJMPException: java.sql.SQLException: Column 'p_attributeCode' not found.
 </code></pre>
-
+<div class="mweb_toc"><ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3">快速解决</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E6%AD%A5%E9%AA%A4">问题步骤</a>
 <ul>
-<li>
-<a href="#toc_0">快速解决</a>
-</li>
-<li>
-<a href="#toc_1">问题步骤</a>
-<ul>
-<li>
-<a href="#toc_2">1. 获取 itemType 类型的 pk</a>
-</li>
-<li>
-<a href="#toc_3">2. 根据类型 PK 获取 ItemType Code</a>
-</li>
-<li>
-<a href="#toc_4">3. 根据 Code 获取报错的那条数据</a>
-</li>
-<li>
-<a href="#toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</a>
-</li>
+<li><a href="#1%E8%8E%B7%E5%8F%96-itemtype%E7%B1%BB%E5%9E%8B%E7%9A%84-pk">1. 获取 itemType 类型的 pk</a></li>
+<li><a href="#2%E6%A0%B9%E6%8D%AE%E7%B1%BB%E5%9E%8B-pk%E8%8E%B7%E5%8F%96-itemtype-code">2. 根据类型 PK 获取 ItemType Code</a></li>
+<li><a href="#3%E6%A0%B9%E6%8D%AE-code%E8%8E%B7%E5%8F%96%E6%8A%A5%E9%94%99%E7%9A%84%E9%82%A3%E6%9D%A1%E6%95%B0%E6%8D%AE">3. 根据 Code 获取报错的那条数据</a></li>
+<li><a href="#4%E7%A1%AE%E8%AE%A4-item-xml%E6%98%AF%E5%90%A6%E7%A7%BB%E9%99%A4%E7%A7%BB%E9%99%A4%E8%BE%B9%E5%88%A0%E9%99%A4%E8%BF%99%E6%9D%A1%E6%95%B0%E6%8D%AE">4. 确认 item.xml 是否移除 移除边删除这条数据</a></li>
 </ul>
 </li>
 </ul>
-
-
-<h2 id="toc_0">快速解决</h2>
-
-<pre class="line-numbers"><code class="language-text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
-SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+</div>
+<h2><a id="%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>快速解决</h2>
+<pre class="line-numbers"><code class="language-plain_text"># 查询是否存在，确认item.xml是否移除该属性的定义，删除这条数据
+SELECT * FROM {AttributeDescriptor} WHERE {pk} = '8951708354515'
 
 REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
 ;8951708354515
 </code></pre>
-
-<h2 id="toc_1">问题步骤</h2>
-
-<h3 id="toc_2">1. 获取 itemType 类型的 pk</h3>
-
-<pre class="line-numbers"><code class="language-text">SELECT {itemtype} FROM {Item} WHERE {pk} = &#39;8951708354515&#39;
+<h2><a id="%E9%97%AE%E9%A2%98%E6%AD%A5%E9%AA%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>问题步骤</h2>
+<h3><a id="1%E8%8E%B7%E5%8F%96-itemtype%E7%B1%BB%E5%9E%8B%E7%9A%84-pk" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 获取 itemType 类型的 pk</h3>
+<pre class="line-numbers"><code class="language-plain_text">SELECT {itemtype} FROM {Item} WHERE {pk} = '8951708354515'
 </code></pre>
-
-<h3 id="toc_3">2. 根据类型 PK 获取 ItemType Code</h3>
-
-<pre class="line-numbers"><code class="language-text">SELECT {code} FROM {ComposedType} WHERE {pk} = &#39;8796107276370&#39;
+<h3><a id="2%E6%A0%B9%E6%8D%AE%E7%B1%BB%E5%9E%8B-pk%E8%8E%B7%E5%8F%96-itemtype-code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. 根据类型 PK 获取 ItemType Code</h3>
+<pre class="line-numbers"><code class="language-plain_text">SELECT {code} FROM {ComposedType} WHERE {pk} = '8796107276370'
 </code></pre>
-
-<h3 id="toc_4">3. 根据 Code 获取报错的那条数据</h3>
-
-<pre class="line-numbers"><code class="language-text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = &#39;8951708354515&#39;
+<h3><a id="3%E6%A0%B9%E6%8D%AE-code%E8%8E%B7%E5%8F%96%E6%8A%A5%E9%94%99%E7%9A%84%E9%82%A3%E6%9D%A1%E6%95%B0%E6%8D%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 根据 Code 获取报错的那条数据</h3>
+<pre class="line-numbers"><code class="language-plain_text">SELECT * FROM {AttributeDescriptor} WHERE {pk} = '8951708354515'
 </code></pre>
-
-<h3 id="toc_5">4. 确认 item.xml 是否移除 移除边删除这条数据</h3>
-
-<pre class="line-numbers"><code class="language-text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
+<h3><a id="4%E7%A1%AE%E8%AE%A4-item-xml%E6%98%AF%E5%90%A6%E7%A7%BB%E9%99%A4%E7%A7%BB%E9%99%A4%E8%BE%B9%E5%88%A0%E9%99%A4%E8%BF%99%E6%9D%A1%E6%95%B0%E6%8D%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 确认 item.xml 是否移除 移除边删除这条数据</h3>
+<pre class="line-numbers"><code class="language-plain_text">REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
 ;8951708354515
 </code></pre>
 
@@ -251,7 +228,11 @@ REMOVE AttributeDescriptor[batchmode=false];pk[unique=true]
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

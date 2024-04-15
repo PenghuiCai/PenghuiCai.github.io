@@ -139,169 +139,192 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <ul>
-<li>
-<a href="#toc_0">tail</a>
-</li>
-<li>
-<a href="#toc_1">less</a>
-</li>
-<li>
-<a href="#toc_2">cat + grep 组合</a>
-</li>
-<li>
-<a href="#toc_3">日志文件时间排序</a>
-</li>
+                    <div class="mweb_toc"><ul>
+<li><a href="#tail">tail</a></li>
+<li><a href="#less">less</a></li>
+<li><a href="#cat-grep%E7%BB%84%E5%90%88">cat + grep 组合</a></li>
+<li><a href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F">日志文件时间排序</a></li>
 </ul>
-
-
-<h2 id="toc_0">tail</h2>
-
+</div>
+<h2><a id="tail" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>tail</h2>
 <p>tail 命令可用于查看文件的内容，它有一个常用的参数 -f 常用于查看正在改变的日志文件。</p>
-
 <ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
-</code></pre></li>
-<li><p>无参：显示尾部 10 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail console.log
-</code></pre></li>
-<li><p>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</p>
-<pre class="line-numbers"><code class="language-shell">tail -f console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 20 行内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
-</code></pre></li>
-<li><p>读取日志文件尾部 10 个字节内容</p>
-<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
-</code></pre></li>
+<li>命令格式</li>
 </ul>
-
+<pre class="line-numbers"><code class="language-shell">tail [参数] [文件名]
+</code></pre>
+<ul>
+<li>无参：显示尾部 10 行内容</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">tail console.log
+</code></pre>
+<ul>
+<li>循环读取日志文件，显示文件尾部 10 行内容并一直加载新的内容(Ctrl+C组合件结束加载)</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">tail -f console.log
+</code></pre>
+<ul>
+<li>读取日志文件尾部 20 行内容</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">tail -n 20 console.log
+</code></pre>
+<ul>
+<li>读取日志文件尾部 10 个字节内容</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">tail -c 10 console.log
+</code></pre>
 <p>注意</p>
-
-<pre class="line-numbers"><code class="language-text">1. 以上命令，不设置具体值，默认尾部 10 行
+<pre class="line-numbers"><code class="language-plain_text">1. 以上命令，不设置具体值，默认尾部 10 行
 2. 数字前可以使用 - 符号，默认 - 从文件尾部开始往上 n 行/字节
 3. 相反，数字前也可以使用 + 符号，+ 表示除去文件头部 n 行、字节之外到文件尾部的文件内容显示
 </code></pre>
-
-<h2 id="toc_1">less</h2>
-
+<h2><a id="less" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>less</h2>
 <p>less 命令可随意查看整个文件内容，主要用于大文件查找。以一页（屏幕范围）一页的显示方便使用者逐页阅读，而且 less 在查看之前不会加载整个文件。</p>
-
 <ul>
-<li><p>命令格式</p>
-<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
-</code></pre></li>
-<li><p>查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less console.log
-</code></pre></li>
-<li><p>显示行号查看文件，文件头部开始展示一屏幕范围内容</p>
-<pre class="line-numbers"><code class="language-shell">less -N console.log
-</code></pre></li>
-<li><p>查看文件，搜索指令时忽略大小写</p>
-<pre class="line-numbers"><code class="language-shell">less -i console.log
-</code></pre></li>
-<li><p>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">/字符串
-</code></pre></li>
-<li><p>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</p>
-<pre class="line-numbers"><code class="language-shell">?字符串
-</code></pre></li>
-<li><p>搜索指令，仅显示匹配“字符串”的行</p>
-<pre class="line-numbers"><code class="language-shell">&amp;字符串
-</code></pre></li>
-<li><p>滚动指令，向上一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
-</code></pre></li>
-<li><p>滚动指令，向下一行</p>
-<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
-</code></pre></li>
-<li><p>滚动指令，向下滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">键盘空格键
-</code></pre></li>
-<li><p>滚动命令，向上滚动一屏幕</p>
-<pre class="line-numbers"><code class="language-shell">b
-</code></pre></li>
-<li><p>滚动命令，滚动到头部</p>
-<pre class="line-numbers"><code class="language-shell">g
-</code></pre></li>
-<li><p>滚动命令，滚动到尾部</p>
-<pre class="line-numbers"><code class="language-shell">G
-</code></pre></li>
-<li><p>退出less模式</p>
-<pre class="line-numbers"><code class="language-shell">q
-</code></pre></li>
+<li>命令格式</li>
 </ul>
-
-<h2 id="toc_2">cat + grep 组合</h2>
-
-<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
-
+<pre class="line-numbers"><code class="language-shell">less [参数] 文件名
+</code></pre>
 <ul>
-<li><p>命令格式</p>
+<li>查看文件，文件头部开始展示一屏幕范围内容</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">less console.log
+</code></pre>
+<ul>
+<li>显示行号查看文件，文件头部开始展示一屏幕范围内容</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">less -N console.log
+</code></pre>
+<ul>
+<li>查看文件，搜索指令时忽略大小写</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">less -i console.log
+</code></pre>
+<ul>
+<li>搜索指令，向下搜索“字符串”，n 查看下一个，N 查看上一个</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">/字符串
+</code></pre>
+<ul>
+<li>搜索指令，向上搜索“字符串”，n 查看下一个，N 查看上一个</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">?字符串
+</code></pre>
+<ul>
+<li>搜索指令，仅显示匹配“字符串”的行</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">&amp;字符串
+</code></pre>
+<ul>
+<li>滚动指令，向上一行</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">键盘上键:⬆️
+</code></pre>
+<ul>
+<li>滚动指令，向下一行</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">键盘下键:⬇️
+</code></pre>
+<ul>
+<li>滚动指令，向下滚动一屏幕</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">键盘空格键
+</code></pre>
+<ul>
+<li>滚动命令，向上滚动一屏幕</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">b
+</code></pre>
+<ul>
+<li>滚动命令，滚动到头部</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">g
+</code></pre>
+<ul>
+<li>滚动命令，滚动到尾部</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">G
+</code></pre>
+<ul>
+<li>退出less模式</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">q
+</code></pre>
+<h2><a id="cat-grep%E7%BB%84%E5%90%88" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat + grep 组合</h2>
+<p>cat + grep 组合可以根据条件检索出符合条件的行并把它们打印的另一个文件中，便于查看。</p>
+<ul>
+<li>命令格式</li>
+</ul>
 <pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep [参数] [参数] &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
+cat [源文件名] | grep [参数] [参数] &quot;条件&quot;
+# ======================================
+# 2. 将检索结果打印到目标文件中
 cat [源文件名] | grep [参数] [参数] &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>示例</p>
+</code></pre>
+<ul>
+<li>示例</li>
+</ul>
 <pre class="line-numbers"><code class="language-shell"># 检索 /logs/console-20190426.log 文件中包含字符串&quot;ERROR&quot;的行，并把这些行打印的20190426-error.log文件中。
 cat /logs/console-20190426.log | grep -A 0 &quot;ERROR&quot; &gt; 20190426-error.log
-</code></pre></li>
-<li><p>显示包括字符串的行及下面的 1 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -A 1 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索多个“或”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep -E &quot;条件1|条件2&quot;<br/>
-# ======================================<br/>
-# 3. 将检索多个“并”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep &quot;条件1&quot; | grep &quot;条件2&quot;<br/>
-# ======================================<br/>
-# 4. 将检索多个“或”+“并”检索条件结果打印在屏幕上显示<br/>
-cat [源文件名] | grep -E &quot;条件1|条件2&quot; | grep &quot;条件3&quot;<br/>
-# ======================================<br/>
-# 3. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 5 行记录</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -B 5 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-<li><p>显示包括字符串的行及上面的 10 行和下面 10 行</p>
-<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
-cat [源文件名] | grep -C 10 &quot;条件&quot;<br/>
-# ======================================<br/>
-# 2. 将检索结果打印到目标文件中<br/>
-cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
-</code></pre></li>
-</ul>
-
-<h2 id="toc_3">日志文件时间排序</h2>
-
+</code></pre>
 <ul>
-<li><p>按时间降序，从近到远</p>
-<pre class="line-numbers"><code class="language-shell">命令: ls -lt
-命令: ll -t <br/>
-详细解释:<br/>
--l     use a long listing format  以长列表方式显示（详细信息方式）<br/>
--t     sort by modification time 按修改时间排序（最新的在最前面）
-</code></pre></li>
-<li><p>按照时间升序，从远到近</p>
-<pre class="line-numbers"><code class="language-shell">命令: ls -ltr
-命令: ll -tr<br/>
-详细解释:<br/>
--l     use a long listing format  以长列表方式显示（详细信息方式）<br/>
--t     sort by modification time 按修改时间排序（最新的在最前面）<br/>
--r     reverse order while sorting （反序）<br/>
--n<br/>
--h     以高可读方式打印 (比如1K 234M 2G)
-</code></pre></li>
+<li>显示包括字符串的行及下面的 1 行记录</li>
 </ul>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -A 1 &quot;条件&quot;
+# ======================================
+# 2. 将检索多个“或”检索条件结果打印在屏幕上显示
+cat [源文件名] | grep -E &quot;条件1|条件2&quot;
+# ======================================
+# 3. 将检索多个“并”检索条件结果打印在屏幕上显示
+cat [源文件名] | grep &quot;条件1&quot; | grep &quot;条件2&quot;
+# ======================================
+# 4. 将检索多个“或”+“并”检索条件结果打印在屏幕上显示
+cat [源文件名] | grep -E &quot;条件1|条件2&quot; | grep &quot;条件3&quot;
+# ======================================
+# 3. 将检索结果打印到目标文件中
+cat [源文件名] | grep -A 1 &quot;条件&quot; &gt; [目标文件名]
+</code></pre>
+<ul>
+<li>显示包括字符串的行及上面的 5 行记录</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -B 5 &quot;条件&quot;
+# ======================================
+# 2. 将检索结果打印到目标文件中
+cat [源文件名] | grep -B 5 &quot;条件&quot; &gt; [目标文件名]
+</code></pre>
+<ul>
+<li>显示包括字符串的行及上面的 10 行和下面 10 行</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell"># 1. 将检索结果在屏幕上显示
+cat [源文件名] | grep -C 10 &quot;条件&quot;
+# ======================================
+# 2. 将检索结果打印到目标文件中
+cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
+</code></pre>
+<h2><a id="%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%8E%92%E5%BA%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>日志文件时间排序</h2>
+<ul>
+<li>按时间降序，从近到远</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">命令: ls -lt
+命令: ll -t 
+详细解释:
+-l     use a long listing format  以长列表方式显示（详细信息方式）
+-t     sort by modification time 按修改时间排序（最新的在最前面）
+</code></pre>
+<ul>
+<li>按照时间升序，从远到近</li>
+</ul>
+<pre class="line-numbers"><code class="language-shell">命令: ls -ltr
+命令: ll -tr
+详细解释:
+-l     use a long listing format  以长列表方式显示（详细信息方式）
+-t     sort by modification time 按修改时间排序（最新的在最前面）
+-r     reverse order while sorting （反序）
+-n
+-h     以高可读方式打印 (比如1K 234M 2G)
+</code></pre>
 
                   </article>
                   <div class="comments-wrap">
@@ -352,7 +375,11 @@ cat [源文件名] | grep -C 10 &quot;条件&quot; &gt; [目标文件名]
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

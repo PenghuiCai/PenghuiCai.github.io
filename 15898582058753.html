@@ -139,105 +139,93 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <ul>
-<li>
-<a href="#toc_0">创建 新功能 分支</a>
+                    <div class="mweb_toc"><ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF">创建 新功能 分支</a>
 <ul>
-<li>
-<a href="#toc_1">创建条件</a>
-</li>
-<li>
-<a href="#toc_2">命名规则</a>
-</li>
-<li>
-<a href="#toc_3">生命周期</a>
-</li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%9D%A1%E4%BB%B6">创建条件</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99">命名规则</a></li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></li>
 </ul>
 </li>
-<li>
-<a href="#toc_4">创建 bug修复 分支</a>
+<li><a href="#%E5%88%9B%E5%BB%BAbug%E4%BF%AE%E5%A4%8D%E5%88%86%E6%94%AF">创建 bug修复 分支</a>
 <ul>
-<li>
-<a href="#toc_5">创建条件</a>
-</li>
-<li>
-<a href="#toc_6">命名规则</a>
-</li>
-<li>
-<a href="#toc_7">生命周期</a>
-</li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%9D%A1%E4%BB%B6">创建条件</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99">命名规则</a></li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></li>
 </ul>
 </li>
 </ul>
-
-
-<h2 id="toc_0">创建 新功能 分支</h2>
-
-<h3 id="toc_1">创建条件</h3>
-
-<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支开发某个 新功能点 时创建
+</div>
+<h2><a id="%E5%88%9B%E5%BB%BA%E6%96%B0%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建 新功能 分支</h2>
+<h3><a id="%E5%88%9B%E5%BB%BA%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建条件</h3>
+<pre class="line-numbers"><code class="language-plain_text">基于对应的 master(prod) 分支开发某个 新功能点 时创建
 </code></pre>
-
-<h3 id="toc_2">命名规则</h3>
-
-<pre class="line-numbers"><code class="language-text">feature/authorName-createTime-functionalDescription
+<h3><a id="%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>命名规则</h3>
+<pre class="line-numbers"><code class="language-plain_text">feature/authorName-createTime-functionalDescription
 例1（无项目管理系统）：feature/xm-20190313-createOrder
 例2（有项目管理系统）：feature/xm-20190313-taskid
 </code></pre>
-
-<h3 id="toc_3">生命周期</h3>
-
+<h3><a id="%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>生命周期</h3>
 <ul>
-<li><p>开发前：</p>
-<pre class="line-numbers"><code class="language-text">从 master(prod) 分支创建 feature/xxx 分支完成开发任务
-</code></pre></li>
-<li><p>开发后：</p>
-<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支到 develop(develop/global) 分支进行功能测试
-</code></pre></li>
-<li><p>功能测试后：</p>
-<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 staging(release)  进行业务流程验收测试
-</code></pre></li>
-<li><p>验收测试后：</p>
-<pre class="line-numbers"><code class="language-text">合并 feature/xxx 分支至 master(prod)，等待部署上线
-</code></pre></li>
-<li><p>上线完成：</p>
-<pre class="line-numbers"><code class="language-text">观察一段时间，删除 feature/xxx 分支
-</code></pre></li>
+<li>开发前：</li>
 </ul>
-
-<h2 id="toc_4">创建 bug修复 分支</h2>
-
-<h3 id="toc_5">创建条件</h3>
-
-<pre class="line-numbers"><code class="language-text">基于对应的 master(prod) 分支修复某个 Bug 时创建
+<pre class="line-numbers"><code class="language-plain_text">从 master(prod) 分支创建 feature/xxx 分支完成开发任务
 </code></pre>
-
-<h3 id="toc_6">命名规则</h3>
-
-<pre class="line-numbers"><code class="language-text">bugfix/authorName-createTime-functionalDescription
+<ul>
+<li>开发后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 feature/xxx 分支到 develop(develop/global) 分支进行功能测试
+</code></pre>
+<ul>
+<li>功能测试后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 feature/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre>
+<ul>
+<li>验收测试后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 feature/xxx 分支至 master(prod)，等待部署上线
+</code></pre>
+<ul>
+<li>上线完成：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">观察一段时间，删除 feature/xxx 分支
+</code></pre>
+<h2><a id="%E5%88%9B%E5%BB%BAbug%E4%BF%AE%E5%A4%8D%E5%88%86%E6%94%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建 bug修复 分支</h2>
+<h3><a id="%E5%88%9B%E5%BB%BA%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建条件</h3>
+<pre class="line-numbers"><code class="language-plain_text">基于对应的 master(prod) 分支修复某个 Bug 时创建
+</code></pre>
+<h3><a id="%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>命名规则</h3>
+<pre class="line-numbers"><code class="language-plain_text">bugfix/authorName-createTime-functionalDescription
 例1（无项目管理系统）：bugfix/xm-20190313-saveOrderException
 例2（有项目管理系统）：bugfix/xm-20190313-taskid
 </code></pre>
-
-<h3 id="toc_7">生命周期</h3>
-
+<h3><a id="%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>生命周期</h3>
 <ul>
-<li><p>修复前：</p>
-<pre class="line-numbers"><code class="language-text">创建 bugfix/xxx 分支完成 bug 修补任务
-</code></pre></li>
-<li><p>修复后：</p>
-<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支到 develop 分支进行功能测试
-</code></pre></li>
-<li><p>功能测试后：</p>
-<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 staging(release)  进行业务流程验收测试
-</code></pre></li>
-<li><p>验收测试后：</p>
-<pre class="line-numbers"><code class="language-text">合并 bugfix/xxx 分支至 master(prod)，等待部署上线
-</code></pre></li>
-<li><p>上线完成：</p>
-<pre class="line-numbers"><code class="language-text">观察一段时间，删除  bugfix/xxx 分支
-</code></pre></li>
+<li>修复前：</li>
 </ul>
+<pre class="line-numbers"><code class="language-plain_text">创建 bugfix/xxx 分支完成 bug 修补任务
+</code></pre>
+<ul>
+<li>修复后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 bugfix/xxx 分支到 develop 分支进行功能测试
+</code></pre>
+<ul>
+<li>功能测试后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 bugfix/xxx 分支至 staging(release)  进行业务流程验收测试
+</code></pre>
+<ul>
+<li>验收测试后：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">合并 bugfix/xxx 分支至 master(prod)，等待部署上线
+</code></pre>
+<ul>
+<li>上线完成：</li>
+</ul>
+<pre class="line-numbers"><code class="language-plain_text">观察一段时间，删除  bugfix/xxx 分支
+</code></pre>
 
                   </article>
                   <div class="comments-wrap">
@@ -288,7 +276,11 @@
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

@@ -140,14 +140,12 @@
                 </div>
                   <article class="markdown-body single-content">
                     <blockquote>
-<p>hybris 的 admingroup 组中的所有用户，均具备操作 HAC 的初始化和更新功能的权限。<br/>
-然而，一旦系统上线，运维工作人员可能会继续使用该组的成员账户。<br/>
+<p>hybris 的 admingroup 组中的所有用户，均具备操作 HAC 的初始化和更新功能的权限。<br />
+然而，一旦系统上线，运维工作人员可能会继续使用该组的成员账户。<br />
 为了防止这些账户误操作导致数据库初始化或更新，我们需要一些额外的控制措施来限制它们的访问</p>
 </blockquote>
-
-<h2 id="toc_0">文件结构</h2>
-
-<pre class="line-numbers"><code class="language-text"># 增加hac模块
+<h2><a id="%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件结构</h2>
+<pre class="line-numbers"><code class="language-plain_text"># 增加hac模块
 xixiangbase
 ├── hac
 │       └──src/de/hybris/platform/hac/controller/InitUpdatePlatformController.java
@@ -164,18 +162,14 @@ xixiangbase
 ├── lib
 ├── src
 </code></pre>
-
-<h2 id="toc_1">新增配置项</h2>
-
-<pre class="line-numbers"><code class="language-text"># project.properties
+<h2><a id="%E6%96%B0%E5%A2%9E%E9%85%8D%E7%BD%AE%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>新增配置项</h2>
+<pre class="line-numbers"><code class="language-plain_text"># project.properties
 
 # true表示禁用，false表示开放
 hac.initialization.disable=true
 </code></pre>
-
-<h2 id="toc_2">扩展配置添加</h2>
-
-<pre class="line-numbers"><code class="language-markup">&lt;!-- extensioninfo.xml --&gt;
+<h2><a id="%E6%89%A9%E5%B1%95%E9%85%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>扩展配置添加</h2>
+<pre class="line-numbers"><code class="language-XML">&lt;!-- extensioninfo.xml --&gt;
 
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
 &lt;extensioninfo xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -189,10 +183,8 @@ hac.initialization.disable=true
   &lt;/extension&gt;
 &lt;/extensioninfo&gt;
 </code></pre>
-
-<h2 id="toc_3">初始化更新接口覆盖</h2>
-
-<pre class="line-numbers"><code class="language-java">package de.hybris.platform.hac.controller;
+<h2><a id="%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%8F%A3%E8%A6%86%E7%9B%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>初始化更新接口覆盖</h2>
+<pre class="line-numbers"><code class="language-Java">package de.hybris.platform.hac.controller;
 
 import de.hybris.platform.core.Registry;
 import de.hybris.platform.core.Tenant;
@@ -328,25 +320,21 @@ public class InitUpdatePlatformController {
 
 }
 </code></pre>
-
-<h2 id="toc_4">页面覆盖</h2>
-
+<h2><a id="%E9%A1%B5%E9%9D%A2%E8%A6%86%E7%9B%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>页面覆盖</h2>
 <pre class="line-numbers"><code class="language-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
 &lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;
 &lt;% pageContext.setAttribute(&quot;newLineChar&quot;, &quot;\n&quot;); %&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;title&gt;初始化&lt;/title&gt;
+	&lt;title&gt;初始化&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;h2 style=&quot;text-align: center; padding-top: 6em; height: 1.5em;&quot;&gt;${message}&lt;/h2&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-
-<h2 id="toc_5">菜单覆盖</h2>
-
-<pre class="line-numbers"><code class="language-javascript"># hac-tab-config.json
+<h2><a id="%E8%8F%9C%E5%8D%95%E8%A6%86%E7%9B%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>菜单覆盖</h2>
+<pre class="line-numbers"><code class="language-json"># hac-tab-config.json
 [
   {
     &quot;basePath&quot;: &quot;/platform&quot;,
@@ -504,7 +492,11 @@ public class InitUpdatePlatformController {
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

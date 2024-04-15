@@ -137,12 +137,9 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">传统架构</h2>
-
-<h3 id="toc_1">单一应用架构/单体架构</h3>
-
+                    <h2><a id="%E4%BC%A0%E7%BB%9F%E6%9E%B6%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>传统架构</h2>
+<h3><a id="%E5%8D%95%E4%B8%80%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>单一应用架构/单体架构</h3>
 <p>当网站流量很小时，简单单体结构，只需一个应用，将所有功能都部署在一起，运行在一个服务器上，以减少部署节点和成本。数据访问框架(ORM)是关键。</p>
-
 <ol>
 <li>特点：
 <ul>
@@ -150,13 +147,15 @@
 <li>所有功能打一个包就能完成</li>
 <li>应用与数据库分开部署</li>
 <li>通过部署应用集群和数据集群来提供性能</li>
-</ul></li>
+</ul>
+</li>
 <li>优势：
 <ul>
 <li>开发相当简单</li>
 <li>部署单一应用程序是很简单，只需将打包的应用程序复制到服务器</li>
 <li>横向扩展是很简单的。即：如果一台服务器不够用，则可以再部署一台全新的服务器，并且可以通过负载均衡器【例如Nginx】将负载分配到不同的服务器上。</li>
-</ul></li>
+</ul>
+</li>
 <li>劣势：
 <ul>
 <li>复杂性高，大项目整个项目包含的模块多，模块边界模糊，依赖关系不清晰，代码质量参差不齐，混乱的堆砌在一起，整个项目非常复杂，每次修改代码都胆战心惊，有时候就是仅仅新增了一个简单的功能，或者就是修改一个bug都会带来隐含的缺陷。</li>
@@ -164,76 +163,75 @@
 <li>可靠性，不可靠。如果一个特性出现故障，整个应用程序可能会出现故障</li>
 <li>开发速度，单一架构的大型项目开发缓慢，对于新的团队成员来说，理解和修改大型单一架构应用程序的代码是很困难的。代码质量会随着时间的推移而下降，应用程序越大，启动时间越长。</li>
 <li>不利于升级维护：某一个模块出现问题，则导致整个项目整体部署。</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
-<h3 id="toc_2">垂直应用框架</h3>
-
+<h3><a id="%E5%9E%82%E7%9B%B4%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>垂直应用框架</h3>
 <p>MVC模式、前后端分离模式、组件模式、类库模式、当业务规模较小时，把所有应用部署到同一个进程，通过双机或者前置负载均衡实现负载分流，或者大项目垂直拆分业务为一个个小项目，此时分离前后端是逻辑的MVC架构是关键。</p>
-
 <ol>
 <li>特点：
 <ul>
 <li>以单体架构的大规模项目，进行垂直划分项目，将大项目拆分成一个个单体结构项目</li>
 <li>项目与项目之前的存在数据冗余，耦合性较大</li>
 <li>项目之间的接口多为数据同步功能</li>
-</ul></li>
+</ul>
+</li>
 <li>优点：
 <ul>
 <li>项目架构简单，前期开发成本低，周期短，小型项目的首选</li>
 <li>通过垂直拆分，原来的单体项目不至于无限放大</li>
 <li>不同的项目可以采用不同的技术</li>
-</ul></li>
+</ul>
+</li>
 <li>缺点：
 <ul>
 <li>系统之间相互独立，有重复的开发任务</li>
 <li>系统性能扩展只能通过扩展集群节点，成本高，有瓶颈</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
-<h2 id="toc_3">分布式架构</h2>
-
-<h3 id="toc_4">面向服务的体系结构(SOA，service-oriented architecture)</h3>
-
+<h2><a id="%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>分布式架构</h2>
+<h3><a id="%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84soa%EF%BC%8Cservice-oriented-architecture" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>面向服务的体系结构(SOA，service-oriented architecture)</h3>
 <p>垂直应用越来越多时，重复的代码量也会递增，所以出现了分布式架构，它将工程拆分为表现层和服务层两个部分，服务层中包含业务逻辑，表层只需要处理和页面的交互，业务逻辑都是调用服务层的服务来实现，此时提升业务复用性和拆分是关键，RPC和MQ是SOA的两大基石。（RPC，Remote Procedure Call 远程过程调用）是一个计算机面向方法的通信协议。 该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程。A计算机提供一个服务，B计算机同过参数传递的方式可以像调用本地服务那样调用A计算机的服务。</p>
-
 <ol>
 <li>特点:
 <ul>
 <li>该定义并不特指一种技术，而是一种分布式运算的软件设计方法。软件的部分组件（调用者），可以透过网络上的通用协议调用另一个应用软件组件运行、运作，让调用者获得服务。</li>
 <li>基于SOA思想将重复、公共的功能抽取为组件，以服务方式给各个系统提供服务</li>
 <li>各个项目（系统）与服务之间采用webService、RPC等方式通讯</li>
-</ul></li>
+</ul>
+</li>
 <li>优点：
 <ul>
 <li>将重复、公共的功能抽取为服务，提高开发效率，提高系统的可复用性，可维护性</li>
 <li>可以针对不同服务的特点指定集群及优化方案。</li>
 <li>基于ESB/DUBBO减少系统耦合</li>
-</ul></li>
+</ul>
+</li>
 <li>缺点：
 <ul>
 <li>系统与服务界限模糊，不利于开发和维护；</li>
 <li>抽象服务的粒度过大，系统与服务之间耦合性高。</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
-<h3 id="toc_5">微服务架构（MSA，MicroServices Architecture）</h3>
-
+<h3><a id="%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%EF%BC%88msa%EF%BC%8Cmicroservices-architecture%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>微服务架构（MSA，MicroServices Architecture）</h3>
 <p>微服务架构和分布式SOA架构有一点类似，但是区别也很明显，SOA是面向服务的架构，从顶层的应用到底层的数据库设计都是基于应用来设计，但是微服务是将服务原子化，独立拆分成各个独立的系统。</p>
-
 <ol>
 <li>优点：
 <ul>
 <li>去中心化，通过服务的原子化拆分，以及微服务的独立打包、部署和升级，小团队的交付周期将缩短，运维成本也将大幅度下降；</li>
 <li>微服务遵循单一原则。微服务之间采用Restful等轻量协议传输。</li>
 <li>产品迭代周期更短，业务迭代快</li>
-</ul></li>
+</ul>
+</li>
 <li>缺点：
 <ul>
 <li>微服务过多，服务治理成本高，不利于系统维护；</li>
 <li>业务发展比较稳定其实并不建议使用微服务架构，通讯成本增加，架构复杂增加；</li>
 <li>分布式系统开发的技术成本高（容错、分布式事务等），对团队挑战大。</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 
                   </article>
@@ -283,7 +281,11 @@
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

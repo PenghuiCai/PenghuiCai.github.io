@@ -139,56 +139,39 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <pre class="line-numbers"><code class="language-text">FATAL ERROR：Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+                    <pre class="line-numbers"><code class="language-plain_text">FATAL ERROR：Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
 </code></pre>
-
-<h1 id="toc_0">启动服务</h1>
-
-<pre class="line-numbers"><code class="language-text">yarn install
+<h1><a id="%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>启动服务</h1>
+<pre class="line-numbers"><code class="language-plain_text">yarn install
 # 启动roadhog
 yarn build:dll
 # 启动应用
 yarn start
 </code></pre>
-
-<h1 id="toc_1">编译失败异常</h1>
-
-<p><img src="media/16559527064386/16559527798736.jpg" alt=""/></p>
-
-<h1 id="toc_2">原因可能是<code>nodejs</code>版本过低，升级版本后在尝试</h1>
-
-<p><img src="media/16559527064386/16559528035670.jpg" alt=""/></p>
-
-<h1 id="toc_3">查看<code>node</code>版本</h1>
-
-<pre class="line-numbers"><code class="language-text">node -v
+<h1><a id="%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E5%BC%82%E5%B8%B8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>编译失败异常</h1>
+<p><img src="media/16559527064386/16559527798736.jpg" alt="" /></p>
+<h1><a id="%E5%8E%9F%E5%9B%A0%E5%8F%AF%E8%83%BD%E6%98%AFnodejs%E7%89%88%E6%9C%AC%E8%BF%87%E4%BD%8E%EF%BC%8C%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC%E5%90%8E%E5%9C%A8%E5%B0%9D%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>原因可能是<code>nodejs</code>版本过低，升级版本后在尝试</h1>
+<p><img src="media/16559527064386/16559528035670.jpg" alt="" /></p>
+<h1><a id="%E6%9F%A5%E7%9C%8Bnode%E7%89%88%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看<code>node</code>版本</h1>
+<pre class="line-numbers"><code class="language-plain_text">node -v
 </code></pre>
-
-<h1 id="toc_4">升级<code>node</code>版本</h1>
-
-<h2 id="toc_5">mac系统</h2>
-
+<h1><a id="%E5%8D%87%E7%BA%A7node%E7%89%88%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>升级<code>node</code>版本</h1>
+<h2><a id="mac%E7%B3%BB%E7%BB%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>mac系统</h2>
 <p>以下命令在终端中可能会遇到权限问题，在开始位置输入<code>sudo</code>即可</p>
-
 <ul>
 <li>清除<code>npm</code>缓存，执行命令</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">npm cache clean -f
+<pre class="line-numbers"><code class="language-plain_text">npm cache clean -f
 </code></pre>
-
 <ul>
 <li><code>n模块</code>是专门用来管理<code>nodejs</code>的版本，安装<code>n模块</code></li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">npm install -g n
+<pre class="line-numbers"><code class="language-plain_text">npm install -g n
 </code></pre>
-
 <ul>
 <li>更新升级<code>node</code>版本</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">// 把当前系统的 Node 更新成最新的 “稳定版本”
+<pre class="line-numbers"><code class="language-plain_text">// 把当前系统的 Node 更新成最新的 “稳定版本”
  n stable
 // 长期支持版
  n lts 
@@ -197,36 +180,27 @@ yarn start
 // 指定安装版本
  n 10.14.2 
 </code></pre>
-
 <ul>
 <li>删除指定<code>node</code>版本</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">n rm 10.14.2
+<pre class="line-numbers"><code class="language-plain_text">n rm 10.14.2
 </code></pre>
-
 <ul>
 <li>查看升级后的<code>node</code>版本</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">node -v
+<pre class="line-numbers"><code class="language-plain_text">node -v
 </code></pre>
-
-<h2 id="toc_6">window系统</h2>
-
+<h2><a id="window%E7%B3%BB%E7%BB%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>window系统</h2>
 <ul>
 <li><code>cmd</code>查看当前<code>node</code>版本和<code>node</code>安装位置</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">node -v
+<pre class="line-numbers"><code class="language-plain_text">node -v
 where node
 </code></pre>
-
 <ul>
 <li>百度搜索<code>node+需要版本</code>官网下载<code>LTS版本nodejs</code>。安装到之前的目录即可</li>
 </ul>
-
-<pre class="line-numbers"><code class="language-text">// node 下载地址 
+<pre class="line-numbers"><code class="language-plain_text">// node 下载地址 
 https://nodejs.org/zh-cn/download/releases/
 </code></pre>
 
@@ -279,7 +253,11 @@ https://nodejs.org/zh-cn/download/releases/
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

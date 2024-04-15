@@ -141,68 +141,41 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <ul>
-<li>
-<a href="#toc_0">简介</a>
-</li>
-<li>
-<a href="#toc_1">FlexibleSearch 查询的基本语法</a>
-<ul>
-<li>
-<a href="#toc_2">&lt;selects&gt; 返回字段（数据库列）</a>
-</li>
-<li>
-<a href="#toc_3">&lt;types&gt; 对象模型 类型 code</a>
-</li>
-<li>
-<a href="#toc_4">条件</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<h2 id="toc_0">简介</h2>
-
-<p>FlexibleSearch 框架自动解析类型和数据库表依赖关系，不需要指定显式的数据库表名，类型系统和数据库表示之间的整个转换过程是自动进行的，并在必要时使用 UNION 和 JOIN 生成数据库可执行的 SQL 语句。</p>
-
-<pre class="line-numbers"><code class="language-sql">SELECT
+                    <p>[toc]<br />
+##简介<br />
+FlexibleSearch 框架自动解析类型和数据库表依赖关系，不需要指定显式的数据库表名，类型系统和数据库表示之间的整个转换过程是自动进行的，并在必要时使用 UNION 和 JOIN 生成数据库可执行的 SQL 语句。</p>
+<pre class="line-numbers"><code class="language-SQL">SELECT
     {p:pk},{p.code},{p.name[zh]} 
 FROM {Product as p}
 </code></pre>
-
-<pre class="line-numbers"><code class="language-sql">SELECT 
+<pre class="line-numbers"><code class="language-SQL">SELECT 
     item_t0.PK, item_t0.p_code, lp_t0.p_name
 FROM products item_t0 
     JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK 
 </code></pre>
-
-<hr/>
-
-<h2 id="toc_1">FlexibleSearch 查询的基本语法</h2>
-
-<pre class="line-numbers"><code class="language-sql">SELECT &lt;selects&gt; FROM &lt;types&gt; ( WHERE &lt;conditions&gt; )? ( ORDER BY &lt;order&gt; )?
+<hr />
+<p>##FlexibleSearch 查询的基本语法</p>
+<pre class="line-numbers"><code class="language-SQL">SELECT &lt;selects&gt; FROM &lt;types&gt; ( WHERE &lt;conditions&gt; )? ( ORDER BY &lt;order&gt; )?
 </code></pre>
-
-<h3 id="toc_2">&lt;selects&gt; 返回字段（数据库列）</h3>
-
+<h3><a id="selects%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5%EF%BC%88%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%97%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>&lt;selects&gt; 返回字段（数据库列）</h3>
 <ul>
 <li>获取所有字段
 <ul>
 <li><code>{*}</code> 按 SQL 约定返回所有数据库列，例如：<code>SELECT {*} FROM {Product}</code>。</li>
-</ul></li>
+</ul>
+</li>
 <li>获取指定字段
 <ul>
 <li><code>{attribute}</code> 指定属性标识符用必须使用<code>{}</code>包裹，例如：<code>SELECT {code} FROM {Product}</code>。</li>
-</ul></li>
+</ul>
+</li>
 <li>获取国际化字段
 <ul>
 <li><code>{attribute[zh]}</code> 使用语言标识符作为属性名称中的后缀，并用<code>[]</code>包裹，例如<code>SELECT {name[zh]}, {name[en]} FROM {Product}</code>。</li>
-</ul></li>
 </ul>
-
-<h3 id="toc_3">&lt;types&gt; 对象模型 类型 code</h3>
-
+</li>
+</ul>
+<h3><a id="types%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%B1%BB%E5%9E%8B-code" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>&lt;types&gt; 对象模型 类型 code</h3>
 <ul>
 <li><code>FROM</code>子句中的<code>&lt;types&gt;</code>字段的值需要是<code>itemtype</code>的<code>code</code>属性，<code>FROM</code>子句必须用<code>{}</code>包裹</li>
 <li>可以使用<code>AS</code>给类型指定别名，例如<code>SELECT {p.code} FROM {Product AS p} ORDER BY {p.code}</code></li>
@@ -211,11 +184,10 @@ FROM products item_t0
 <ul>
 <li>查询子类型例子：<code>SELECT {code},{pk} FROM {Product}</code></li>
 <li>不查询子类型例子：<code>SELECT {code},{pk} FROM {Product!}</code></li>
-</ul></li>
 </ul>
-
-<h3 id="toc_4">条件</h3>
-
+</li>
+</ul>
+<h3><a id="%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>条件</h3>
 <table>
 <thead>
 <tr>
@@ -225,7 +197,6 @@ FROM products item_t0
 <th>代码示例</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>1</td>
@@ -255,13 +226,13 @@ FROM products item_t0
 <td>5</td>
 <td><code>OR</code></td>
 <td>或者</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; OR {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= '2019-03-30 21:07:51' OR {p.modifiedtime} &gt;= '2019-03-30 21:07:50'</code></td>
 </tr>
 <tr>
 <td>6</td>
 <td><code>AND</code></td>
 <td>并且</td>
-<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= &#39;2019-03-30 21:07:51&#39; AND {p.modifiedtime} &gt;= &#39;2019-03-30 21:07:50&#39;</code></td>
+<td><code>SELECT {p:pk},{p.creationtime},{p.modifiedtime} FROM {Product as p} WHERE {p.creationtime} &gt;= '2019-03-30 21:07:51' AND {p.modifiedtime} &gt;= '2019-03-30 21:07:50'</code></td>
 </tr>
 <tr>
 <td>7</td>
@@ -285,19 +256,19 @@ FROM products item_t0
 <td>10</td>
 <td><code>LIKE</code></td>
 <td>如果没有使用百分号 %, LIKE 子句与等号 = 的效果是一样的</td>
-<td><code>... WHERE ... LIKE &#39;...&#39;</code></td>
+<td><code>... WHERE ... LIKE '...'</code></td>
 </tr>
 <tr>
 <td>11</td>
 <td><code>%</code></td>
 <td>匹配任意数量字符的通配符</td>
-<td><code>... WHERE ... LIKE &#39;%...&#39; , &#39;...%...&#39; , &#39;...%&#39; , &#39;%...%&#39;</code></td>
+<td><code>... WHERE ... LIKE '%...' , '...%...' , '...%' , '%...%'</code></td>
 </tr>
 <tr>
 <td>12</td>
 <td><code>_</code></td>
 <td>匹配单个字符的通配符</td>
-<td><code>... WHERE ... LIKE &#39;_...&#39; , &#39;..._...&#39; , &#39;..._&#39;</code></td>
+<td><code>... WHERE ... LIKE '_...' , '..._...' , '..._'</code></td>
 </tr>
 <tr>
 <td>13</td>
@@ -315,37 +286,37 @@ FROM products item_t0
 <td>15</td>
 <td><code>CONCAT</code></td>
 <td>连接两个结果 - 右侧的示例将返回字符串结果</td>
-<td><code>SELECT concat({c.code},&#39;-&#39;,{cs.code}) as &#39;配货单号-配货单状态&#39; FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk} } WHERE {cs.code} = &#39;APPROVED&#39;</code></td>
+<td><code>SELECT concat({c.code},'-',{cs.code}) as '配货单号-配货单状态' FROM { Consignment as c JOIN ConsignmentStatus as cs ON {c.status} = {cs.pk} } WHERE {cs.code} = 'APPROVED'</code></td>
 </tr>
 <tr>
 <td>16</td>
 <td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE '%套头无帽卫衣%'</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 WHERE lp_t0.p_name LIKE '%套头无帽卫衣%'</code></td>
 </tr>
 <tr>
 <td>17</td>
 <td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK WHERE lp_t0.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE '%套头无帽卫衣%'</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK WHERE lp_t0.p_name  LIKE '%套头无帽卫衣%'</code></td>
 </tr>
 <tr>
 <td>18</td>
 <td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 JOIN productslp lp_t0_l1 ON lp_t0.ITEMPK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]} LIKE '%套头无帽卫衣%' OR {p:name[en]} LIKE '%套头无帽卫衣%'</code></td>
+<td><code>SELECT count(lp_t0.ITEMPK) FROM productslp lp_t0 JOIN productslp lp_t0_l1 ON lp_t0.ITEMPK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE '%套头无帽卫衣%' OR lp_t0_l1.p_name LIKE '%套头无帽卫衣%'</code></td>
 </tr>
 <tr>
 <td>19</td>
 <td><code>:o</code></td>
-<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE &#39;%套头无帽卫衣%&#39; OR {p:name[en]:o} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
-<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK LEFT JOIN productslp lp_t0_l1 ON item_t0.PK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE &#39;%套头无帽卫衣%&#39; OR lp_t0_l1.p_name  LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count({p:pk}) FROM {Product AS p} WHERE {p:name[zh]:o} LIKE '%套头无帽卫衣%' OR {p:name[en]:o} LIKE '%套头无帽卫衣%'</code></td>
+<td><code>SELECT count(item_t0.PK) FROM products item_t0 LEFT JOIN productslp lp_t0 ON item_t0.PK = lp_t0.ITEMPK LEFT JOIN productslp lp_t0_l1 ON item_t0.PK = lp_t0_l1.ITEMPK WHERE lp_t0.p_name LIKE '%套头无帽卫衣%' OR lp_t0_l1.p_name  LIKE '%套头无帽卫衣%'</code></td>
 </tr>
 <tr>
 <td>21</td>
 <td><code>{locAttr[ANY]}</code></td>
 <td>所有国际化定义</td>
-<td><code>SELECT count(DISTINCT {p:PK}) FROM {Product AS p} WHERE {p:name[ANY]} LIKE &#39;%套头无帽卫衣%&#39;</code></td>
+<td><code>SELECT count(DISTINCT {p:PK}) FROM {Product AS p} WHERE {p:name[ANY]} LIKE '%套头无帽卫衣%'</code></td>
 </tr>
 <tr>
 <td>22</td>
@@ -405,7 +376,11 @@ FROM products item_t0
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>

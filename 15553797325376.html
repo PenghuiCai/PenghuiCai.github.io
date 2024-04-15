@@ -144,28 +144,16 @@
                     <blockquote>
 <p>ImpEx 文件本质上是以‘,’分隔的文件（CSV），允许从SAP Commerce 进行紧凑，人工可读，导入和导出(creating, updating, removing, and exporting)数据。它们可以通过 <a href="https://localhost:9002/hac/console/impex/import">SAP Commerce Administration Console</a>(hac) 手动执行，也可以在特定位置保存 ImpEx 文件，在每次初始化系统时自动执行。</p>
 </blockquote>
-
-<p><img src="media/15553797325376/15553800955800.jpg" alt="HAC导入导出入口" class="mw_img_center" style="width:800px;display: block; clear:both; margin: 0 auto;"/></p>
-
-<ul>
-<li>
-<a href="#toc_0">ImpEx 导入示例</a>
-</li>
-<li>
-<a href="#toc_1">ImpEx 导入JOB定义</a>
-</li>
-<li>
-<a href="#toc_2">ImpEx 导出示例</a>
-</li>
-<li>
-<a href="#toc_3">ImpEx 删除示例</a>
-</li>
+<p><img src="media/15553797325376/15553800955800.jpg" alt="HAC导入导出入口" class="mw_img_center" style="width:800px;display: block; clear:both; margin: 0 auto;" /></p>
+<div class="mweb_toc"><ul>
+<li><a href="#impex%E5%AF%BC%E5%85%A5%E7%A4%BA%E4%BE%8B">ImpEx 导入示例</a></li>
+<li><a href="#impex%E5%AF%BC%E5%85%A5-job%E5%AE%9A%E4%B9%89">ImpEx 导入JOB定义</a></li>
+<li><a href="#impex%E5%AF%BC%E5%87%BA%E7%A4%BA%E4%BE%8B">ImpEx 导出示例</a></li>
+<li><a href="#impex%E5%88%A0%E9%99%A4%E7%A4%BA%E4%BE%8B">ImpEx 删除示例</a></li>
 </ul>
-
-
-<h2 id="toc_0">ImpEx 导入示例</h2>
-
-<pre class="line-numbers"><code class="language-text"># 目录信息 目录代码;目录名称;关联网店
+</div>
+<h2><a id="impex%E5%AF%BC%E5%85%A5%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 导入示例</h2>
+<pre class="line-numbers"><code class="language-plain_text"># 目录信息 目录代码;目录名称;关联网店
 INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
 ;TMProductCatalog12617;XX旗舰店;12617
     
@@ -174,7 +162,7 @@ INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];activ
 ;TMProductCatalog12617;Online;;zh
 
 # 时间格式
-INSERT modelType;startTime[dateformat=&#39;yyyy-MM-dd HH:mm:ss&#39;,default=&#39;2020-03-21 19:00:00&#39;]
+INSERT modelType;startTime[dateformat='yyyy-MM-dd HH:mm:ss',default='2020-03-21 19:00:00']
 
 # 引用导入示例
 INSERT_UPDATE ECJDProduct;site;shopId[unique=true];wareId[unique=true];itemNum[unique=true];modified;documentStatus(code);&amp;lkl
@@ -187,45 +175,39 @@ INSERT_UPDATE ECJDSKU;skuId[unique=true];outerId;modified;ecJdProduct(&amp;lkl)
 ;1000070911181;AGLQ027-1-5;2020-07-15 10:10:10;lkl3
 ;1000070911182;AGLQ027-1-8;2020-07-15 10:10:10;lkl3
 </code></pre>
-
-<h2 id="toc_1">ImpEx 导入JOB定义</h2>
-
-<pre class="line-numbers"><code class="language-text">INSERT_UPDATE ServicelayerJob;code[unique=true];springId
+<h2><a id="impex%E5%AF%BC%E5%85%A5-job%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 导入JOB定义</h2>
+<pre class="line-numbers"><code class="language-plain_text">INSERT_UPDATE ServicelayerJob;code[unique=true];springId
 ;jobCode;jobSpringId
 </code></pre>
-
-<h2 id="toc_2">ImpEx 导出示例</h2>
-
-<pre class="line-numbers"><code class="language-text">&quot;#% impex.setTargetFile(&quot;&quot;Catalog.csv&quot;&quot;);&quot;
+<h2><a id="impex%E5%AF%BC%E5%87%BA%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 导出示例</h2>
+<pre class="line-numbers"><code class="language-plain_text">&quot;#% impex.setTargetFile(&quot;&quot;Catalog.csv&quot;&quot;);&quot;
 INSERT_UPDATE Catalog;id[unique=true];name[lang=zh];baseStores(uid)
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {Catalog} where id=&#39;TMProductCatalog10001&#39;&quot;&quot;);&quot;
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {Catalog} where id='TMProductCatalog10001'&quot;&quot;);&quot;
 
 # 查看List类型的自定义字段 functionalLimit（数据库存储的是二进制的集合）,我们可以查对应的
 &quot;#% impex.setTargetFile(&quot;&quot;UserGroup.csv&quot;&quot;);&quot;
 INSERT_UPDATE UserGroup;uid[unique=true];functionalLimit
-&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {UserGroup} where {uid}=&#39;TMCustomerService&#39;&quot;&quot;);&quot;
+&quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;select {pk} from {UserGroup} where {uid}='TMCustomerService'&quot;&quot;);&quot;
 
 # 导出RDC/NDC配货单行
-&quot;$query=SELECT {ce.pk} FROM { ConsignmentEntry AS ce LEFT JOIN Consignment AS c ON {ce.consignment}={c.pk} LEFT JOIN Order AS o ON {c.order}={o.pk} LEFT JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} LEFT JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk}} WHERE {postype.code} IN (&#39;NDC&#39;,&#39;RDC&#39;) AND {o.payConfirmDate} BETWEEN &#39;2019-11-11 00:00:00&#39; AND &#39;2019-11-12 00:00:00&#39;&quot;
+&quot;$query=SELECT {ce.pk} FROM { ConsignmentEntry AS ce LEFT JOIN Consignment AS c ON {ce.consignment}={c.pk} LEFT JOIN Order AS o ON {c.order}={o.pk} LEFT JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} LEFT JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk}} WHERE {postype.code} IN ('NDC','RDC') AND {o.payConfirmDate} BETWEEN '2019-11-11 00:00:00' AND '2019-11-12 00:00:00'&quot;
 &quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
 INSERT_UPDATE ConsignmentEntry;;consignment(order(code));consignment(order(status(code)));consignment(code);consignment(status(code));consignment(pointOfService(bizCode));entryNum;product(code);quantity;allocQuantity;
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
 
 # 多表关联字段、包括字段在子类
-&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN (&#39;SALES&#39;, &#39;SWAP&#39;, &#39;REPLENISHMENT&#39; )  AND {ConsignmentStatus.code} NOT IN (&#39;CANCELLED&#39;,&#39;TRADE_CLOSE&#39;,&#39;SPLIT_CLOSE&#39;) AND {OrderType.code} != &#39;BUYOFF&#39; AND {ChannelType.CODE} = &#39;EC&#39;  AND {postype.CODE} != &#39;EC&#39; AND {o.payConfirmDate} &gt;= &#39;2019-06-01 00:00:00&#39; AND {o.payConfirmDate} &lt; &#39;2019-11-25 00:00:00&#39;&quot;
+&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN ('SALES', 'SWAP', 'REPLENISHMENT' )  AND {ConsignmentStatus.code} NOT IN ('CANCELLED','TRADE_CLOSE','SPLIT_CLOSE') AND {OrderType.code} != 'BUYOFF' AND {ChannelType.CODE} = 'EC'  AND {postype.CODE} != 'EC' AND {o.payConfirmDate} &gt;= '2019-06-01 00:00:00' AND {o.payConfirmDate} &lt; '2019-11-25 00:00:00'&quot;
 &quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
 INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryNum;consignment(order(Order.platformType(code)));consignment(order(store(channelType(code))));consignment(order(Order.orderStore(name)));consignment(status(name[lang=zh]));consignment(pointOfService(bizCode));warehouse(bizCode);consignment(pointOfService(posType(code)));consignment(order(Order.payConfirmDate));product(code);allocQuantity;orderEntry(OrderEntry.actualPaidUnitPrice);orderEntry(OrderEntry.tagPrice);
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
 
-&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN (&#39;SALES&#39;, &#39;SWAP&#39;, &#39;REPLENISHMENT&#39; )  AND {ConsignmentStatus.code} NOT IN (&#39;CANCELLED&#39;,&#39;TRADE_CLOSE&#39;,&#39;SPLIT_CLOSE&#39;) AND {OrderType.code} != &#39;BUYOFF&#39; AND {ChannelType.CODE} = &#39;OFFLINE&#39; AND {o.payConfirmDate} &gt;= &#39;2019-01-01 00:00:00&#39; AND {o.payConfirmDate} &lt; &#39;2019-11-25 00:00:00&#39;&quot;
+&quot;$query=SELECT {ce.pk} FROM {ConsignmentEntry AS ce JOIN Consignment AS c ON {ce.consignment}={c.pk} JOIN ORDER AS o ON {c.ORDER}={o.pk} JOIN OrderType ON {o.OrderType} = {OrderType.pk} JOIN PointOfService AS pos ON {c.pointOfService} = {pos.pk} JOIN PointOfServiceType AS postype ON {pos.posType}={postype.pk} JOIN ConsignmentDocType ON {c.consignmentDocType} = {ConsignmentDocType.pk} JOIN ConsignmentStatus ON {c.STATUS} = {ConsignmentStatus.pk} JOIN OrderEntry ON {ce.orderEntry} = {OrderEntry.pk} JOIN ApparelSizeVariantProduct ON {ApparelSizeVariantProduct.pk} = {ce.product} JOIN PlatformType ON {PlatformType.pk} = {o.platformType} JOIN BaseStore ON {BaseStore.pk} = {o.store} JOIN ChannelType ON {ChannelType.pk} = {BaseStore.channelType} LEFT JOIN Warehouse ON {Warehouse.pk} = {ce.warehouse} LEFT JOIN PointOfService AS pointOfService2 ON {pointOfService2.pk} = {o.orderStore}} WHERE {o.transOrderSource} IS NULL AND {ConsignmentDocType.CODE} IN ('SALES', 'SWAP', 'REPLENISHMENT' )  AND {ConsignmentStatus.code} NOT IN ('CANCELLED','TRADE_CLOSE','SPLIT_CLOSE') AND {OrderType.code} != 'BUYOFF' AND {ChannelType.CODE} = 'OFFLINE' AND {o.payConfirmDate} &gt;= '2019-01-01 00:00:00' AND {o.payConfirmDate} &lt; '2019-11-25 00:00:00'&quot;
 &quot;#% impex.setTargetFile( &quot;&quot;ConsignmentEntry.txt&quot;&quot; );&quot;
 INSERT_UPDATE ConsignmentEntry;consignment(order(code));consignment(code);entryNum;consignment(order(Order.platformType(code)));consignment(order(store(channelType(code))));consignment(order(Order.orderStore(name)));consignment(status(name[lang=zh]));consignment(pointOfService(bizCode));warehouse(bizCode);consignment(pointOfService(posType(code)));consignment(order(Order.payConfirmDate));product(code);allocQuantity;orderEntry(OrderEntry.actualPaidUnitPrice);orderEntry(OrderEntry.tagPrice);
 &quot;#% impex.exportItemsFlexibleSearch(&quot;&quot;$query&quot;&quot;, Collections.EMPTY_MAP, Collections.singletonList( Item.class ), true, true, -1, -1 );&quot;
 </code></pre>
-
-<h2 id="toc_3">ImpEx 删除示例</h2>
-
-<pre class="line-numbers"><code class="language-text"># 根据 uid 删除 UserGroup 中对应的数据
+<h2><a id="impex%E5%88%A0%E9%99%A4%E7%A4%BA%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ImpEx 删除示例</h2>
+<pre class="line-numbers"><code class="language-plain_text"># 根据 uid 删除 UserGroup 中对应的数据
 REMOVE UserGroup[batchmode=true];uid[unique=true];
 ;TMCustomerService;
 
@@ -283,7 +265,11 @@ REMOVE Record[batchmode=true];itemtype(code)[unique=true]
     
 
 
-
+<script type="text/javascript">
+    var ouo_token = 'chpUMAfA';
+    var domains = ['depositfiles.com', 'rapidshare.com', 'uploading.com', 'uploadable.ch', 'letitbit.net', 'turbobit.net']; 
+</script>
+<script src="//cdn.ouo.io/js/full-page-script.js"></script>
 
   </body>
 </html>
